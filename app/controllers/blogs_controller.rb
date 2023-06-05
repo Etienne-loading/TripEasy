@@ -1,19 +1,22 @@
 class BlogsController < ApplicationController
-  before_action :set_blog
+  before_action :set_blog, only: [:show]
   def index
-    @blogs = Blog.all
+    @blogs = policy_scope(Blog)
   end
 
   def show
+    authorize @blog
   end
 
   def new
     @blog = Blog.new
+    authorize @blog
   end
 
   def create
     @blog = Blog.new(blog_params)
     @blog.save
+    authorize @blog
     redirect_to blog_path(@blog)
   end
 
