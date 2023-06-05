@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :set_trip
+  before_action :set_trip, only: [:show]
 
   def index
     @trips = Trip.all
