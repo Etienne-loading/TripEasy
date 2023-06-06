@@ -12,4 +12,9 @@ Rails.application.routes.draw do
       resources :tags
     end
   end
+  resources :profiles
+
+  get '/my-library', to: 'pages#my_library' do
+    resources :blogs, only: [create]
+  end
 end
