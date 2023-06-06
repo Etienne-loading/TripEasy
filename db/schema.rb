@@ -9,7 +9,6 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-
 ActiveRecord::Schema[7.0].define(version: 2023_06_06_090513) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +65,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_090513) do
 
   create_table "steps", force: :cascade do |t|
     t.string "title"
-    t.string "city"
     t.text "content"
     t.integer "duration"
     t.float "latitude"
