@@ -16,21 +16,15 @@
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :first_name,
-                autofocus: true,
                 input_html: { autocomplete: "first_name" }%>
     <%= f.input :last_name,
-                autofocus: true,
                 input_html: { autocomplete: "last_name" }%>
     <%= f.input :pseudo,
-                autofocus: true,
                 input_html: { autocomplete: "pseudo" }%>
     <%= f.input :birthday, as: :date,
-                html5: true,
-                autofocus: true %>
-    <%= f.input :nationality,
-                autofocus: true %>
-    <%= f.input :interest,
-                autofocus: true %>
+                html5: true %>
+    <%= f.input :nationality %>
+    <%= f.input :interest %>
   </div>
 
   <div class="form-actions">
