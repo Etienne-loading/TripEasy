@@ -9,11 +9,10 @@ class Step < ApplicationRecord
   has_many_attached :photo
 
   validates :title, presence: true
-  validates :city, presence: true
+  validates :address, presence: true
   validates :content, presence: true
   validates :duration, presence: true
   validates :latitude, presence: true
   validates :longitude, presence: true
   validates :country, presence: true
-  validates :address, presence: true
 end
