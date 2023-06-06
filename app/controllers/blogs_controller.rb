@@ -6,6 +6,14 @@ class BlogsController < ApplicationController
 
   def show
     authorize @blog
+    @steps = @blog.steps
+
+    @markers = @steps.geocoded.map do |step|
+      {
+        lat: step.latitude,
+        lng: step.longitude
+      }
+    end
   end
 
   def new
