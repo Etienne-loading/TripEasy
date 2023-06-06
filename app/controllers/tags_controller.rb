@@ -1,5 +1,4 @@
 class TagsController < ApplicationController
-
   def create
     @tag = Tag.new(tags_param)
     @booking = Step.find(params[:step_id])
@@ -10,6 +9,7 @@ class TagsController < ApplicationController
       render "profiles/show", status: :unprocessable_entity
     end
   end
+
   private
 
   def tags_param

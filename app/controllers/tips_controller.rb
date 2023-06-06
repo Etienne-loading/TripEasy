@@ -1,6 +1,6 @@
 class TipsController < ApplicationController
   lass TripsController < ApplicationController
-  before_action :set_trip
+  before_action :set_trip, only: [:show]
 
   def index
     @tips = Tips.all
