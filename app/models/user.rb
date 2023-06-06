@@ -12,8 +12,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :birthday, presence: true
   validates :pseudo, presence: true, uniqueness: true
-  validates :interest, presence: true, inclusion: { in: INTEREST }
-  validates :nationality, presence: true, inclusion: { in: NATIONALITIES }
+  # validates :interest, presence: true, , inclusion: { in: INTEREST }
+  validates :nationality, presence: true
 
   INTEREST = [
     "Adventure tourism",
@@ -194,7 +194,7 @@ class User < ApplicationRecord
     "Mexican",
     "Micronesian",
     "Moldovan",
-    "Mon\u00e9gasque, Monacan",
+    "Monacan",
     "Mongolian",
     "Montenegrin",
     "Montserratian",
@@ -228,7 +228,7 @@ class User < ApplicationRecord
     "Portuguese",
     "Puerto Rican",
     "Qatari",
-    "R\u00e9unionese, R\u00e9unionnais",
+    "Reunionese",
     "Romanian",
     "Russian",
     "Rwandan",
@@ -241,7 +241,6 @@ class User < ApplicationRecord
     "Saint Vincentian, Vincentian",
     "Samoan",
     "Sammarinese",
-    "S\u00e3o Tom\u00e9an",
     "Saudi, Saudi Arabian",
     "Senegalese",
     "Serbian",
