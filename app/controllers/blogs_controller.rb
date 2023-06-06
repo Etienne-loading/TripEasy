@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show]
+  before_action :set_blog, only: [:show, :edit, :destroy]
   def index
     @blogs = policy_scope(Blog)
   end
@@ -23,17 +23,23 @@ class BlogsController < ApplicationController
 
   def create
     @blog = Blog.new(blog_params)
-    @blog.save
+    @blog.user = current_user
     authorize @blog
-    redirect_to blog_path(@blog)
+    if @blog.save
+      redirect_to my_library_path
+    else
+      render 'pages/my_library', status: :unprocessable_entity
+    end
   end
 
   def edit
+    authorize @blog
   end
 
   def destroy
+    authorize @blog
     @blog.destroy
-    redirect_to profile_path, status: :see_other
+    redirect_to my_library_path, status: :see_other
   end
 
   private
