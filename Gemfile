@@ -30,6 +30,9 @@ gem "jbuilder"
 # Geocoder
 gem "geocoder"
 
+# pg_search
+gem "pg_search"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

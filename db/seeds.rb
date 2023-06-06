@@ -208,5 +208,5 @@ japan7 = { title: "Tropical Paradise: Relaxation in Okinawa's Islands", address:
   )
   step.save
   puts "Created #{step.title}"
-  puts "DONNNNNNNNNNNNNNE"
 end
+  puts "DONNNNNNNNNNNNNNE"
