@@ -18,7 +18,8 @@ class Blog < ApplicationRecord
   has_many :steps, dependent: :destroy
   has_many :tips, through: :steps
   has_many :tags, through: :steps
-  # has_one_attached :profile_photo
+  has_one_attached :photo_banner
+  has_one_attached :photo_card
 
   validates :title, presence: true
   validates :min_price, presence: true
