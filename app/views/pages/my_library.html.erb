@@ -1,7 +1,8 @@
 <h1>My library</h1>
 <ul>
   <% current_user.blogs.each do |blog| %>
-    <li><%= link_to blog.title, blog_path(blog) %><%= link_to "Edit", edit_blog_path(blog) %><%= link_to "", blog_path(blog), class: "fa-solid fa-trash", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
+    <li><%= link_to blog.title, blog_path(blog) %>
+    <%= link_to "Edit", edit_blog_path(blog) %><%= link_to "", blog_path(blog), class: "fa-solid fa-trash", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
   <% end %>
 </ul>
 

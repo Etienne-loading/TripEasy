@@ -13,7 +13,4 @@ class Step < ApplicationRecord
   validates :address, presence: true
   validates :content, presence: true
   validates :duration, presence: true
-  validates :latitude, presence: true
-  validates :longitude, presence: true
-  validates :country, presence: true
 end
