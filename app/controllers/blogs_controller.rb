@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show, :edit, :destroy]
+  before_action :set_blog, only: [:show, :edit, :destroy, :update]
   def index
     @blogs = policy_scope(Blog)
   end
@@ -34,6 +34,12 @@ class BlogsController < ApplicationController
 
   def edit
     authorize @blog
+    @step = Step.new
+    @steps = @blog.steps
+  end
+
+  def update
+    
   end
 
   def destroy
