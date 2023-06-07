@@ -1,15 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="edit-step-blog"
+// Connects to data-controller="create-step"
 export default class extends Controller {
-  static targets = ["content", "button", "form"]
   connect() {
+    console.log('oiezrfj');
   }
+  static targets = ["button", "form"]
 
-  revealEditForm(event) {
+  revealCreateForm(event) {
     event.preventDefault()
     this.formTarget.classList.remove("d-none")
-    this.contentTarget.classList.add("d-none")
     this.buttonTarget.classList.add("d-none")
   }
 }
