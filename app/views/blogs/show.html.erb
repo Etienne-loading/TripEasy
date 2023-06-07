@@ -1,14 +1,23 @@
 <div class="container my-2">
-
-  <h1>Blogs#show</h1>
-
-  <div data-controller="map"
-    data-map-markers-value="<%= @markers.to_json %>"
-    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-    <div class="d-none" style="width: 35%; height: 600px; border-radius: 4px;"
-    data-map-target="container">
+  <div class="row">
+    <div class="col">
+      <h1><%= @blog.title %></h1>
     </div>
-    <button class="btn btn-primary my-2" style="position: fixed; bottom: 1.5em; left: 50%; transform: translateX(-50%);" data-action="click->map#toggleMapVisibility">Show map</button>
   </div>
-
+  <div class="row">
+    <% @steps.each do |step| %>
+      <div class="col-9 mb-3">
+        <%= step.title %>
+        <%= step.content %>
+      </div>
+    <% end %>
+    <div class='col-3' data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      <div class="d-none" style="width: 100%; height: 600px; border-radius: 4px;"
+      data-map-target="container">
+      </div>
+      <button class="btn btn-primary my-2 " style="position: absolute; bottom: 1.5em; left: 50%; transform: translateX(-50%);" data-action="click->map#toggleMapVisibility">Show map</button>
+    </div>
+  </div>
 </div>
