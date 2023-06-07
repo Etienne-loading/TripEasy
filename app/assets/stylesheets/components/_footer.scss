@@ -1,0 +1,165 @@
+@import 'bootstrap/variables';
+// @import 'bootstrap/mixins';
+
+$font-primary: 'Nunito Sans',Arial, sans-serif;
+$primary: #f7b633;
+
+body{
+	font-family: $font-primary;
+	font-size: 15px;
+	line-height: 1.8;
+	font-weight: normal;
+}
+
+a {
+	transition: .3s all ease;
+	&:hover, &:focus {
+		text-decoration: none !important;
+		outline: none !important;
+	}
+}
+h1, h2, h3, h4, h5,
+.h1, .h2, .h3, .h4, .h5 {
+	line-height: 1.5;
+	font-weight: 400;
+	font-family: $font-primary;
+}
+
+
+//COVER BG
+.img,
+.blog-img,
+.user-img{
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.ftco-footer-social {
+	li {
+		list-style: none;
+		margin: 0 10px 0 0;
+		display: inline-block;
+		a {
+			height: 40px;
+			width: 40px;
+			display: block;
+			background: rgba($black, .05);
+			border-radius: 50%;
+			position: relative;
+			span {
+				position: absolute;
+				font-size: 20px;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			&:hover {
+				color: $white;
+			}
+		}
+	}
+}
+
+.tagcloud {
+	a {
+		text-transform: uppercase;
+		display: inline-block;
+		padding: 4px 10px;
+		margin-bottom: 7px;
+		margin-right: 4px;
+		border-radius: 4px;
+		font-size :11px;
+		&:hover {
+			border: 1px solid #ff0000;
+		}
+	}
+}
+
+.ftco-section{
+	padding: 12em 0;
+	h2{
+		margin-bottom: 0;
+	}
+}
+
+footer{
+	padding: 4em 0;
+  padding-bottom: 4em;
+}
+
+//FOOTER 04
+.footer-04{
+	background: #272727;
+	padding-bottom: 4em;
+	.border-top{
+		border-color: darken(#272727,5%) !important;
+		background: darken(#272727,5%);
+	}
+	.footer-heading{
+		font-size: 13px;
+		color: $white;
+		margin-bottom: 20px;
+		text-transform: uppercase;
+		font-weight: 600;
+		letter-spacing: 1px;
+		.logo{
+			letter-spacing: none;
+			font-size: 16px;
+			color: $white;
+			text-transform: capitalize;
+		}
+	}
+	p{
+		color: rgba(255,255,255,.3);
+	}
+	a{
+		color: $primary;
+	}
+	.ftco-footer-social{
+		li{
+			a{
+				color: $white;
+			}
+		}
+	}
+	.tagcloud{
+		a{
+			border: 1px solid rgba(255,255,255,.1);
+			color: $white;
+		}
+	}
+
+	.list-unstyled{
+		li{
+			a{
+				color: rgba(255,255,255,.7);
+			}
+		}
+		a{
+			color: rgba(255,255,255,.7);
+		}
+	}
+	.ftco-footer-social{
+		li{
+			a{
+				border-radius: 4px;
+				border: 1px solid rgba(255,255,255,.1);
+			}
+		}
+	}
+}
+
+.tag-cloud-link:hover {
+  color:#f7b633!important;
+  transition: 0.3s!important;
+}
+
+#categories-hover:hover {
+  color:#f2f2f2!important;
+  transition: 0.3s!important;
+}
+
+#categories-footer {
+  padding: 0 10%;
+}
