@@ -1,20 +1,40 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :blogs do # index + show as traveler / new/create + edit/update + destroy as editor
+    resources :likes, only: [:create] # as traveler
+    #resources :steps, only: [:create] # as editor
+  end
+
+  # as traveler
+  resources :profiles, only: [:show]
+
+  # as editor
   resources :blogs do
-    resources :likes
     resources :steps do
-      resources :tips
-      resources :tags
+      resources :tips, only: [:create]
+      resources :tags, only: [:create]
     end
   end
-  resources :profiles
 
-  get '/my-library', to: 'pages#my_library' do
-    resources :blogs, only: [create]
-  end
+  resources :tips, only: [:update, :destroy]
+  resources :tags, only: [:update, :destroy]
+
+  get '/my-library', to: 'pages#my_library'
 end
+
+
+# resources :blogs
+#   index + show as traveler
+#   new/create + edit/update + destroy as editor
+
+# resource :my_library, only: :show # /my_library
+
+# ##
+
+# resources :blogs, only: [:index, :show] as traveler
+
+# namespace :my_library do
+#   resources :blogs, only: [:index, :new, :create, ...] as editor
+# end

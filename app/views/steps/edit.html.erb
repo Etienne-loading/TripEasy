@@ -1,0 +1,8 @@
+<%= simple_form_for [@blog, @step] do |f| %>
+          <%= f.input :title, placeholder: "Title" %>
+          <%= f.input :address, placeholder: "Address" %>
+          <%= f.input :content, placeholder: "Content" %>
+          <%#= f.input :country,  placeholder: "Country" %>
+          <%= f.input :duration, placeholder: "Duration" %>
+          <%= f.submit class: "btn btn-primary" %>
+        <% end %>

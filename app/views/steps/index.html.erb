@@ -1,1 +1,36 @@
-<h1>Hello</h1>
+<div class="container">
+  <h1>Edition Module</h1>
+  <div class="row">
+    <div class="col">
+      <% @steps.each do |step| %>
+        <div class="col-12 mb-3">
+          <%= step.title %>
+          <%= step.content %>
+          <%#= simple_form_for [, @step] do |f| %>
+              <%#= f.input :title, placeholder: "Title" %>
+              <%#= f.input :address, placeholder: "Address" %>
+              <%#= f.input :content, placeholder: "Content" %>
+              <%#= f.input :country,  placeholder: "Country" %>
+              <%#= f.input :duration, placeholder: "Duration" %>
+              <%#= f.submit class: "btn btn-primary" %>
+            <%# end %>
+        </div>
+        <%#= link_to "Edit",  %>
+        <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-warning" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row" data-controller="edit-step-blog">
+    <div class="col-12">
+      <a class="btn btn-primary">Add section</a>
+    </div>
+    <%= simple_form_for [@blog, @step] do |f| %>
+              <%= f.input :title, placeholder: "Title" %>
+              <%= f.input :address, placeholder: "Address" %>
+              <%= f.input :content, placeholder: "Content" %>
+              <%#= f.input :country,  placeholder: "Country" %>
+              <%= f.input :duration, placeholder: "Duration" %>
+              <%= f.submit class: "btn btn-primary" %>
+            <% end %>
+  </div>
+</div>
