@@ -1,32 +1,90 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top">
-  <div class="container-fluid">
-    <%= link_to "Trip Easy", root_path, class: "navbar-brand" %>
+<%# OLD NAVBAR %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<% if false %>
+  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top">
+    <div class="container-fluid">
+      <%= link_to "Trip Easy", root_path, class: "navbar-brand" %>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item mx-3">
-            <%= link_to "my blogs", my_library_path, class: "btn btn-primary" %>
-          </li>
-          <li class="nav-item dropdown">
-          <a href="#" class="avatar navbar-brand mx-3" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= current_user.pseudo %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "my profile page", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item mx-3">
+              <%= link_to "my blogs", my_library_path, class: "btn btn-primary" %>
+            </li>
+            <li class="nav-item dropdown">
+            <a href="#" class="avatar navbar-brand mx-3" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= current_user.pseudo %>
+            </a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <%= link_to "My profile", "#", class: "dropdown-item" %>
+                <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
+<% end %>
+
+
+
+
+
+
+
+<%# NEW NAVBAR %>
+
+<div class="navbar mt-3">
+  <div class="logo-container">
+    <%= link_to image_tag("TripEasyB&W.png", id:"logo"), root_path, class: "navbar-brand" %>
+  </div>
+
+  <div class="tabs-container">
+    <ul class="tabs" style="margin-bottom: 0px;">
+      <li><%= link_to "Discovery", root_path %></li>
+      <li><%= link_to "Destination", blogs_path %></li>
+      <li><%= link_to "About Us", root_path %></li>
+    </ul>
+  </div>
+  <% if user_signed_in? %>
+    <div class="user-container d-flex">
+      <li class="nav-item mx-3">
+        <%= link_to "My blogs", my_library_path %>
+      </li>
+      <li class="nav-item dropdown">
+        <a href="" class="avatar navbar-brand mx-3" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-bordered", alt: "avatar-bordered" %>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <%= link_to "My profile", "#", class: "dropdown-item" %>
+          <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+        </div>
+      </li>
+    </div>
+  <% else %>
+    <div class="user-container">
+      <li class="nav-item">
+        <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+      </li>
+    </div>
+  <% end %>
 </div>
+
+
+
+<%# <section class="banner"></section>
+<script type="text/javascript">
+  window.AddEventListener("scroll", function(){
+    var header = document.querySelector("header");
+    header.classList.toggle("sticky", window.scrollY > 0);
+  })
+</script> %>
