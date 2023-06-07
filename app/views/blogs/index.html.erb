@@ -16,3 +16,7 @@
   </div>
   <p><%= link_to "New blog", new_blog_path if policy(Blog).new? %></p>
 </div>
+
+ <% @blogs.photo_banner.each do |blog| %>
+  <%= cl_image_tag blog.key, height: 300, width: 400, crop: :fill %>
+<% end %>
