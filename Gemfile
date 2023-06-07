@@ -30,6 +30,9 @@ gem "jbuilder"
 # Geocoder
 gem "geocoder"
 
+# pg_search
+gem "pg_search"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -58,6 +61,7 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "cloudinary"
+gem 'faker'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

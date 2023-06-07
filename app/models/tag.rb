@@ -1,5 +1,5 @@
 class Tag < ApplicationRecord
   belongs_to :step
 
-  validates :name
+  # validates :name
 end

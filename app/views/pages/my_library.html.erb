@@ -1,0 +1,32 @@
+<h1>My library</h1>
+<ul>
+  <% current_user.blogs.each do |blog| %>
+    <li><%= link_to blog.title, blog_path(blog) %><%= link_to "Edit", edit_blog_path(blog) %><%= link_to "", blog_path(blog), class: "fa-solid fa-trash", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
+  <% end %>
+</ul>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  New blog
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Create a new blog</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for [@blog] do |f| %>
+          <%= f.input :title, placeholder: "Title" %>
+          <%= f.input :min_price, placeholder: "Minimum price" %>
+          <%= f.input :max_price, placeholder: "Maximum price" %>
+          <%= f.input :start_date, as: :date, html5: true, placeholder: "start_date" %>
+          <%= f.input :end_date, as: :date, html5: true, placeholder: "end_date" %>
+          <%= f.submit class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
