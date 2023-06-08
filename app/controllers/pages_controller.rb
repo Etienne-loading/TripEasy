@@ -1,7 +1,9 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home, :my_library]
+  before_action :set_blog, only: [:show, :edit, :destroy, :update]
 
   def home
+  @blogs = Blog.all
   end
 
   def my_library

@@ -7,8 +7,7 @@ class Step < ApplicationRecord
   has_many :tags, dependent: :destroy
   has_many :tips, dependent: :destroy
   has_many_attached :photo
-
-
+  
   # validates :title, presence: true
   # validates :address, presence: true
   # validates :content, presence: true
