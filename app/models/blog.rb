@@ -4,9 +4,9 @@ class Blog < ApplicationRecord
   pg_search_scope :global_search,
     against: [ :title ],
     associated_against: {
-      steps: [:city, :content, :country],
+      steps: [:title, :content, :country],
       tags: [:name],
-      tips: [:content, :title, :link, :category],
+      tips: [:content, :title, :category],
     },
     using: {
       tsearch: { prefix: true }
