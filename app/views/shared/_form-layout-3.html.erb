@@ -1,0 +1,8 @@
+<%= simple_form_for [@blog, @step],
+          html: { class:"d-none", data: { create_step_blog_target:"form" }} do |f| %>
+                    <%= f.input :title, placeholder: "Title" %>
+                    <%= f.input :address, placeholder: "Address" %>
+                    <%= f.input :duration, placeholder: "Duration" %>
+                    <%= f.input :photo, as: :file %>
+                    <%= f.submit class: "btn btn-primary" %>
+                  <% end %>
