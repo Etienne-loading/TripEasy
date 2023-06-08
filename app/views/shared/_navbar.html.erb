@@ -1,4 +1,4 @@
-<div class="navbar container sticky-top">
+<div class="navbar container sticky-top" style="<%= 'position:fixed' if action_name == 'home' %>">
   <div class="logo-container">
     <%= link_to image_tag("TripEasyB&W.png", id:"logo"), root_path, class: "navbar-brand" %>
   </div>
