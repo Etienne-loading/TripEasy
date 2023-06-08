@@ -1,0 +1,7 @@
+<%= simple_form_for [@blog, @step],
+  html: { class:"d-none", data: { layout_target:"form" }} do |f| %>
+  <%= f.input :title, placeholder: "Title" %>
+  <%= f.input :address, placeholder: "Address" %>
+  <%#= f.input :country,  placeholder: "Country" %>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
