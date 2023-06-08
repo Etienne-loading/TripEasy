@@ -4,7 +4,7 @@
     <div class="banner-grid">
       <div class="banner-content">
         <h1>Explore <br> The <strong>World</strong></h1>
-        <p><strong>TripEasy</strong> : Le blog de voyages ultime pour les aventuriers en quête d'inspiration, de conseils et de récits captivants.</p>
+        <p><strong>TripEasy</strong> : The ultimate travel blog for adventurers looking for inspiration, advice and compelling stories.</p>
         <%= form_with url: blogs_path, method: :get, class: "d-flex" do %>
           <%= text_field_tag :query,
             params[:query],
@@ -13,6 +13,7 @@
           %>
           <%= submit_tag "Search", class: "btn btn-primary" %>
         <% end %>
+        <div class="arrow"></div>
       </div>
     </div>
   </div>
