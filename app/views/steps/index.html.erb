@@ -1,43 +1,54 @@
 <div class="container">
   <h1>Edition Module</h1>
-  <div class="row">
-    <div class="col">
-      <% @steps.each do |step| %>
-      <div class="col-12 mb-3" data-controller="edit-step-blog">
-        <div data-edit-step-blog-target="content">
-          <h5 class="mb-2"><%= step.title %> | <%= step.duration %> days</h5>
-          <p><%= step.content %></p>
-        </div>
-        <%= simple_form_for [@blog, step],
-                html: { data: { edit_step_blog_target:"form", edit_step_blog_id_value: "#{step}" }, class:"d-none" } do |f| %>
-        <%= f.input :title %>
-        <%= f.input :address %>
-        <%= f.input :content %>
-        <%#= f.input :country %>
-        <%= f.input :duration %>
-        <%= f.submit class: "btn btn-primary" %>
-        <% end %>
-        <%# <a href="" data-edit-step-blog-target="button" data-action="click->edit-step-blog#revealEditForm">Edit</a> %>
-        <%= link_to "Edit", blog_step_path(step.blog, step), data: {action: "click->edit-step-blog#revealEditForm", edit_step_blog_target: "button" } %>
-        <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-warning" %>
-        <hr>
-      </div>
-      <% end %>
+</div>
+<div class="d-flex">
+  <div class="bg-dark overflow-y-scroll", style="width:800px; height:100%, auto;">
+    <% @steps.each do |step| %>
+      <div class="m-3">
+        <%= link_to step.title.truncate_words(4), "##{step.id}", class:"text-white" %>
     </div>
-  </div>
-  <div class="row" data-controller="create-step-blog">
-    <div class="col-12">
-      <a class="btn btn-primary" data-create-step-blog-target="button"
-        data-action="click->create-step-blog#revealCreateForm">Add section</a>
-    </div>
-    <%= simple_form_for [@blog, @step],
-    html: { class:"d-none", data: { create_step_blog_target:"form" }} do |f| %>
-    <%= f.input :title, placeholder: "Title" %>
-    <%= f.input :address, placeholder: "Address" %>
-    <%= f.input :content, placeholder: "Content" %>
-    <%#= f.input :country,  placeholder: "Country" %>
-    <%= f.input :duration, placeholder: "Duration" %>
-    <%= f.submit class: "btn btn-primary" %>
     <% end %>
   </div>
-</div>
+    <div class="bg-white flex-grow-1" data-controller="edit-step-blog">
+      <div class="col p-3">
+        <% @steps.each do |step| %>
+          <div class="col-12 mb-3">
+            <div data-edit-step-blog-target="content" >
+              <h5 id="<%= step.id %>" class="mb-2"><%= step.title %> | <%= step.duration %> days</h5>
+              <p><%= step.content %></p>
+            </div>
+            <div>
+            <%= simple_form_for [@blog, step],
+              html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+                <%= f.input :title %>
+                <%= f.input :address %>
+                <%= f.input :content %>
+                <%#= f.input :country %>
+                <%= f.input :duration %>
+                <%= f.submit class: "btn btn-primary" %>
+            <% end %>
+            </div>
+          </div>
+          <a href="" data-edit-step-blog-target="button" data-action="click->edit-step-blog#revealEditForm">Edit</a>
+          <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-warning" %>
+          <hr>
+        <% end %>
+      </div>
+      <div class="container">
+        <div class="row" data-controller="create-step-blog">
+          <div class="col-12">
+            <a class="btn btn-primary" data-create-step-blog-target="button" data-action="click->create-step-blog#revealCreateForm">Add section</a>
+          </div>
+          <%= simple_form_for [@blog, @step],
+          html: { class:"d-none", data: { create_step_blog_target:"form" }} do |f| %>
+                    <%= f.input :title, placeholder: "Title" %>
+                    <%= f.input :address, placeholder: "Address" %>
+                    <%= f.input :content, placeholder: "Content" %>
+                    <%#= f.input :country,  placeholder: "Country" %>
+                    <%= f.input :duration, placeholder: "Duration" %>
+                    <%= f.submit class: "btn btn-primary" %>
+           <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
