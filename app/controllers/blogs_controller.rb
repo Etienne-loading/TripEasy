@@ -8,6 +8,7 @@ class BlogsController < ApplicationController
   def show
     authorize @blog
     @steps = @blog.steps
+    @steps = @steps.order(:id)
 
     @markers = @steps.geocoded.map do |step|
       {
@@ -40,7 +41,7 @@ class BlogsController < ApplicationController
   end
 
   def update
-    
+
   end
 
   def destroy
