@@ -9,6 +9,9 @@
       <div class="col-9 mb-3">
         <%= step.title %>
         <%= step.content %>
+        <% if step.photo %>
+        <%= cl_image_tag @step.photo.key, height: 300, width: 400, crop: :fill %>
+        <% end %>
       </div>
     <% end %>
     <div class='col-3' data-controller="map"
