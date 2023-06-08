@@ -30,7 +30,7 @@ nationalities = ['French', 'German', 'Spanish', 'Italian']
   puts "Created #{user.pseudo}"
 end
 
-guatemala = { title: "Explorations au Guatemala : Un voyage riche en couleurs et en culture", min_price: 1000, max_price: 1500, start_date: "2022-10-12", end_date: "2022-10-22", carbon_friendly:true, user:User.all.sample}
+guatemala = { title: "Explorations au Guatemala", min_price: 1000, max_price: 1500, start_date: "2022-10-12", end_date: "2022-10-22", carbon_friendly:true, user:User.all.sample, intro:"Bienvenue au Guatemala, un joyau d'Amérique centrale qui allie nature spectaculaire et héritage culturel. Explorez les villes coloniales pittoresques, découvrez des sites archéologiques mayas fascinants, et émerveillez-vous devant des paysages de volcans majestueux et de lacs pittoresques. Imprégnez-vous de la richesse des traditions guatémaltèques, goûtez à une délicieuse cuisine locale et laissez-vous charmer par l'accueil chaleureux des habitants. Préparez-vous à vivre une expérience immersive et enrichissante au Guatemala, où l'aventure et la découverte vous attendent à chaque tournant."}
 [guatemala].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -39,7 +39,8 @@ guatemala = { title: "Explorations au Guatemala : Un voyage riche en couleurs et
     start_date: hash[:start_date],
     end_date: hash[:end_date],
     carbon_friendly: hash[:carbon_friendly],
-    user: hash[:user]
+    user: hash[:user],
+    intro: hash[:intro]
   )
   image = URI.open("https://images.unsplash.com/photo-1582300857444-5ddd87c86797?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80")
   blog.photo_banner.attach(io: image, filename: blog.title, content_type: 'png')
@@ -75,7 +76,7 @@ step4 = { title: "Détente et exploration à Flores : Porte d'entrée vers les r
   puts "Created #{step.title}"
 end
 
-spain = { title: "Le Grand Pays de Raphaël Nadal", min_price: 800, max_price: 1000, start_date: "2023-01-02", end_date: "2023-01-17", carbon_friendly:true, user:User.all.sample }
+spain = { title: "Le Grand Pays de Rafael Nadal", min_price: 800, max_price: 1000, start_date: "2023-01-02", end_date: "2023-01-17", carbon_friendly:true, user:User.all.sample, intro:"Bienvenue en Espagne, un pays riche en histoire, en culture et en beauté naturelle. De villes animées à des plages paradisiaques, ce voyage de 20 jours vous permettra de découvrir toute la diversité de l'Espagne. Explorez les sites emblématiques tels que la Sagrada Familia à Barcelone, promenez-vous dans les ruelles étroites de l'Albaicín à Grenade, goûtez aux délices de la cuisine espagnole à Madrid et détendez-vous sur les plages ensoleillées de la Costa del Sol. Préparez-vous à être charmé par la passion, l'art et l'hospitalité espagnole tout au long de votre voyage inoubliable en Espagne." }
 [spain].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -84,7 +85,8 @@ spain = { title: "Le Grand Pays de Raphaël Nadal", min_price: 800, max_price: 1
     start_date: hash[:start_date],
     end_date: hash[:end_date],
     carbon_friendly: hash[:carbon_friendly],
-    user: hash[:user]
+    user: hash[:user],
+    intro: hash[:intro]
   )
   image = URI.open("https://images.unsplash.com/photo-1543783207-ec64e4d95325?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")
   blog.photo_banner.attach(io: image, filename: blog.title, content_type: 'png')
@@ -94,7 +96,7 @@ spain = { title: "Le Grand Pays de Raphaël Nadal", min_price: 800, max_price: 1
   blog.save
 end
 
-step1 = { title: "Découvrez l'effervescence de Madrid : Capitale vibrante de l'Spain", address: "Madrid", content: "Votre voyage débute dans la magnifique ville de Madrid, où l'histoire et la modernité se mêlent harmonieusement. Dans cet article, explorez les joyaux de Madrid, tels que le Palais Royal, la Plaza Mayor et le musée du Prado. Plongez dans la vie nocturne animée de la ville, dégustez des tapas délicieuses et profitez de l'atmosphère chaleureuse des rues madrilènes.", duration: 2, latitude: 40.4168, longitude: -3.7038, country: "Spain", blog:Blog.last, url:"https://images.unsplash.com/photo-1558370781-d6196949e317?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2358&q=80" }
+step1 = { title: "Découvrez l'effervescence de Madrid : Capitale vibrante de l'Espagne", address: "Madrid", content: "Votre voyage débute dans la magnifique ville de Madrid, où l'histoire et la modernité se mêlent harmonieusement. Dans cet article, explorez les joyaux de Madrid, tels que le Palais Royal, la Plaza Mayor et le musée du Prado. Plongez dans la vie nocturne animée de la ville, dégustez des tapas délicieuses et profitez de l'atmosphère chaleureuse des rues madrilènes.", duration: 2, latitude: 40.4168, longitude: -3.7038, country: "Spain", blog:Blog.last, url:"https://images.unsplash.com/photo-1558370781-d6196949e317?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2358&q=80" }
 step2 = { title: "Laissez-vous charmer par Barcelone : Perle de la Méditerranée", address: "Barcelone", content: "Barcelone vous accueille avec son architecture emblématique, ses plages ensoleillées et sa riche culture catalane. Dans cet article, découvrez les merveilles de la ville, telles que la Sagrada Familia, le parc Güell et la promenade animée de Las Ramblas. Imprégnez-vous de l'atmosphère bohème du quartier gothique, goûtez à la délicieuse cuisine catalane et profitez des vues imprenables depuis le mont Tibidabo.", duration: 3, latitude: 41.3851, longitude: 2.1734, country: "Spain", blog:Blog.last }
 step3 = { title: "Explorez la beauté mauresque de Grenade : Un trésor de l'Andalousie", address: "Grenade", content: "Grenade vous transporte dans l'époque mauresque avec son emblématique Alhambra et ses ruelles étroites remplies de charme. Dans cet article, découvrez l'Alhambra, un complexe palatial incroyablement détaillé, et promenez-vous dans les quartiers de l'Albaicín et du Sacromonte. Imprégnez-vous de l'ambiance andalouse, assistez à un spectacle de flamenco et dégustez des tapas authentiques accompagnées de vins locaux.", duration: 3, latitude: 37.1773, longitude: -3.5986, country: "Spain", blog:Blog.last, url:"https://images.unsplash.com/photo-1647797833375-63d6ecc36d62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2429&q=80" }
 step4 = { title: "Vibrez au rythme de Séville : Capitale culturelle de l'Andalousie", address: "Séville", content: "Séville vous enchantera avec son architecture mauresque, ses jardins luxuriants et son ambiance festive. Dans cet article, découvrez la majestueuse cathédrale de Séville, l'imposante Plaza de España et le palais royal de l'Alcazar.", duration: 3, latitude: 7.3891, longitude: -5.9845, country:"Spain", blog:Blog.last, url: "https://images.unsplash.com/photo-1634893448760-0cb6e1af22f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80" }
@@ -122,7 +124,7 @@ step6 = { title: "Cordoue, un voyage dans le temps : Entre histoire et culture a
   puts "Created #{step.title}"
 end
 
-myanmar = { title: "Exploration enchantée : À la découverte de la richesse du Myanmar", min_price: 1500, max_price: 2000, start_date: "2023-03-02", end_date: "2023-03-13", carbon_friendly:false, user:User.all.sample }
+myanmar = { title: "Exploration enchantée", min_price: 1500, max_price: 2000, start_date: "2023-03-02", end_date: "2023-03-13", carbon_friendly:false, user:User.all.sample, intro:"Bienvenue au Myanmar, un pays mystérieux et enchanteur d'Asie du Sud-Est. Préparez-vous à plonger dans une culture riche et préservée, à découvrir des temples majestueux, des paysages époustouflants et une hospitalité chaleureuse. Explorez les splendeurs de Yangon avec la célèbre pagode Shwedagon, laissez-vous émerveiller par les temples de Bagan, embarquez pour une croisière sur le majestueux fleuve Irrawaddy et imprégnez-vous de l'atmosphère unique du lac Inle. Le Myanmar vous promet une aventure immersive à travers son histoire, ses traditions et sa nature préservée. Préparez-vous à être transporté dans un monde de beauté et de spiritualité lors de ce voyage inoubliable au Myanmar." }
 [myanmar].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -131,7 +133,8 @@ myanmar = { title: "Exploration enchantée : À la découverte de la richesse du
     start_date: hash[:start_date],
     end_date: hash[:end_date],
     carbon_friendly: hash[:carbon_friendly],
-    user: hash[:user]
+    user: hash[:user],
+    intro: hash[:intro]
   )
   image = URI.open("https://images.unsplash.com/photo-1584897356466-858d9b6c53d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80")
   blog.photo_banner.attach(io: image, filename: blog.title, content_type: 'png')
@@ -168,7 +171,7 @@ step5 = { title: "Détente sur les plages de Ngapali : Un paradis tropical", add
   puts "Created #{step.title}"
 end
 
-lithuania = { title: "Unveiling Lithuania: A Journey through History, Culture, and Natural Beauty", min_price: 500, max_price: 1000, start_date: "2019-08-20", end_date: "2019-08-13", carbon_friendly:true, user:User.all.sample }
+lithuania = { title: "Unveiling Lithuania", min_price: 500, max_price: 1000, start_date: "2019-08-20", end_date: "2019-08-13", carbon_friendly:true, user:User.all.sample, intro:"Welcome to Lithuania, a captivating Baltic gem that blends rich history with breathtaking natural beauty. Explore the charming streets of Vilnius, the capital city, and be mesmerized by its well-preserved medieval old town. Discover the medieval castles and picturesque landscapes of Trakai, immerse yourself in the unique culture of the Hill of Crosses, and unwind on the pristine shores of the Curonian Spit. Lithuania offers a perfect blend of history, art, and natural wonders. Get ready to be enchanted by its charming cities, lush forests, and warm hospitality. Embark on a remarkable journey through Lithuania and create memories that will last a lifetime." }
 [lithuania].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -177,7 +180,8 @@ lithuania = { title: "Unveiling Lithuania: A Journey through History, Culture, a
     start_date: hash[:start_date],
     end_date: hash[:end_date],
     carbon_friendly: hash[:carbon_friendly],
-    user: hash[:user]
+    user: hash[:user],
+    intro: hash[:intro]
   )
   image = URI.open("https://images.unsplash.com/photo-1567023249914-7c83f04de30c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")
   blog.photo_banner.attach(io: image, filename: blog.title, content_type: 'png')
@@ -213,7 +217,7 @@ step4 = { title: "Immerse Yourself in Nature: Trakai and the Curonian Spit", add
   puts "Created #{step.title}"
 end
 
-japan = { title: "Wanderlust Japan: A Journey through Ancient Traditions and Modern Wonders", min_price: 500, max_price: 1000, start_date: "2019-08-20", end_date: "2019-08-13", carbon_friendly:true, user:User.all.sample }
+japan = { title: "Wanderlust Japan", min_price: 500, max_price: 1000, start_date: "2019-08-20", end_date: "2019-08-13", carbon_friendly:true, user:User.all.sample, intro:"Welcome to Japan, a land of captivating contrasts where ancient traditions blend seamlessly with modern innovation. Embark on a month-long adventure through this enchanting country and prepare to be captivated by its rich culture, stunning landscapes, and warm hospitality. Start your journey in Tokyo, a bustling metropolis where traditional temples stand side by side with towering skyscrapers. Immerse yourself in the vibrant street life of Shibuya and explore the serene gardens of the Imperial Palace. Head to Kyoto, a city of timeless beauty, where you can discover the iconic golden pavilion of Kinkaku-ji and wander through the enchanting Arashiyama Bamboo Grove. Experience a traditional tea ceremony and witness the grace and elegance of geisha performances. Visit Hiroshima and pay homage to the past at the Peace Memorial Park, a powerful reminder of the city's history. Explore the historic streets of Kyoto and Nara, where ancient temples and friendly deer await. Venture into the scenic countryside and marvel at the beauty of Mount Fuji, Japan's iconic peak. Explore the charming villages of Takayama and Shirakawa-go, known for their traditional thatched-roof houses. Indulge in the country's culinary delights, from sushi and ramen to delicate matcha tea and delectable wagyu beef. Soak in natural hot springs, known as onsen, and experience the art of relaxation in traditional ryokans. Japan offers a harmonious blend of tradition and modernity, where ancient temples coexist with high-tech marvels. Get ready for an extraordinary journey through this captivating land of contrasts." }
 [japan].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -222,7 +226,8 @@ japan = { title: "Wanderlust Japan: A Journey through Ancient Traditions and Mod
     start_date: hash[:start_date],
     end_date: hash[:end_date],
     carbon_friendly: hash[:carbon_friendly],
-    user: hash[:user]
+    user: hash[:user],
+    intro: hash[:intro]
   )
   image = URI.open("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")
   blog.photo_banner.attach(io: image, filename: blog.title, content_type: 'png')
