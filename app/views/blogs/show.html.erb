@@ -5,16 +5,15 @@
     </div>
   </div>
   <div class="row">
-    <% @steps.each do |step| %>
-      <div class="col-9 mb-3">
-        <%= step.title %>
-        <%= step.content %>
-        <% if step.photo %>
-        <%= cl_image_tag @step.photo.key, height: 300, width: 400, crop: :fill %>
-        <% end %>
-      </div>
-    <% end %>
-    <div class='col-3' data-controller="map"
+    <div class="col-8">
+      <% @steps.each do |step| %>
+        <div class="mb-3">
+          <%= step.title %>
+          <%= step.content %>
+        </div>
+      <% end %>
+    </div>
+    <div class='col-4' data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
       <div style="width: 100%; height: 100vh; border-radius: 4px; position: sticky; top: 0;"
