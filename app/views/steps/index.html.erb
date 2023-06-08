@@ -6,8 +6,7 @@
     <% @steps.each do |step| %>
       <div class="m-3">
         <%= link_to step.title.truncate_words(4), "##{step.id}", class:"text-white" %>
-      </div>
-
+    </div>
     <% end %>
   </div>
     <div class="bg-white flex-grow-1" data-controller="edit-step-blog">
@@ -21,13 +20,13 @@
             <div>
             <%= simple_form_for [@blog, step],
               html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
-                <%= f.input :title, placeholder: "Title" %>
-                <%= f.input :address, placeholder: "Address" %>
-                <%= f.input :content, placeholder: "Content" %>
-                <%#= f.input :country,  placeholder: "Country" %>
-                <%= f.input :duration, placeholder: "Duration" %>
+                <%= f.input :title %>
+                <%= f.input :address %>
+                <%= f.input :content %>
+                <%#= f.input :country %>
+                <%= f.input :duration %>
                 <%= f.submit class: "btn btn-primary" %>
-              <% end %>
+            <% end %>
             </div>
           </div>
           <a href="" data-edit-step-blog-target="button" data-action="click->edit-step-blog#revealEditForm">Edit</a>
@@ -48,7 +47,7 @@
                     <%#= f.input :country,  placeholder: "Country" %>
                     <%= f.input :duration, placeholder: "Duration" %>
                     <%= f.submit class: "btn btn-primary" %>
-                  <% end %>
+           <% end %>
         </div>
       </div>
     </div>

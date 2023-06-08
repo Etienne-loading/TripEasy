@@ -1,0 +1,19 @@
+<div class="banner">
+  <div class="container">
+    <%= render "shared/navbar" %>
+    <div class="banner-grid">
+      <div class="banner-content">
+        <h1>Explore <br> The <strong>World</strong></h1>
+        <p><strong>TripEasy</strong> : Le blog de voyages ultime pour les aventuriers en quête d'inspiration, de conseils et de récits captivants.</p>
+        <%= form_with url: blogs_path, method: :get, class: "d-flex" do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Nevada, Road-trip, hiking, etc..."
+          %>
+          <%= submit_tag "Search", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
