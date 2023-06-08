@@ -1,6 +1,6 @@
 <div class="container my-2">
   <div class="row">
-    <div class="col">
+    <div class="col-8 col-4">
       <h1><%= @blog.title %></h1>
     </div>
   </div>
@@ -17,10 +17,12 @@
     <div class='col-3' data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-      <div class="d-none" style="width: 100%; height: 600px; border-radius: 4px;"
+      <div style="width: 100%; height: 100vh; border-radius: 4px; position: sticky; top: 0;"
       data-map-target="container">
       </div>
-      <button class="btn btn-primary my-2 " style="position: absolute; bottom: 1.5em; left: 50%; transform: translateX(-50%);" data-action="click->map#toggleMapVisibility">Show map</button>
     </div>
   </div>
 </div>
+
+
+<%# style="background-image: url(<%= cl_image_path blog.photo_banner.key %>

@@ -1,11 +1,13 @@
-import { Controller } from "@hotwired/stimulus"
+import {
+  Controller
+} from "@hotwired/stimulus"
 
 // Connects to data-controller="create-step"
 export default class extends Controller {
-  connect() {
-    console.log('oiezrfj');
-  }
+
   static targets = ["button", "form"]
+
+  connect() {}
 
   revealCreateForm(event) {
     event.preventDefault()

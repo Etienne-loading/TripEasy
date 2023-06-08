@@ -5,6 +5,7 @@ class StepsController < ApplicationController
   def index
     skip_policy_scope
     @steps = @blog.steps
+    @steps = @steps.order(:id)
     @step = Step.new
   end
 
@@ -17,12 +18,13 @@ class StepsController < ApplicationController
 
   def create
     skip_authorization
+    @steps = @blog.steps
     @step = Step.new(step_params)
     @step.blog = @blog
     if @step.save
       redirect_to blog_steps_path
     else
-      render edit_blog_step_path, status: :unprocessable_entity
+      render :index, status: :unprocessable_entity
     end
   end
 

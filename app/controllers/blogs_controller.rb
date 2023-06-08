@@ -2,12 +2,13 @@ class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :destroy, :update]
   def index
     @blogs = policy_scope(Blog)
-    @blogs.global_search(params[:query])
+    @blogs = @blogs.global_search(params[:query])
   end
 
   def show
     authorize @blog
     @steps = @blog.steps
+    @steps = @steps.order(:id)
 
     @markers = @steps.geocoded.map do |step|
       {
@@ -40,7 +41,7 @@ class BlogsController < ApplicationController
   end
 
   def update
-    
+
   end
 
   def destroy
