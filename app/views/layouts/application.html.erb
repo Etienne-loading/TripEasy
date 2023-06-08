@@ -12,12 +12,14 @@
   </head>
 
   <body>
-    <div class="container">
-      <%= render "shared/navbar" if action_name != "home" %>
-    </div>
+    <% if action_name != "home" %>
+      <div class="container">
+        <%= render "shared/navbar" %>
+      </div>
+    <% end %>
     <%= render "shared/flashes" %>
 
-    <div style="min-height: calc(100vh - 96px); position: relative;">
+    <div style="min-height: calc(100vh - 274px); position: relative;">
       <%= yield %>
     </div>
 
