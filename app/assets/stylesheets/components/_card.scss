@@ -1,43 +1,72 @@
 @import 'bootstrap/variables';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
-$card_color: #F9F9F9;
+$card_color: #F2F2F2;
 .card-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 10px;
+  grid-gap: 35px;
 }
 
 .card-blog {
-  border-radius: 9px;
+  border-radius:19px;
   width: auto;
   height: 40vh;
   transition: .3s ease;
   background: $card_color;
-  margin: 8px;
 }
 
 .card-img {
   // background-color: #8785ff;
     background-position: center;
     background-size: cover;
-    height: 45%;
+    height: 50%;
     width: auto;
-    border-radius: 8px;
-    box-shadow: 0px 6px 15px grey;
+    border-radius: 17px;
+    // box-shadow: 0px 6px 15px grey;
   }
 
-h6 {
+.card-title {
 	line-height: 1.5;
 	font-weight: 450;
   font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
 }
 
 .card-intro {
   line-height: 95%;
   font-size: 90%;
 }
+
 .per-period{
-  font-size: 0.7em;
+  font-size: 0.6em;
   display:contents;
+}
+
+.duration-price{
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+}
+.duration-price{
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+}
+
+.tag{
+  background-color:#4A6947;
+  border-radius: 100px;
+  padding: 3%;
+  color: #FCFAEE;
+  font-size: 0.85em ;
+  }
+
+.localisation{
+  position: relative;
+  bottom: -27px
+}
+
+.heart{
+  position: relative;
+  bottom: -2px;
+  right: -175px;
 }
