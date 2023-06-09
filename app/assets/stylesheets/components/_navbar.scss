@@ -96,6 +96,6 @@
   display: flex;
   border-radius: 3px;
   &:hover {
-    background-color: #f7b633;
-  }
+    filter: brightness(85%);
+    }
 }
