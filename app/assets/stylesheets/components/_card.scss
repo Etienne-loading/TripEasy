@@ -29,8 +29,8 @@ $card_color: #F2F2F2;
 .card-title {
 	line-height: 1.5;
 	font-weight: 450;
-  font-family: 'Roboto', sans-serif;
   font-size: 1.2em;
+  font-family: 'Rhodium Libre', serif;
 }
 
 .card-intro {
@@ -45,32 +45,31 @@ $card_color: #F2F2F2;
 
 .duration-price{
   font-weight: 400;
-  font-family: 'Roboto', sans-serif;
 }
 .duration-price{
   font-weight: 400;
-  font-family: 'Roboto', sans-serif;
 }
 
 .tag{
   background-color:#4A6947;
   border-radius: 100px;
-  padding: 3%;
+  padding: 2%;
   color: #FCFAEE;
   font-size: 0.85em ;
   }
 
 .localisation{
   position: relative;
-  bottom: -27px
-}
+    bottom: -42px;
+  }
 
 .heart{
   position: relative;
-  bottom: -2px;
-  right: -175px;
+  bottom: -17px;
+  right: -223px;
 }
 
 .card-link{
   text-decoration: none;
+  color:black;
 }
