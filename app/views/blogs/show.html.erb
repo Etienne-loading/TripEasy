@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-12" style="background-image: url(<%= cl_image_path @blog.photo_banner.key %>)">
-    <h1 class="ms-5"><%= @blog.title %></h1>
+  <div class="col-12 banner-show-blog" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @blog.photo_banner.key %>)">
+    <h1 class="ms-5" style = "font-size: 58px; color: white;"><%= @blog.title %></h1>
   </div>
 </div>
 <div class="container my-2">
