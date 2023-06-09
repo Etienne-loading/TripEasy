@@ -9,9 +9,9 @@ $card_color: #F2F2F2;
 }
 
 .card-blog {
-  border-radius:19px;
+  border-radius: 6px;
   width: auto;
-  height: 40vh;
+  height: 350px;
   transition: .3s ease;
   background: $card_color;
 }
@@ -22,7 +22,7 @@ $card_color: #F2F2F2;
     background-size: cover;
     height: 50%;
     width: auto;
-    border-radius: 17px;
+    border-radius: 6px;
     // box-shadow: 0px 6px 15px grey;
   }
 
