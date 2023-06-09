@@ -1,8 +1,10 @@
 <%= simple_form_for [@blog, @step],
   html: { class:"d-none", data: { layout_target:"form2" }} do |f| %>
-  <%= f.input :title, placeholder: "Title" %>
-  <%= f.input :address, placeholder: "Address" %>
-  <%= f.input :photo, as: :file, label: "Choose a picture" %>
-  <%#= f.input :country,  placeholder: "Country" %>
+  <%= f.input :title, label: false, placeholder: "Title" %>
+  <%= f.input :address, label: false, placeholder: "Address" %>
+  <%= f.input :duration, label: false, placeholder: "Duration" %>
+  <%= f.input :photo, as: :file, label: false %>
+  <%= f.input :content, label: false, placeholder: "Content" %>
+  <%= f.hidden_field :layout, value: 2 %>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
