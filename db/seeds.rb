@@ -312,7 +312,7 @@ end
   puts "Created #{blog.title}"
 
   title = "#{Faker::Lorem.word.capitalize} #{Faker::Lorem.word.capitalize}"
-  country = Faker::Lorem.words(number: , supplemental: false).join(' ')
+  country = Faker::Address.unique.country
   blog = Blog.last
   step = Step.create!(
     title: title,
