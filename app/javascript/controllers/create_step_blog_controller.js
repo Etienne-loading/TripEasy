@@ -11,7 +11,7 @@ export default class extends Controller {
 
   revealCreateForm(event) {
     event.preventDefault()
-    this.formTarget.classList.remove("d-none")
-    this.buttonTarget.classList.add("d-none")
+    // this.formTarget.classList.remove("d-none")
+    // this.buttonTarget.classList.add("d-none")
   }
 }

@@ -19,7 +19,7 @@
           </div>
           <div>
             <%= simple_form_for [@blog, step],
-                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+                  html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
               <%= f.input :title %>
               <%= f.input :address %>
               <%= f.input :content %>
@@ -38,18 +38,52 @@
     <div class="container">
       <div class="row" data-controller="create-step-blog">
         <div class="col-12">
-          <a class="btn btn-primary" data-create-step-blog-target="button"
-            data-action="click->create-step-blog#revealCreateForm">Add section</a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">
+            Add section
+          </button>
         </div>
-        <%= simple_form_for [@blog, @step],
+      </div>
+          <%# <a class="btn btn-primary" data-create-step-blog-target="button"
+            data-action="click->create-step-blog#revealCreateForm">Add section</a> %>
+        </div>
+        <div class="modal fade" tabindex="-1" id="modalForm" data-controller="layout" aria-labelledby="modalFormLabel" aria-hidden="true" ,
+          style="z-index: 20000;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalFormLabel">Choose a layout</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col" data-layout-target="col">
+                  <a href="" data-action="click->layout#showForm1"><div data-layout-target="layout1" class="border border-dark" style="height: 150px; width: 200px">1</div></a>
+                  <%= render "shared/form-layout-1" %>
+                  </div>
+                  <div class="col" data-layout-target="col2">
+                    <a href="" data-action="click->layout#showForm2"><div data-layout-target="layout2" class="border border-dark" style="height: 150px; width: 200px">2</div></a>
+                    <%= render "shared/form-layout-2" %>
+                  </div>
+                  <div class="col" data-layout-target="layout3">
+                    <div class="border border-dark" style="height: 150px; width: 200px">3</div>
+                  </div>
+                  <div class="col" data-layout-target="layout4">
+                    <div class="border border-dark" style="height: 150px; width: 200px">4</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%#= simple_form_for [@blog, @step],
           html: { class:"d-none", data: { create_step_blog_target:"form" }} do |f| %>
-          <%= f.input :title, placeholder: "Title" %>
-          <%= f.input :address, placeholder: "Address" %>
-          <%= f.input :content, placeholder: "Content" %>
-          <%#= f.input :country,  placeholder: "Country" %>
-          <%= f.input :duration, placeholder: "Duration" %>
-          <%= f.submit class: "btn btn-primary" %>
-        <% end %>
+        <%#= f.input :title, placeholder: "Title" %>
+        <%#= f.input :address, placeholder: "Address" %>
+        <%#= f.input :content, placeholder: "Content" %>
+        <%#= f.input :country,  placeholder: "Country" %>
+        <%#= f.input :duration, placeholder: "Duration" %>
+        <%#= f.submit class: "btn btn-primary" %>
+        <%# end %>
       </div>
     </div>
   </div>
