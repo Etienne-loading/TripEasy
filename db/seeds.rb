@@ -292,8 +292,8 @@ end
   title = "#{Faker::Lorem.word.capitalize} #{Faker::Lorem.word.capitalize}"
   min_price = rand(500..1000)
   max_price = rand(500..1000)
-  start_date = Faker::Date.between(from: '2019-08-13', to: '2019-08-20').to_s
-  end_date = Faker::Date.between(from: '2019-08-13', to: '2019-08-20').to_s
+  start_date = Faker::Date.between(from: '1995-08-13', to: '2020-08-20').to_s
+  end_date = Faker::Date.between(from: '2020-10-20', to: '2023-06-09').to_s
   carbon_friendly = true
   user = User.all.sample
 
@@ -312,7 +312,7 @@ end
   puts "Created #{blog.title}"
 
   title = "#{Faker::Lorem.word.capitalize} #{Faker::Lorem.word.capitalize}"
-  country = Faker::Address.unique.country
+  country = Faker::Lorem.words(number: , supplemental: false).join(' ')
   blog = Blog.last
   step = Step.create!(
     title: title,
