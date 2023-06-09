@@ -4,89 +4,117 @@
 <div class="d-flex">
   <div class="bg-dark overflow-y-scroll" , style="width:800px; height:100%, auto;">
     <% @steps.each do |step| %>
-      <div class="m-3">
-        <%= link_to step.title.truncate_words(4), "##{step.id}", class:"text-white" %>
-      </div>
+    <div class="m-3">
+      <%= link_to step.title.truncate_words(4), "##{step.id}", class:"text-white" %>
+    </div>
     <% end %>
   </div>
   <div class="bg-white flex-grow-1">
     <div class="col p-3">
       <% @steps.each do |step| %>
-        <div class="col-12 mb-3" data-controller="edit-step-blog">
-          <div data-edit-step-blog-target="content">
-            <h5 id="<%= step.id %>" class="mb-2"><%= step.title %> | <%= step.duration %> days</h5>
-            <p><%= step.content %></p>
-          </div>
-          <div>
-            <%= simple_form_for [@blog, step],
-                  html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
-              <%= f.input :title %>
-              <%= f.input :address %>
-              <%= f.input :content %>
-              <%#= f.input :country %>
-              <%= f.input :duration %>
-              <%= f.submit class: "btn btn-primary" %>
-            <% end %>
-          </div>
-          <%# <a href="" data-edit-step-blog-target="button" data-action="click->edit-step-blog#revealEditForm">Edit</a> %>
-          <%= link_to "Edit", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"} %>
-          <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-warning" %>
+      <div class="col-12 mb-3" data-controller="edit-step-blog">
+        <div data-edit-step-blog-target="content">
+          <h5 id="<%= step.id %>" class="mb-2"><%= step.title %> | <%= step.duration %> days</h5>
+          <p><%= step.content %></p>
         </div>
+        <div>
+          <% if step.layout == 1 %>
+          <%= simple_form_for [@blog, step],
+                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+          <%= f.input :title, placeholder: "Title" %>
+          <%= f.input :address, placeholder: "Address" %>
+          <%= f.input :duration, placeholder: "Duration" %>
+          <%= f.submit class: "btn btn-primary" %>
+          <% end %>
+          <% elsif step.layout == 2 %>
+          <%= simple_form_for [@blog, step],
+                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+          <%= f.input :title, placeholder: "Title" %>
+          <%= f.input :address, placeholder: "Address" %>
+          <%= f.input :duration, placeholder: "Duration" %>
+          <%= f.input :photo, as: :file %>
+          <%= f.submit class: "btn btn-primary" %>
+          <% end %>
+          <% elsif step.layout == 3 %>
+          <%= simple_form_for [@blog, step],
+                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+          <%= f.input :title, placeholder: "Title" %>
+          <%= f.input :address, placeholder: "Address" %>
+          <%= f.input :duration, placeholder: "Duration" %>
+          <%= f.input :photo, as: :file %>
+          <%= f.submit class: "btn btn-primary" %>
+          <% end %>
+          <% else %>
+          <%= simple_form_for [@blog, step],
+                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+          <%= f.input :title, placeholder: "Title" %>
+          <%= f.input :address, placeholder: "Address" %>
+          <%= f.input :content, placeholder: "Content" %>
+          <%= f.input :duration, placeholder: "Duration" %>
+          <%= f.submit class: "btn btn-primary" %>
+          <% end %>
+          <% end %>
+        </div>
+        <%= link_to "Edit", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"} %>
+        <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-warning" %>
+      </div>
       <hr>
       <% end %>
     </div>
     <div class="container">
       <div class="row" data-controller="create-step-blog">
         <div class="col-12">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">
             Add section
           </button>
         </div>
       </div>
-          <%# <a class="btn btn-primary" data-create-step-blog-target="button"
-            data-action="click->create-step-blog#revealCreateForm">Add section</a> %>
-        </div>
-        <div class="modal fade" tabindex="-1" id="modalForm" data-controller="layout" aria-labelledby="modalFormLabel" aria-hidden="true" ,
-          style="z-index: 20000;">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modalFormLabel">Choose a layout</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal fade" tabindex="-1" id="modalForm" data-controller="layout" aria-labelledby="modalFormLabel"
+      aria-hidden="true" , style="z-index: 20000;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalFormLabel">Choose a layout</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row align-items-center text-center">
+              <div class="col-6" data-layout-target="col">
+                <a href="" class="text-decoration-none" data-action="click->layout#showForm1">
+                  <div data-layout-target="layout1"><%= image_tag("Add-Title.png") %><p>Add a title</p>
+                  </div>
+                </a>
+                <%= render "shared/form-layout-1" %>
               </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col" data-layout-target="col">
-                  <a href="" data-action="click->layout#showForm1"><div data-layout-target="layout1" class="border border-dark" style="height: 150px; width: 200px">1</div></a>
-                  <%= render "shared/form-layout-1" %>
+              <div class="col-6" data-layout-target="col2">
+                <a href="" class="text-decoration-none" data-action="click->layout#showForm2">
+                  <div data-layout-target="layout2"><%= image_tag("Add-txt-and-img.png") %><p>Add a picture with a text
+                    </p>
                   </div>
-                  <div class="col" data-layout-target="col2">
-                    <a href="" data-action="click->layout#showForm2"><div data-layout-target="layout2" class="border border-dark" style="height: 150px; width: 200px">2</div></a>
-                    <%= render "shared/form-layout-2" %>
+                </a>
+                <%= render "shared/form-layout-2" %>
+              </div>
+              <div class="col-6" data-layout-target="col3">
+                <a href="" class="text-decoration-none" data-action="click->layout#showForm3">
+                  <div data-layout-target="layout3"><%= image_tag("Add-img.png") %><p>Add many medias</p>
                   </div>
-                  <div class="col" data-layout-target="col3">
-                    <a href="" data-action="click->layout#showForm3"><div data-layout-target="layout3" class="border border-dark" style="height: 150px; width: 200px">3</div></a>
-                    <%= render "shared/form-layout-3" %>
+                </a>
+                <%= render "shared/form-layout-3" %>
+              </div>
+              <div class="col-6" data-layout-target="col4">
+                <a href="" class="text-decoration-none" data-action="click->layout#showForm4">
+                  <div data-layout-target="layout4"><%= image_tag("Add-txt.png") %><p>Add text</p>
                   </div>
-                  <div class="col" data-layout-target="col4">
-                    <a href="" data-action="click->layout#showForm4"><div data-layout-target="layout4" class="border border-dark" style="height: 150px; width: 200px">4</div></a>
-                    <%= render "shared/form-layout-4" %>
-                  </div>
-                </div>
+                </a>
+                <%= render "shared/form-layout-4" %>
               </div>
             </div>
           </div>
         </div>
-        <%#= simple_form_for [@blog, @step],
-          html: { class:"d-none", data: { create_step_blog_target:"form" }} do |f| %>
-        <%#= f.input :title, placeholder: "Title" %>
-        <%#= f.input :address, placeholder: "Address" %>
-        <%#= f.input :content, placeholder: "Content" %>
-        <%#= f.input :country,  placeholder: "Country" %>
-        <%#= f.input :duration, placeholder: "Duration" %>
-        <%#= f.submit class: "btn btn-primary" %>
-        <%# end %>
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
