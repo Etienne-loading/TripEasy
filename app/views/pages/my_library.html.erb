@@ -6,9 +6,25 @@
       <% current_user.blogs.each do |blog| %>
         <div class="row">
           <div class="col">
-            <%= link_to blog.title, blog_path(blog) %>
-            <%= link_to "Edit", blog_steps_path(blog) %>
-            <%= link_to "", blog_path(blog), class: "fa-solid fa-trash", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+            <div class="mb-3">
+              <div class="card-my-blog d-flex justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url(<%= cl_image_path blog.photo_banner.key %>);">
+                <h3 class="card-title"><%= blog.title %></h3>
+                <div class="card-my-blog_links-container">
+                  <%= link_to blog_path(blog), class:"btn btn-card" do %>
+                    <i class="fa-solid fa-eye"></i>
+                  <% end %>
+                  <%= link_to blog_steps_path(blog), class:"btn btn-card" do %>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  <% end %>
+                  <%= link_to blog_steps_path(blog), class:"btn btn-card" do %>
+                    <i class="fa-solid fa-pen-ruler"></i>
+                  <% end %>
+                  <%= link_to blog_path(blog), class: "btn btn-card-danger", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                    <i class="fa-solid fa-trash color-danger"></i>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>
