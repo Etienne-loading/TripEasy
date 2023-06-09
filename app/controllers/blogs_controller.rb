@@ -2,7 +2,9 @@ class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :destroy, :update]
   def index
     @blogs = policy_scope(Blog)
-    @blogs = @blogs.global_search(params[:query])
+    unless params[:query].empty?
+      @blogs = @blogs.global_search(params[:query])
+    end
   end
 
   def show
