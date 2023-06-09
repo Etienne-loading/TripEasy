@@ -12,6 +12,16 @@ class Blog < ApplicationRecord
       tsearch: { prefix: true }
     }
 
+  def self.global_search(query)
+    if query.present?
+      # Effectuer la recherche normalement
+      search(query)
+    else
+      # Retourner tous les résultats
+      all
+    end
+  end
+
   belongs_to :user
 
   has_many :likes, dependent: :destroy
