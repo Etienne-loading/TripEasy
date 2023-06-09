@@ -1,19 +1,19 @@
 <div class="navbar container sticky-top" style="<%= 'position:fixed' if action_name == 'home' %>">
   <div class="logo-container">
-    <%= link_to image_tag("TripEasy.png", id:"logo"), root_path, class: "navbar-brand" %>
+    <%= link_to image_tag("TripEasyB&W.png", id:"logo"), root_path, class: "navbar-brand" %>
   </div>
 
   <div class="tabs-container">
     <ul class="tabs" style="margin-bottom: 0px;">
-      <li><%= link_to "Discovery", root_path %></li>
-      <li><%= link_to "Destination", blogs_path %></li>
+      <li><%= link_to "Blogs", blogs_path %></li>
+      <li><%= link_to "How it works", root_path %></li>
       <li><%= link_to "About Us", root_path %></li>
     </ul>
   </div>
   <% if user_signed_in? %>
     <div class="user-container d-flex align-items-center">
-      <li class="nav-item mx-3">
-        <%= link_to "My blogs", my_library_path %>
+      <li id="create-btn">
+      <%= link_to "Create a blog", my_library_path, style: "color: white;" %>
       </li>
       <li class="nav-item dropdown">
         <a href="" class="avatar navbar-brand mx-3" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
