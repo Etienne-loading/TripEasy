@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col">
             <div class="mb-3">
-              <div class="card-my-blog d-flex justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url(<%= cl_image_path blog.photo_banner.key %>);">
+              <div class="card-my-blog d-flex justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url(<%=  blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg")  %>);">
                 <h3 class="card-title"><%= blog.title %></h3>
                 <div class="card-my-blog_links-container">
                   <%= link_to blog_path(blog), class:"btn btn-card" do %>
@@ -51,6 +51,7 @@
               <%= f.input :max_price, placeholder: "Maximum price" %>
               <%= f.input :start_date, as: :date, html5: true, placeholder: "start_date" %>
               <%= f.input :end_date, as: :date, html5: true, placeholder: "end_date" %>
+              <%= f.input :photo_banner, as: :file %>
               <%= f.submit class: "btn btn-primary" %>
             <% end %>
           </div>
