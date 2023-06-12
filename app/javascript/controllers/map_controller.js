@@ -40,6 +40,9 @@ export default class extends Controller {
       .then(response => response.json())
       .then((json) => {
         // do something with the json
+        console.log(json.routes);
+        if (!json.routes) return;
+
         const data = json.routes[0];
         const route = data.geometry.coordinates;
         const geojson = {
