@@ -24,6 +24,25 @@
   <% end %>
   <div class="col-9">
     <div class="col p-3">
+      <h2><%= @blog.title %></h2>
+      <div class="p-2" data-controller="edit-intro-blog">
+        <div data-edit-intro-blog-target="content">
+          <h5>Introduction content</h5>
+          <% if  @blog.video.url%>
+          <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: true, class: "d-block w-50 m-auto mb-3" %>
+          <% end %>
+          <%= @blog.intro %>
+        </div>
+        <div>
+          <%= link_to "Edit my introduction", edit_blog_path(@blog), data: {edit_intro_blog_target:"button", action:"click->edit-intro-blog#revealEditForm"}%>
+        </div>
+        <%= simple_form_for @blog, html: { class:"d-none", data: { edit_intro_blog_target:"form" }} do |f| %>
+            <%= f.input :title, placeholder: "Title" %>
+            <%= f.input :video, as: :file, placeholder: "Video", input_html: { resource_type: :video } %>
+            <%= f.input :intro, placeholder: "Introduction content" %>
+            <%= f.submit class: "btn btn-primary" %>
+            <% end %>
+      </div>
       <% step_num = 0 %>
       <% @steps.each do |step| %>
         <% step_num += 1 %>
