@@ -6,6 +6,12 @@
 <div class="container my-2">
   <div class="row">
     <div class="col-8">
+      <div>
+        <% if  @blog.video.url%>
+          <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: true, class: "d-block w-50 m-auto my-3" %>
+        <% end %>
+        <%= @blog.intro %>
+      </div>
       <% @steps.each do |step| %>
         <div class="mb-3">
           <h3><%= step.title %></h3>
