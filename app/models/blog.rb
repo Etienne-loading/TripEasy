@@ -20,6 +20,7 @@ class Blog < ApplicationRecord
   has_many :tags, through: :steps
   has_one_attached :photo_banner
   has_one_attached :photo_card
+  has_one_attached :video#, amazon: :s3
 
   validates :title, presence: true
   validates :min_price, presence: true

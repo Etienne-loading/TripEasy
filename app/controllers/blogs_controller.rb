@@ -43,7 +43,9 @@ class BlogsController < ApplicationController
   end
 
   def update
-
+    authorize @blog
+    @blog.update(blog_params)
+    redirect_to blog_steps_path(@blog)
   end
 
   def destroy
@@ -59,6 +61,6 @@ class BlogsController < ApplicationController
   end
 
   def blog_params
-    params.require(:blog).permit(:title, :max_price, :min_price, :start_date, :end_date, :carbon_friendly, :photo_banner)
+    params.require(:blog).permit(:title, :max_price, :min_price, :start_date, :end_date, :carbon_friendly, :photo_banner, :video)
   end
 end
