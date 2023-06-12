@@ -30,7 +30,7 @@
             <% if counter < 4 %>
             <%= link_to blog_path(blog), class: "card-link" do %>
             <div class="card-blog p-3">
-              <div class="card-img" style="background-image: url(<%=  blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg")  %>)"></div>
+              <div class="card-img" style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)"></div>
                 <div class="d-flex flex-column">
                   <div>
                     <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
@@ -85,7 +85,7 @@
             <% if counter < 4 %>
             <%= link_to blog_path(blog), class: "card-link" do %>
             <div class="card-blog p-3">
-              <div class="card-img" style="background-image: url(<%= cl_image_path blog.photo_banner.key %>)"></div>
+              <div class="card-img" style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)"></div>
                 <div class="d-flex flex-column">
                   <div>
                     <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
@@ -139,7 +139,7 @@
             <% @blogs.each do |blog| %>
             <% if counter < 4 %>
               <div class="card-blog p-3">
-                <div class="card-img" style="background-image: url(<%= cl_image_path blog.photo_banner.key %>)"></div>
+                <div class="card-img" style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)"></div>
                   <div class="d-flex flex-column">
                     <div>
                       <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
