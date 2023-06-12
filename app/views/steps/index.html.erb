@@ -1,69 +1,103 @@
-<div class="container">
-  <h1>Edition Module</h1>
+<div class="banner-show-blog flex-column"
+  style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(<%= @blog.photo_banner.attached? ? cl_image_path(@blog.photo_banner.key) : image_path("default-bg.jpg") %>)">
+  <h1 style="font-size: 58px; color: white;">
+    <%= @blog.title %>
+  </h1>
+  <h2 style="color: white">(Edition mode)</h2>
 </div>
 <div class="d-flex">
-  <div class="bg-dark overflow-y-scroll" , style="width:800px; height:100%, auto;">
-    <% @steps.each do |step| %>
-    <div class="m-3">
-      <%= link_to step.title.truncate_words(4), "##{step.id}", class:"text-white" %>
-    </div>
-    <% end %>
-  </div>
-  <div class="bg-white flex-grow-1">
-    <div class="col p-3">
-      <% @steps.each do |step| %>
-      <div class="col-12 mb-3" data-controller="edit-step-blog">
-        <div data-edit-step-blog-target="content">
-          <h5 id="<%= step.id %>" class="mb-2"><%= step.title %> | <%= step.duration %> days</h5>
-          <p><%= step.content %></p>
+  <% step_num_sidebar = 0 %>
+  <% if @steps.present? %>
+    <div class="bg-dark col-3" style="min-height: 50vh">
+      <div class="sticky-top">
+        <div class="nav flex-column">
+          <% @steps.each do |step| %>
+            <% step_num_sidebar += 1 %>
+            <%= link_to "#{step_num_sidebar}. #{step.title.truncate_words(4)}", "##{step.id}", class:"text-white p-3 text-decoration-none" %>
+          <% end %>
+          <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#modalForm">
+            Add section
+          </button>
         </div>
-        <div>
-          <% if step.layout == 1 %>
-          <%= simple_form_for [@blog, step],
-                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
-          <%= f.input :title, placeholder: "Title" %>
-          <%= f.input :address, placeholder: "Address" %>
-          <%= f.input :duration, placeholder: "Duration" %>
-          <%= f.submit class: "btn btn-primary" %>
-          <% end %>
-          <% elsif step.layout == 2 %>
-          <%= simple_form_for [@blog, step],
-                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
-          <%= f.input :title, placeholder: "Title" %>
-          <%= f.input :address, placeholder: "Address" %>
-          <%= f.input :duration, placeholder: "Duration" %>
-          <%= f.input :photo, as: :file %>
-          <%= f.submit class: "btn btn-primary" %>
-          <% end %>
-          <% elsif step.layout == 3 %>
-          <%= simple_form_for [@blog, step],
-                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
-          <%= f.input :title, placeholder: "Title" %>
-          <%= f.input :address, placeholder: "Address" %>
-          <%= f.input :duration, placeholder: "Duration" %>
-          <%= f.input :photo, as: :file %>
-          <%= f.submit class: "btn btn-primary" %>
-          <% end %>
-          <% else %>
-          <%= simple_form_for [@blog, step],
-                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
-          <%= f.input :title, placeholder: "Title" %>
-          <%= f.input :address, placeholder: "Address" %>
-          <%= f.input :content, placeholder: "Content" %>
-          <%= f.input :duration, placeholder: "Duration" %>
-          <%= f.submit class: "btn btn-primary" %>
-          <% end %>
-          <% end %>
-        </div>
-        <%= link_to "Edit", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"} %>
-        <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-warning" %>
       </div>
-      <hr>
+    </div>
+  <% end %>
+  <div class="col-9">
+    <div class="col p-3">
+      <% step_num = 0 %>
+      <% @steps.each do |step| %>
+        <% step_num += 1 %>
+        <div class="col-12 mb-3" data-controller="edit-step-blog">
+          <div data-edit-step-blog-target="content">
+            <h4>Step : <%= step_num %></h4>
+            <h5 id="<%= step.id %>" class="mb-2"><%= step.title %> | <%= step.duration %> days</h5>
+            <% if step.photo_text.attached? %>
+              <div class="d-flex flex-column">
+                <p><%= step.content %></p>
+                <%= cl_image_tag(step.photo_text.key, width:250, height: 150, class:"mb-3") %>
+              </div>
+            <% elsif step.photos.attached? %>
+              <div class="d-flex align-items-center">
+                <% step.photos.each do |photo| %>
+                  <div style="width:250px; height:150px" class="me-3 mb-3">
+                    <%= cl_image_tag(photo.key, width: "100%", height: "100%") %>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <p><%= step.content %></p>
+            <% end %>
+          </div>
+          <div>
+            <% if step.layout == 1 %>
+              <%= simple_form_for [@blog, step],
+                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+                <%= f.input :title, placeholder: "Title" %>
+                <%= f.input :address, placeholder: "Address" %>
+                <%= f.input :duration, placeholder: "Duration" %>
+                <%= f.submit class: "btn btn-primary" %>
+              <% end %>
+            <% elsif step.layout == 2 %>
+              <%= simple_form_for [@blog, step],
+                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+                <%= f.input :title, placeholder: "Title" %>
+                <%= f.input :address, placeholder: "Address" %>
+                <%= f.input :duration, placeholder: "Duration" %>
+                <%= f.input :photo_text, as: :file %>
+                <%= f.input :content, placeholder: "Content" %>
+                <%= f.submit class: "btn btn-primary" %>
+              <% end %>
+            <% elsif step.layout == 3 %>
+              <%= simple_form_for [@blog, step],
+                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+                <%= f.input :title, placeholder: "Title" %>
+                <%= f.input :address, placeholder: "Address" %>
+                <%= f.input :duration, placeholder: "Duration" %>
+                <%= f.input :photos, label: false, as: :file, input_html: { multiple: true } %>
+                <%= f.submit class: "btn btn-primary" %>
+              <% end %>
+            <% else %>
+              <%= simple_form_for [@blog, step],
+                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+                <%= f.input :title, placeholder: "Title" %>
+                <%= f.input :address, placeholder: "Address" %>
+                <%= f.input :content, placeholder: "Content" %>
+                <%= f.input :duration, placeholder: "Duration" %>
+                <%= f.submit class: "btn btn-primary" %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="d-flex justify-content-between">
+            <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-secondary" %>
+            <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-warning" %>
+          </div>
+        </div>
+        <hr>
       <% end %>
     </div>
     <div class="container">
       <div class="row" data-controller="create-step-blog">
-        <div class="col-12">
+        <div class="col text-center my-3">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">
             Add section
           </button>
@@ -115,6 +149,4 @@
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>
