@@ -15,7 +15,8 @@ class BlogsController < ApplicationController
     @markers = @steps.geocoded.map do |step|
       {
         lat: step.latitude,
-        lng: step.longitude
+        lng: step.longitude,
+        info_window_html: render_to_string(partial: "steps/info_window", locals: {step: step})
       }
     end
   end
