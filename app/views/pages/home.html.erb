@@ -105,7 +105,9 @@
                         <div>
                           <div class="localisation">
                             <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;" %>
-                            <%=blog.steps.first.country%>
+                            <% if blog.steps.first %>
+                              <%=blog.steps.first.country%>
+                            <% end %>
                           </div>
                           <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;" %></div>
                         </div>
@@ -159,7 +161,9 @@
                           <div>
                             <div class="localisation">
                               <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;" %>
+                              <% if blog.steps.first %>
                               <%=blog.steps.first.country%>
+                            <% end %>
                             </div>
                             <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;" %></div>
                           </div>
