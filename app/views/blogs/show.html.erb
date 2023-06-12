@@ -3,21 +3,62 @@
     <h1 class="ms-5" style = "font-size: 58px; color: white;"><%= @blog.title %></h1>
   </div>
 </div>
-<div class="container my-2">
+<div class="ms-5">
   <div class="row">
     <div class="col-8">
-      <div>
-        <% if  @blog.video.url%>
-          <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: true, class: "d-block w-50 m-auto my-3" %>
+      <h3 class="mt-4">Introduction</h3>
+        <div class="my-3">
+          <% if  @blog.video.url%>
+            <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: true, class: "d-block w-50 m-auto my-3" %>
+          <% end %>
+          <p>
+            <%= @blog.intro %>
+          </p>
+        <% @steps.each do |step| %>
+          <div class="mb-3">
+            <h3><%= step.title %></h3>
+              <% if step.layout == 3 %>
+                <div>
+                  <div>
+                    <div id="stepCarousel-<%= step.id %>" class="carousel slide w-75" data-bs-ride="carousel">
+                      <div class="carousel-indicators">
+                        <% step.photos.each_with_index do |photo, index| %>
+                          <button type="button" data-bs-target="#stepCarousel-<%= step.id %>" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index %>"></button>
+                        <% end %>
+                      </div>
+                      <div class="carousel-inner">
+                        <% step.photos.each_with_index do |photo, index| %>
+                          <div class="carousel-item <%= 'active' if index == 0 %>">
+                            <%= cl_image_tag(photo.key, class:"d-block w-100") %>
+                          </div>
+                        <% end %>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#stepCarousel-<%= step.id %>" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#stepCarousel-<%= step.id %>" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              <% elsif step.layout == 2 %>
+                <div>
+                  <div>
+                    <div class="d-flex flex-column">
+                      <%= cl_image_tag(step.photo_text.key, height: "auto", class:"mb-3 w-75") %>
+                      <p><%= step.content %></p>
+                    </div>
+                  </div>
+                </div>
+              <% else %>
+                <p><%= step.content %></p>
+              <% end %>
+          </div>
         <% end %>
-        <%= @blog.intro %>
-      </div>
-      <% @steps.each do |step| %>
-        <div class="mb-3">
-          <h3><%= step.title %></h3>
-          <%= step.content %>
         </div>
-      <% end %>
     </div>
     <div class='col-4' data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"

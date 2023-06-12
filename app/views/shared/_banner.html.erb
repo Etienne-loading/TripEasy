@@ -3,7 +3,7 @@
     <%= render "shared/navbar" %>
     <div class="banner-grid">
       <div class="banner-content">
-        <h1>Explore <br> The <strong>World</strong></h1>
+        <h1 style= "line-height: 1.2">Explore <br> the <strong>world</strong></h1>
         <p><strong>TripEasy</strong> : The ultimate travel blog for adventurers looking for inspiration, advice and compelling stories.</p>
         <%= form_with url: blogs_path, method: :get, class: "d-flex" do %>
           <%= text_field_tag :query,
@@ -18,4 +18,3 @@
     </div>
   </div>
 </div>
-
