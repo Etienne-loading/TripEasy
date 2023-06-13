@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="bg-dark sidebar-profile col-3" style="height:100vh;">
+    <div class="profile-pic">
+      <%# profilpic %>
+    </div>
+    <div>
+      <div>
+          <p><%= @user.description %></p>
+      </div>
+      <div class="d-flex justify-content-between metrics-users">
+        <p>futur compteur de like</p>
+        <p><%= @user.blogs.count %></p>
+        <%= @user.nationality %>
+      </div>
+    </div>
+  </div>
+  <div class="col-9">
+    <h2><%= @user.pseudo %>'s profile page</h2>
+    <% if @user == current_user %>
+      <%#= @user.like.each do |like| %>
+        <%# display all blogs liked %>
+      <%# end %>
+      <p>all blogs i liked</p>
+    <% elsif @user != current_user %>
+      <div class="container my-5">
+        <div class="card-container mt-5">
+          <% @user.blogs.each do |blog| %>
+            <%= link_to blog_path(blog), class: "card-link" do %>
+          <div class="card-blog p-3">
+            <div class="card-img" style="background-image: url(<%=  blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg")  %>)"></div>
+            <div class="d-flex flex-column">
+              <div>
+                <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
+                <div>
+                  <% if (blog.end_date - blog.start_date).to_i < 14 %>
+                    <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
+                  <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
+                    <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
+                  <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
+                    <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
+                  <% end %>
+                  <div class="mt-2">
+                    <span class="tag mt-1"> #surfing </span> &nbsp
+                    <span class="tag mt-1"> #hiking </span>&nbsp
+                    <span class="tag"> #hunting </span>
+                  </div>
+                  <div>
+                    <div class="localisation">
+                      <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;" %>
+                      <% if blog.steps.first %>
+                          <%=blog.steps.first.country%>
+                      <% end %>
+                    </div>
+                    <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;" %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div>

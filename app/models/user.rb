@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :likes, dependent: :destroy
   has_many :blogs, dependent: :destroy
-  # has_one_attached :profile_photo
+  has_one_attached :profile_photo
 
   validates :first_name, presence: true
   validates :last_name, presence: true
