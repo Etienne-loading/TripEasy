@@ -22,9 +22,19 @@
       </div>
     </div>
   <% end %>
-  <div class="col-9">
+  <div class="col-9" data-controller="theme-color">
+    <div class="dropdown position-absolute top-0 end-0 mt-4 me-4">
+      <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Choose a color for titles
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-red" data-action="click->theme-color#switch_title_red" href="#">Red<div class="ms-3" style="height:20px; width:20px; background-color: #B70404;"></div></a></li>
+        <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-blue" data-action="click->theme-color#switch_title_blue" href="#">Blue<div class="ms-3" style="height:20px; width:20px; background-color: #0077b6;"></div></a></li>
+        <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-yellow" data-action="click->theme-color#switch_title_yellow" href="#">Yellow<div class="ms-3" style="height:20px; width:20px; background-color: #ffc300;"></div></a></li>
+      </ul>
+    </div>
     <div class="col p-3">
-      <h2><%= @blog.title %></h2>
+      <h2 data-theme-color-target="title_blog"><%= @blog.title %></h2>
       <div class="p-2" data-controller="edit-intro-blog">
         <div data-edit-intro-blog-target="content">
           <h5>Introduction content</h5>
@@ -48,8 +58,7 @@
         <% step_num += 1 %>
         <div class="col-12 mb-3" data-controller="edit-step-blog">
           <div data-edit-step-blog-target="content">
-            <h4>Step : <%= step_num %></h4>
-            <h5 id="<%= step.id %>" class="mb-2"><%= step.title %> | <%= step.duration %> days</h5>
+            <h5 id="<%= step.id %>" data-theme-color-target="title_step" class="mb-2">Step : <%= step_num %> | <%= step.title %> | <%= step.duration %> days</h5>
             <% if step.photo_text.attached? %>
               <div class="d-flex flex-column">
                 <p><%= step.content %></p>
@@ -83,7 +92,7 @@
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.input :photo_text, as: :file %>
-                <%= f.input :content, placeholder: "Content" %>
+                <%= f.input :content,  input_html: { rows:"9" }, placeholder: "Content" %>
                 <%= f.submit class: "btn btn-primary" %>
               <% end %>
             <% elsif step.layout == 3 %>
@@ -100,15 +109,15 @@
                 html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
                 <%= f.input :address, placeholder: "Address" %>
-                <%= f.input :content, placeholder: "Content" %>
+                <%= f.input :content, input_html: { rows:"9" }, placeholder: "Content" %>
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.submit class: "btn btn-primary" %>
               <% end %>
             <% end %>
           </div>
           <div class="d-flex justify-content-between">
-            <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-secondary" %>
-            <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-warning" %>
+            <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+            <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
           </div>
         </div>
         <hr>
