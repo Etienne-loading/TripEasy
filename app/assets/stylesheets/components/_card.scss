@@ -1,12 +1,14 @@
 @import 'bootstrap/variables';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
-$card_color: #F2F2F2;
+$card_color: #e1e1e1;
 .card-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 35px;
 }
+
+// card color : #e1e1e1;
 
 .card-blog {
   border-radius: 6px;
