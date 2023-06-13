@@ -11,7 +11,6 @@ $card_color: #F2F2F2;
 .card-blog {
   border-radius: 6px;
   width: auto;
-  height: 350px;
   transition: .3s ease;
   background: $card_color;
   &:hover {
@@ -19,11 +18,23 @@ $card_color: #F2F2F2;
   }
 }
 
+.card-flex {
+  height: auto;
+  flex-grow: 1;
+}
+
+.card-localisation-heart-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-grow: 1;
+}
+
 .card-img {
   // background-color: #8785ff;
     background-position: center;
     background-size: cover;
-    height: 50%;
+    height: 175px;
     width: auto;
     border-radius: 6px;
     // box-shadow: 0px 6px 15px grey;
@@ -54,22 +65,30 @@ $card_color: #F2F2F2;
 }
 
 .tag{
-  background-color:#4A6947;
-  border-radius: 100px;
-  padding: 2%;
-  color: #FCFAEE;
-  font-size: 0.85em ;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.7rem;
+  border-radius: 15px;
+  padding: 0.1rem 0.5rem;
+  background-color: #e1f0e0;
+  color: #4A6947;
+  border: 1px solid #4A6947;
+  margin-right: 0.6rem;
+  margin-bottom: 0.4rem;
   }
 
 .localisation{
-  position: relative;
-    bottom: -42px;
+  display: flex;
+  flex-shrink: 0;
+  flex-grow: 1;
   }
 
 .heart{
-  position: relative;
-  bottom: -17px;
-  right: -223px;
+  display: flex;
+  flex-shrink: 0;
+  flex-grow: 1;
+  text-align: right;
+  justify-content: flex-end;
 }
 
 .card-link{
