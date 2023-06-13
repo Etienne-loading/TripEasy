@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   # as traveler
-  resources :profiles, only: [:show]
+  resources :users, only: [:show]
 
   # as editor
   resources :blogs do
