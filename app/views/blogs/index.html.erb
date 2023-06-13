@@ -45,25 +45,27 @@
                 <div class="mt-2">
                   <div class="mt-2">
                     <% used_tags = [] %>
-                    <% blog.steps.sample(3).each do |step| %>
-                    <% if step.tag_list.present? %>
-                    <% available_tags = step.tag_list - used_tags %>
-                    <% selected_tags = available_tags.sample(3) %>
-                    <% used_tags += selected_tags %>
-                    <% selected_tags.sample(3).each do |tag| %>
-                    <span class="tag mt-1">#<%= tag %></span> &nbsp;
-                    <% end %>
-                    <% end %>
+                      <% blog.steps.sample(3).each do |step| %>
+                        <% if step.tag_list.present? %>
+                        <% available_tags = step.tag_list - used_tags %>
+                        <% selected_tags = available_tags.sample(3) %>
+                        <% used_tags += selected_tags %>
+                        <% selected_tags.sample(3).each do |tag| %>
+                          <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                        <% end %>
+                      <% end %>
                     <% end %>
                   </div>
                 </div>
-                <div class="localisation">
-                  <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;" %>
-                  <% if blog.steps.first %>
-                  <%=blog.steps.first.country%>
-                  <% end %>
+                <div style="display: flex; justify-content: space-between; margin-top: 25px;">
+                  <div class="localisation">
+                    <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;", class:"me-2" %>
+                    <% if blog.steps.first %>
+                    <%=blog.steps.first.country%>
+                    <% end %>
+                  </div>
+                  <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;", class:"ms-2" %></div>
                 </div>
-                <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;" %></div>
               </div>
             </div>
           </div>
