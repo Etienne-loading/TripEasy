@@ -1,16 +1,23 @@
 <body class="bg-white text-dark">
   <div class="container my-5">
-    <h1>Blogs</h1>
+    <h2 class="col d-flex justify-content-center mb-4">Blogs</h2>
     <div class="row">
-      <div class="col">
-        <%= form_with url: blogs_path, method: :get, class: "d-flex" do %>
-        <%= text_field_tag :query,
-            params[:query],
-            class: "form-control",
-            placeholder: "Nevada, Road-trip, hiking, etc..."
-          %>
-          <%= submit_tag "Search", class: "btn btn-primary" %>
-        <% end %>
+      <div class="col d-flex justify-content-center">
+        <div class="search-local" style="max-width: 40rem;">
+          <div class="icon-searchbar">
+            <ion-icon name="location-outline"></ion-icon>
+          </div>
+          <%= form_with url: blogs_path, method: :get, class: "align-items-center d-flex flex-grow-1" do %>
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control text-input flex-grow-1",
+              placeholder: "Nevada, Road-trip, hiking, etc..."
+            %>
+            <button type="submit" class="align-items-center d-flex justify-content-center submit-tag" style="color: white;">
+              <i class="fas fa-magnifying-glass"></i>
+            </button>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="card-container mt-5">

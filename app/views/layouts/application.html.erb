@@ -22,6 +22,6 @@
       <%= yield %>
     </div>
 
-    <%= render "shared/footer" if action_name == "home" %>
+    <%= render "shared/footer" if action_name == "home" || (action_name == "index" && controller_name == "blogs") %>
   </body>
 </html>
