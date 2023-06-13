@@ -21,7 +21,7 @@ class StepsController < ApplicationController
     skip_authorization
     @blog = Blog.find(params[:blog_id])
     @step = @blog.steps.build(step_params)
-    tags = params[:step][:tag_list].split(',')
+    tags = params[:step][:tag_list].split(',') if tags
     @step.tag_list.add(tags)
     if @step.save
       redirect_to blog_steps_path(@blog)
@@ -59,7 +59,7 @@ class StepsController < ApplicationController
   private
 
   def step_params
-    params.require(:step).permit(:title, :address, :content, :duration, :latitude, :longitude, :country, :layout, :photo_text, :name, :tag_list, photos: [])
+    params.require(:step).permit(:title, :address, :content, :duration, :latitude, :longitude, :country, :layout, :photo_text, :name,:tags,:tag_list, photos: [])
   end
 
   def set_blog
