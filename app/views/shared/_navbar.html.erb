@@ -19,7 +19,7 @@
             <% if current_user.profile_photo.attached? %>
               <%= cl_image_tag current_user.profile_photo.key, class: "avatar", alt: "dropdown menu", style: 'object-fit: cover; height:40px; weight:40px;' %>
             <% else %>
-              <%= image_tag 'https://cdn-icons-png.flaticon.com/512/147/147137.png', class: "avatar", alt: "dropdown menu", style: 'object-fit: cover' %>
+              <%= image_tag 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/7912990/avatar-icon-md.pngg', class: "avatar", alt: "dropdown menu", style: 'object-fit: cover' %>
             <% end %>
           </a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
