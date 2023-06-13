@@ -6,96 +6,89 @@
 </div>
 <div class="ms-5">
   <div class="row">
-    <div class="col-12 banner-show-blog" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(<%= @blog.photo_banner.attached? ? cl_image_path(@blog.photo_banner.key) : image_path("default-bg.jpg") %>)">
-      <h1 class="ms-5" style = "font-size: 58px; color: white;"><%= @blog.title %></h1>
-    </div>
-  </div>
-  <div class="ms-5">
-    <div class="row">
-      <div class="col-8" style="font-family: sans-serif; font-size: 18px;" data-controller="theme-color">
-          <div>
-            <div data-scroll-target="bar" class="bg-primary bg-gradient fixed-top" style="height:8px; border-radius:'4px'; top:86px"></div>
+    <div class="col-8" style="font-family: sans-serif; font-size: 18px;" data-controller="theme-color">
+        <div>
+          <div data-scroll-target="bar" class="bg-primary bg-gradient fixed-top" style="height:8px; border-radius:'4px'; top:86px"></div>
+        </div>
+      <div class="dropdown position-absolute top-0 end-0 mt-4 me-4">
+        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Choose a color for titles
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-red" data-action="click->theme-color#switch_title_red" href="#">Red<div class="ms-3" style="height:20px; width:20px; background-color: #B70404;"></div></a></li>
+          <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-blue" data-action="click->theme-color#switch_title_blue" href="#">Blue<div class="ms-3" style="height:20px; width:20px; background-color: #0077b6;"></div></a></li>
+          <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-yellow" data-action="click->theme-color#switch_title_yellow" href="#">Yellow<div class="ms-3" style="height:20px; width:20px; background-color: #ffc300;"></div></a></li>
+        </ul>
+      </div>
+      <div class="post_detail">
+        <% if (@blog.end_date - @blog.start_date).to_i < 14 %>
+          <span class="duration-price">Budget €<%= (@blog.max_price + @blog.min_price) / 2 %> | <%= (@blog.end_date - @blog.start_date).to_i %> days <i class="fa-regular fa-calendar"></i></span>
+        <% elsif (@blog.end_date - @blog.start_date).to_i >= 14 && (@blog.end_date - @blog.start_date).to_i < 60 %>
+          <span class="duration-price">Budget €<%= ((@blog.max_price + @blog.min_price) / 2) * 4 %> | <%= ((@blog.end_date - @blog.start_date).to_i) / 7 %> weeks <i class="fa-regular fa-calendar"></i></span>
+        <% elsif (@blog.end_date - @blog.start_date).to_i >= 60 %>
+          <span class="duration-price">Budget €<%= (@blog.max_price + @blog.min_price) / 2 %> | <%= ((@blog.end_date - @blog.start_date).to_i) / 30 %> months <i class="fa-regular fa-calendar"></i></span>
+        <% end %>
+      </div>
+      <h3 class="mt-4" data-theme-color-target="title_intro">Introduction</h3>
+        <div class="my-3">
+          <% if  @blog.video.url%>
+            <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: false, class: "d-block w-50 m-auto my-3" %>
+          <% end %>
+          <div class="p-content">
+            <%= simple_format @blog.intro %>
           </div>
-        <div class="dropdown position-absolute top-0 end-0 mt-4 me-4">
-          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Choose a color for titles
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-red" data-action="click->theme-color#switch_title_red" href="#">Red<div class="ms-3" style="height:20px; width:20px; background-color: #B70404;"></div></a></li>
-            <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-blue" data-action="click->theme-color#switch_title_blue" href="#">Blue<div class="ms-3" style="height:20px; width:20px; background-color: #0077b6;"></div></a></li>
-            <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-yellow" data-action="click->theme-color#switch_title_yellow" href="#">Yellow<div class="ms-3" style="height:20px; width:20px; background-color: #ffc300;"></div></a></li>
-          </ul>
-        </div>
-        <div class="post_detail">
-          <% if (@blog.end_date - @blog.start_date).to_i < 14 %>
-            <span class="duration-price">Budget €<%= (@blog.max_price + @blog.min_price) / 2 %> | <%= (@blog.end_date - @blog.start_date).to_i %> days <i class="fa-regular fa-calendar"></i></span>
-          <% elsif (@blog.end_date - @blog.start_date).to_i >= 14 && (@blog.end_date - @blog.start_date).to_i < 60 %>
-            <span class="duration-price">Budget €<%= ((@blog.max_price + @blog.min_price) / 2) * 4 %> | <%= ((@blog.end_date - @blog.start_date).to_i) / 7 %> weeks <i class="fa-regular fa-calendar"></i></span>
-          <% elsif (@blog.end_date - @blog.start_date).to_i >= 60 %>
-            <span class="duration-price">Budget €<%= (@blog.max_price + @blog.min_price) / 2 %> | <%= ((@blog.end_date - @blog.start_date).to_i) / 30 %> months <i class="fa-regular fa-calendar"></i></span>
-          <% end %>
-        </div>
-        <h3 class="mt-4" data-theme-color-target="title_intro">Introduction</h3>
-          <div class="my-3">
-            <% if  @blog.video.url%>
-              <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: false, class: "d-block w-50 m-auto my-3" %>
-            <% end %>
-            <div class="p-content">
-              <%= simple_format @blog.intro %>
-            </div>
-          <% @steps.each do |step| %>
-            <div class="mb-3">
-              <h3 data-theme-color-target="title_step" class="<% if step.layout == 1 %>
-                                                                  <%= "title-main" %>
-                                                              <% elsif step.layout == 2 %>
-                                                                  <%= "title-secondary" %>
-                                                              <% elsif step.layout == 3 %>
-                                                                  <%= "title-small d-none" %>
-                                                              <% else %>
-                                                                  <%= "title-secondary" %>
-                                                              <% end %>">
-              <%= step.title %></h3>
-              <% if step.photos.attached? %>
-                <div class="text-center position-relative">
-                  <div id="stepCarousel-<%= step.id %>" class="carousel slide w-75 m-auto mb-4" data-bs-ride="carousel" style="padding: 0px 30px; margin-bottom: 2rem;">
-                    <div class="carousel-indicators">
-                      <% step.photos.each_with_index do |photo, index| %>
-                        <button type="button" data-bs-target="#stepCarousel-<%= step.id %>" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index %>"></button>
-                      <% end %>
-                    </div>
-                    <div class="carousel-inner">
-                      <% step.photos.each_with_index do |photo, index| %>
-                        <div class="carousel-item <%= 'active' if index == 0 %>">
-                          <%= cl_image_tag(photo.key, class:"d-block w-100 m-auto mb-4") %>
-                        </div>
-                      <% end %>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#stepCarousel-<%= step.id %>" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#stepCarousel-<%= step.id %>" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
+        <% @steps.each do |step| %>
+          <div class="mb-3">
+            <h3 data-theme-color-target="title_step" class="<% if step.layout == 1 %>
+                                                                <%= "title-main" %>
+                                                            <% elsif step.layout == 2 %>
+                                                                <%= "title-secondary" %>
+                                                            <% elsif step.layout == 3 %>
+                                                                <%= "title-small d-none" %>
+                                                            <% else %>
+                                                                <%= "title-secondary" %>
+                                                            <% end %>">
+            <%= step.title %></h3>
+            <% if step.photos.attached? %>
+              <div class="text-center position-relative">
+                <div id="stepCarousel-<%= step.id %>" class="carousel slide w-75 m-auto mb-4" data-bs-ride="carousel" style="padding: 0px 30px; margin-bottom: 2rem;">
+                  <div class="carousel-indicators">
+                    <% step.photos.each_with_index do |photo, index| %>
+                      <button type="button" data-bs-target="#stepCarousel-<%= step.id %>" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index %>"></button>
+                    <% end %>
                   </div>
-                  <span class="position-absolute top-100 start-50 translate-middle"><%= step.title %></span>
+                  <div class="carousel-inner">
+                    <% step.photos.each_with_index do |photo, index| %>
+                      <div class="carousel-item <%= 'active' if index == 0 %>">
+                        <%= cl_image_tag(photo.key, class:"d-block w-100 m-auto mb-4") %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#stepCarousel-<%= step.id %>" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#stepCarousel-<%= step.id %>" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
-              <% elsif step.photo_text.attached? %>
+                <span class="position-absolute top-100 start-50 translate-middle"><%= step.title %></span>
+              </div>
+            <% elsif step.photo_text.attached? %>
+              <div>
                 <div>
-                  <div>
-                    <div class="d-flex flex-column">
-                    <%= cl_image_tag(step.photo_text.key, height: "auto", class:"mb-3 w-100 m-auto mb-2") %>
-                      <p class="p-content"><%= simple_format step.content %></p>
-                    </div>
+                  <div class="d-flex flex-column">
+                  <%= cl_image_tag(step.photo_text.key, height: "auto", class:"mb-3 w-100 m-auto mb-2") %>
+                    <p class="p-content"><%= simple_format step.content %></p>
                   </div>
                 </div>
-              <% else %>
-                <p class="p-content"><%= simple_format step.content %></p>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
+              </div>
+            <% else %>
+              <p class="p-content"><%= simple_format step.content %></p>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class='col-4' data-controller="map"
