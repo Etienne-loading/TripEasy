@@ -93,10 +93,11 @@
   padding: 8px 8px;
   text-align: center;
   text-decoration: none;
+  transition: 0.3s;
   display: flex;
   border-radius: 3px;
   &:hover {
-    filter: brightness(85%);
+    background-color: #3a5538;
     }
 }
 
