@@ -96,7 +96,7 @@
                 <%= f.input :tag_list, label: false, placeholder: "Tag" %>
                 <%= f.submit class: "btn btn-primary" %>
               <% end %>
-             <% if step.tag_list.present? %>
+            <% if step.tag_list.present? %>
                 <% step.tags.each do |tag| %>
                   <span class="tag mt-1">#<%= tag %></span> &nbsp;
                 <% end %>
@@ -127,7 +127,7 @@
                 <%= f.submit class: "btn btn-primary" %>
               <% end %>
               <% if step.tag_list.present? %>
-                 <% step.tags.each do |tag| %>
+                <% step.tags.each do |tag| %>
                   <span class="tag mt-1">#<%= tag %></span> &nbsp;
                 <% end %>
               <% end %>
