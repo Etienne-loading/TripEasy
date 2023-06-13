@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :blogs do
     resources :steps do
       resources :tips, only: [:create]
-      resources :tags, only: [:create]
+      resources :tag_list
     end
   end
 

@@ -1,72 +1,82 @@
 <% if false %>
-  <div class="container my-5">
-    <h1>Trip Easy</h1>
-    <div class="row">
-      <div class="col">
-        <%= link_to "view all blogs", blogs_path, class: "btn btn-primary" %>
-        <%= form_with url: blogs_path, method: :get, class: "d-flex" do %>
-          <%= text_field_tag :query,
+<div class="container my-5">
+  <h1>Trip Easy</h1>
+  <div class="row">
+    <div class="col">
+      <%= link_to "view all blogs", blogs_path, class: "btn btn-primary" %>
+      <%= form_with url: blogs_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
             params[:query],
             class: "form-control",
             placeholder: "Nevada, Road-trip, hiking, etc..."
           %>
-          <%= submit_tag "Search", class: "btn btn-primary" %>
-        <% end %>
-      </div>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
+</div>
 <% end %>
 <%= render "shared/banner" %>
 <div class="my-5 py-5 bg-white border">
   <div class="container">
     <div class="row">
-        <h2>Find popular countries</h2>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="card-container">
-            <% counter = 0 %>
-            <% @blogs.each do |blog| %>
-            <% if counter < 4 %>
-            <%= link_to blog_path(blog), class: "card-link" do %>
-            <div class="card-blog p-3">
-              <div class="card-img" style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)"></div>
-                <div class="d-flex flex-column">
+      <h2>Find popular countries</h2>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card-container">
+          <% counter = 0 %>
+          <% @blogs.each do |blog| %>
+          <% if counter < 4 %>
+          <%= link_to blog_path(blog), class: "card-link" do %>
+          <div class="card-blog p-3">
+            <div class="card-img"
+              style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)">
+            </div>
+            <div class="d-flex flex-column">
+              <div>
+                <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
+                <div>
+                  <% if (blog.end_date - blog.start_date).to_i < 14 %>
+                  <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> |
+                    <%= (blog.end_date - blog.start_date).to_i %> days </span>
+                  <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
+                  <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> |
+                    <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
+                  <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
+                  <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> |
+                    <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
+                  <% end %>
+                  <div class="mt-2">
+                    <% used_tags = [] %>
+                    <% blog.steps.each do |step| %>
+                    <% if step.tag_list.present? %>
+                    <% available_tags = step.tag_list - used_tags %>
+                    <% selected_tags = available_tags %>
+                    <% used_tags += selected_tags %>
+                    <% selected_tags.sample(3).each do |tag| %>
+                    <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                    <% end %>
+                    <% end %>
+                    <% end %>
+                  </div>
                   <div>
-                    <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
-                      <div>
-                        <% if (blog.end_date - blog.start_date).to_i < 14 %>
-                        <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
-                        <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
-                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
-                        <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
-                        <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
-                        <% end %>
-                        <div class="mt-2">
-                          <span class="tag mt-1"> #surfing </span> &nbsp
-                          <span class="tag mt-1"> #hiking </span>&nbsp
-                          <span class="tag"> #hunting </span>
-                        </div>
-                        <div>
-                          <div class="localisation">
-                            <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;" %>
-                            <% if blog.steps.first %>
-                              <%=blog.steps.first.country%>
-                            <% end %>
-                          </div>
-                          <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;" %></div>
-                        </div>
-                      </div>
+                    <div class="localisation">
+                      <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;" %>
+                      <% if blog.steps.first %>
+                      <%=blog.steps.first.country%>
+                      <% end %>
                     </div>
+                    <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;" %></div>
                   </div>
                 </div>
-                <% end %>
-                <% end %>
-                <% counter += 1 %>
-                <% end %>
               </div>
             </div>
           </div>
+          <% end %>
+          <% end %>
+          <% counter += 1 %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -75,55 +85,63 @@
 <div class="my-5 py-5 bg-white border">
   <div class="container">
     <div class="row">
-        <h2>Find popular countries</h2>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="card-container">
-            <% counter = 0 %>
-            <% @blogs.each do |blog| %>
-            <% if counter < 4 %>
-            <%= link_to blog_path(blog), class: "card-link" do %>
-            <div class="card-blog p-3">
-              <div class="card-img" style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)"></div>
-                <div class="d-flex flex-column">
+      <h2>Find popular countries</h2>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card-container">
+          <% counter = 0 %>
+          <% @blogs.each do |blog| %>
+          <% if counter < 4 %>
+          <%= link_to blog_path(blog), class: "card-link" do %>
+          <div class="card-blog p-3">
+            <div class="card-img"
+              style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)">
+            </div>
+            <div class="d-flex flex-column">
+              <div>
+                <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
+                <div>
+                  <% if (blog.end_date - blog.start_date).to_i < 14 %>
+                  <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> |
+                    <%= (blog.end_date - blog.start_date).to_i %> days </span>
+                  <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
+                  <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> |
+                    <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
+                  <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
+                  <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> |
+                    <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
+                  <% end %>
+                  <div class="mt-2">
+                    <% used_tags = [] %>
+                    <% blog.steps.each do |step| %>
+                    <% if step.tag_list.present? %>
+                    <% available_tags = step.tag_list - used_tags %>
+                    <% selected_tags = available_tags %>
+                    <% used_tags += selected_tags %>
+                    <% selected_tags.sample(3).each do |tag| %>
+                    <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                    <% end %>
+                    <% end %>
+                    <% end %>
+                  </div>
                   <div>
-                    <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
-                      <div>
-                        <% if (blog.end_date - blog.start_date).to_i < 14 %>
-                        <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
-                        <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
-                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
-                        <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
-                        <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
-                        <% end %>
-                        <div class="mt-2">
-                          <span class="tag mt-1"> #surfing </span> &nbsp
-                          <span class="tag mt-1"> #hiking </span>&nbsp
-                          <span class="tag"> #hunting </span>
-                        </div>
-                        <div>
-                          <div class="localisation">
-                            <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;" %>
-                            <% if blog.steps.first %>
-                              <%=blog.steps.first.country%>
-                            <% end %>
-                          </div>
-                          <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;" %></div>
-                        </div>
-                      </div>
+                    <div class="localisation">
+                      <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;" %>
+                      <% if blog.steps.first %>
+                      <%=blog.steps.first.country%>
+                      <% end %>
                     </div>
+                    <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;" %></div>
                   </div>
                 </div>
-                <% end %>
-                <% end %>
-                <% counter += 1 %>
-                <% end %>
-              </div>
-            </div>
               </div>
             </div>
           </div>
+          <% end %>
+          <% end %>
+          <% counter += 1 %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -132,52 +150,61 @@
 <div class="my-5 py-5 bg-white border">
   <div class="container">
     <div class="row">
-        <h2>Find popular categories</h2>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="card-container">
-            <% counter = 0 %>
-            <% @blogs.each do |blog| %>
-            <% if counter < 4 %>
-              <div class="card-blog p-3">
-                <div class="card-img" style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)"></div>
-                  <div class="d-flex flex-column">
-                    <div>
-                      <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
-                        <div>
-                          <% if (blog.end_date - blog.start_date).to_i < 14 %>
-                          <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
-                          <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
-                          <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
-                          <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
-                          <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
-                          <% end %>
-                          <div class="mt-2">
-                            <span class="tag mt-1"> #surfing </span> &nbsp
-                            <span class="tag mt-1"> #hiking </span>&nbsp
-                            <span class="tag"> #hunting </span>
-                          </div>
-                          <div>
-                            <div class="localisation">
-                              <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;" %>
-                              <% if blog.steps.first %>
-                              <%=blog.steps.first.country%>
-                            <% end %>
-                            </div>
-                            <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;" %></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+      <h2>Find popular categories</h2>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card-container">
+          <% counter = 0 %>
+          <% @blogs.each do |blog| %>
+          <% if counter < 4 %>
+          <div class="card-blog p-3">
+            <div class="card-img"
+              style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)">
+            </div>
+            <div class="d-flex flex-column">
+              <div>
+                <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
+                <div>
+                  <% if (blog.end_date - blog.start_date).to_i < 14 %>
+                  <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> |
+                    <%= (blog.end_date - blog.start_date).to_i %> days </span>
+                  <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
+                  <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> |
+                    <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
+                  <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
+                  <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> |
+                    <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
+                  <% end %>
+                  <div class="mt-2">
+                    <% used_tags = [] %>
+                    <% blog.steps.each do |step| %>
+                    <% if step.tag_list.present? %>
+                    <% available_tags = step.tag_list - used_tags %>
+                    <% selected_tags = available_tags %>
+                    <% used_tags += selected_tags %>
+                    <% selected_tags.sample(3).each do |tag| %>
+                    <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                    <% end %>
+                    <% end %>
+                    <% end %>
                   </div>
-                  <% end %>
-                  <% counter += 1 %>
-                  <% end %>
+                  <div>
+                    <div class="localisation">
+                      <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;" %>
+                      <% if blog.steps.first %>
+                      <%=blog.steps.first.country%>
+                      <% end %>
+                    </div>
+                    <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;" %></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <% end %>
+          <% counter += 1 %>
+          <% end %>
         </div>
       </div>
     </div>

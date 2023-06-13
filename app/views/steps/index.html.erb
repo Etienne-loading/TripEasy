@@ -24,7 +24,13 @@
           <%= f.input :title, placeholder: "Title" %>
           <%= f.input :address, placeholder: "Address" %>
           <%= f.input :duration, placeholder: "Duration" %>
+          <%= f.input :tag_list, label: false, placeholder: "Tag" %>
           <%= f.submit class: "btn btn-primary" %>
+          <% end %>
+          <% if step.tag_list.present? %>
+          <% step.tags.each do |tag| %>
+          <span class="tag mt-1">#<%= tag %></span> &nbsp;
+          <% end %>
           <% end %>
           <% elsif step.layout == 2 %>
           <%= simple_form_for [@blog, step],
@@ -33,7 +39,13 @@
           <%= f.input :address, placeholder: "Address" %>
           <%= f.input :duration, placeholder: "Duration" %>
           <%= f.input :photo, as: :file %>
+          <%= f.input :tag_list, label: false, placeholder: "Tag" %>
           <%= f.submit class: "btn btn-primary" %>
+          <% end %>
+          <% if step.tag_list.present? %>
+          <% step.tags.each do |tag| %>
+          <span class="tag mt-1">#<%= tag %></span> &nbsp;
+          <% end %>
           <% end %>
           <% elsif step.layout == 3 %>
           <%= simple_form_for [@blog, step],
@@ -42,7 +54,13 @@
           <%= f.input :address, placeholder: "Address" %>
           <%= f.input :duration, placeholder: "Duration" %>
           <%= f.input :photo, as: :file %>
+          <%= f.input :tag_list, label: false, placeholder: "Tag" %>
           <%= f.submit class: "btn btn-primary" %>
+          <% end %>
+          <% if step.tag_list.present? %>
+          <% step.tags.each do |tag| %>
+          <span class="tag mt-1">#<%= tag %></span> &nbsp;
+          <% end %>
           <% end %>
           <% else %>
           <%= simple_form_for [@blog, step],
@@ -51,7 +69,13 @@
           <%= f.input :address, placeholder: "Address" %>
           <%= f.input :content, placeholder: "Content" %>
           <%= f.input :duration, placeholder: "Duration" %>
+          <%= f.input :tag_list, label: false, placeholder: "Tag" %>
           <%= f.submit class: "btn btn-primary" %>
+          <% end %>
+          <% if step.tag_list.present? %>
+          <% step.tags.each do |tag| %>
+          <span class="tag mt-1">#<%= tag %></span> &nbsp;
+          <% end %>
           <% end %>
           <% end %>
         </div>
@@ -115,6 +139,4 @@
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>
