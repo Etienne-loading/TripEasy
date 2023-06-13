@@ -93,7 +93,13 @@
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.input :photo_text, as: :file %>
                 <%= f.input :content,  input_html: { rows:"9" }, placeholder: "Content" %>
+                <%= f.input :tag_list, label: false, placeholder: "Tag" %>
                 <%= f.submit class: "btn btn-primary" %>
+              <% end %>
+             <% if step.tag_list.present? %>
+                <% step.tags.each do |tag| %>
+                  <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                <% end %>
               <% end %>
             <% elsif step.layout == 3 %>
               <%= simple_form_for [@blog, step],
@@ -102,7 +108,13 @@
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.input :photos, label: false, as: :file, input_html: { multiple: true } %>
+                <%= f.input :tag_list, label: false, placeholder: "Tag" %>
                 <%= f.submit class: "btn btn-primary" %>
+              <% end %>
+             <% if step.tag_list.present? %>
+                <% step.tags.each do |tag| %>
+                  <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                <% end %>
               <% end %>
             <% else %>
               <%= simple_form_for [@blog, step],
@@ -111,7 +123,13 @@
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :content, input_html: { rows:"9" }, placeholder: "Content" %>
                 <%= f.input :duration, placeholder: "Duration" %>
+                <%= f.input :tag_list, label: false, placeholder: "Tag" %>
                 <%= f.submit class: "btn btn-primary" %>
+              <% end %>
+              <% if step.tag_list.present? %>
+                 <% step.tags.each do |tag| %>
+                  <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                <% end %>
               <% end %>
             <% end %>
           </div>
