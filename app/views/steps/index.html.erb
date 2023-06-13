@@ -41,7 +41,7 @@
           <% if  @blog.video.url%>
           <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: true, class: "d-block w-50 m-auto mb-3" %>
           <% end %>
-          <%= @blog.intro %>
+          <%= simple_format @blog.intro %>
         </div>
         <div>
           <%= link_to "Edit my introduction", edit_blog_path(@blog), data: {edit_intro_blog_target:"button", action:"click->edit-intro-blog#revealEditForm"}%>
@@ -61,7 +61,7 @@
             <h5 id="<%= step.id %>" data-theme-color-target="title_step" class="mb-2">Step : <%= step_num %> | <%= step.title %> | <%= step.duration %> days</h5>
             <% if step.photo_text.attached? %>
               <div class="d-flex flex-column">
-                <p><%= step.content %></p>
+                <p><%= simple_format step.content %></p>
                 <%= cl_image_tag(step.photo_text.key, width:250, height: 150, class:"mb-3") %>
               </div>
             <% elsif step.photos.attached? %>
@@ -73,7 +73,7 @@
                 <% end %>
               </div>
             <% else %>
-              <p><%= step.content %></p>
+              <p><%= simple_format step.content %></p>
             <% end %>
           </div>
           <div>
@@ -93,7 +93,13 @@
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.input :photo_text, as: :file %>
                 <%= f.input :content,  input_html: { rows:"9" }, placeholder: "Content" %>
+                <%= f.input :tag_list, label: false, placeholder: "Tag" %>
                 <%= f.submit class: "btn btn-primary" %>
+              <% end %>
+             <% if step.tag_list.present? %>
+                <% step.tags.each do |tag| %>
+                  <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                <% end %>
               <% end %>
             <% elsif step.layout == 3 %>
               <%= simple_form_for [@blog, step],
@@ -102,7 +108,13 @@
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.input :photos, label: false, as: :file, input_html: { multiple: true } %>
+                <%= f.input :tag_list, label: false, placeholder: "Tag" %>
                 <%= f.submit class: "btn btn-primary" %>
+              <% end %>
+             <% if step.tag_list.present? %>
+                <% step.tags.each do |tag| %>
+                  <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                <% end %>
               <% end %>
             <% else %>
               <%= simple_form_for [@blog, step],
@@ -111,7 +123,13 @@
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :content, input_html: { rows:"9" }, placeholder: "Content" %>
                 <%= f.input :duration, placeholder: "Duration" %>
+                <%= f.input :tag_list, label: false, placeholder: "Tag" %>
                 <%= f.submit class: "btn btn-primary" %>
+              <% end %>
+              <% if step.tag_list.present? %>
+                 <% step.tags.each do |tag| %>
+                  <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                <% end %>
               <% end %>
             <% end %>
           </div>
