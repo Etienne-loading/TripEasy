@@ -19,26 +19,77 @@ export default class extends Controller {
       maxZoom: 15,
     });
 
-    this.#addMarkersToMap();
-    this.#fitMapToMarkers();
+    this.addMarkersToMap();
+    this.fitMapToMarkers();
+    this.getRoute();
   }
 
-  findMapButton() {
-    return this.element.querySelector("[data-action='click->map#toggleMapVisibility']");
+  getRoute() {
+    let stepCoordinates = []
+
+    this.markersValue.forEach(async (step) => {
+      stepCoordinates.push(`${step.lng},${step.lat}`)
+    });
+
+    stepCoordinates = stepCoordinates.join(";")
+
+    const directionUrl = `https://api.mapbox.com/directions/v5/mapbox/driving/${stepCoordinates}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
+    console.log(directionUrl);
+
+    fetch(directionUrl, { method: 'GET' })
+      .then(response => response.json())
+      .then((json) => {
+        // do something with the json
+        console.log(json.routes);
+        if (!json.routes) return;
+
+        const data = json.routes[0];
+        const route = data.geometry.coordinates;
+        const geojson = {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: route
+          }
+        };
+
+        this.map.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: geojson
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': '#FCB84B',
+            'line-width': 5,
+            'line-opacity': 0.75,
+            'line-dasharray': [1, 2]
+          }
+        });
+      });
   }
 
-  #fitMapToMarkers() {
+  fitMapToMarkers() {
     console.log(this.markersValue)
     const bounds = new mapboxgl.LngLatBounds();
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
   }
 
-  #addMarkersToMap() {
+  addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker()
-        .setLngLat([ marker.lng, marker.lat ])
-        .addTo(this.map);
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
+      new mapboxgl.Marker({ color: '#4A6947' }) // Remplacez 'red' par la couleur souhaitée
+        .setLngLat([marker.lng, marker.lat])
+        .setPopup(popup)
+        .addTo(this.map)
     });
   }
+
 }

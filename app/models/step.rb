@@ -6,7 +6,9 @@ class Step < ApplicationRecord
   belongs_to :blog
 
   has_many :tips, dependent: :destroy
-  has_many_attached :photo
+
+  has_one_attached :photo_text
+  has_many_attached :photos
 
   # validates :title, presence: true
   # validates :address, presence: true

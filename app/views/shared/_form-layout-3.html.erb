@@ -3,7 +3,7 @@
 <%= f.input :title, label: false, placeholder: "Title" %>
 <%= f.input :address, label: false, placeholder: "Address" %>
 <%= f.input :duration, label: false, placeholder: "Duration" %>
-<%= f.input :photo, label: false, as: :file %>
+<%= f.input :photos, label: false, as: :file, input_html: { multiple: true } %>
 <%= f.input :tag_list, label: false, placeholder: "Tag" %>
 <%= f.hidden_field :layout, value: 3 %>
 <%= f.submit class: "btn btn-primary" %>

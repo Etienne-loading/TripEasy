@@ -59,7 +59,7 @@ class StepsController < ApplicationController
   private
 
   def step_params
-    params.require(:step).permit(:title, :address, :content, :duration, :latitude, :longitude, :country, :layout, :photo, :name, :tag_list)
+    params.require(:step).permit(:title, :address, :content, :duration, :latitude, :longitude, :country, :layout, :photo, :photo_text, photos: [], :name, :tag_list)
   end
 
   def set_blog

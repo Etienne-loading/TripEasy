@@ -3,19 +3,28 @@
     <%= render "shared/navbar" %>
     <div class="banner-grid">
       <div class="banner-content">
-        <h1>Explore <br> The <strong>World</strong></h1>
+        <h1 style= "line-height: 1.2">Explore <br> the <strong>world</strong></h1>
         <p><strong>TripEasy</strong> : The ultimate travel blog for adventurers looking for inspiration, advice and compelling stories.</p>
-        <%= form_with url: blogs_path, method: :get, class: "d-flex" do %>
-          <%= text_field_tag :query,
-            params[:query],
-            class: "form-control",
-            placeholder: "Nevada, Road-trip, hiking, etc..."
-          %>
-          <%= submit_tag "Search", class: "btn btn-primary" %>
-        <% end %>
+          <div class="search-local">
+            <div class="icon-searchbar">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+            <%= form_with url: blogs_path, method: :get, class: "align-items-center d-flex flex-grow-1" do %>
+              <%= text_field_tag :query,
+                params[:query],
+                class: "form-control text-input flex-grow-1",
+                placeholder: "Nevada, Road-trip, hiking, etc..."
+              %>
+              <button type="submit" class="align-items-center d-flex justify-content-center submit-tag" style="color: white;">
+                <i class="fas fa-magnifying-glass"></i>
+              </button>
+            <% end %>
+          </div>
         <div class="arrow"></div>
       </div>
     </div>
   </div>
 </div>
 
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

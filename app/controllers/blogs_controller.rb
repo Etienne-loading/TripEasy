@@ -15,7 +15,8 @@ class BlogsController < ApplicationController
     @markers = @steps.geocoded.map do |step|
       {
         lat: step.latitude,
-        lng: step.longitude
+        lng: step.longitude,
+        info_window_html: render_to_string(partial: "steps/info_window", locals: {step: step})
       }
     end
   end
@@ -43,7 +44,9 @@ class BlogsController < ApplicationController
   end
 
   def update
-
+    authorize @blog
+    @blog.update(blog_params)
+    redirect_to blog_steps_path(@blog)
   end
 
   def destroy
@@ -59,6 +62,6 @@ class BlogsController < ApplicationController
   end
 
   def blog_params
-    params.require(:blog).permit(:title, :max_price, :min_price, :start_date, :end_date, :carbon_friendly, :photo_banner)
+    params.require(:blog).permit(:title, :max_price, :min_price, :start_date, :end_date, :carbon_friendly, :photo_banner, :video)
   end
 end
