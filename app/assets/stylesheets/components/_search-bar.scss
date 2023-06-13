@@ -4,7 +4,7 @@
 	--font: "Inter", sans-serif;
 	--green: #4A6947;
 	--black: #292929;
-	--white: #fbfbfb;
+	--white: #e1e1e1;;
 }
 
 /* ICON */
@@ -42,7 +42,8 @@
   .text-input {
     height: 100%;
     width: 100%;
-    background: var(--white);
+    box-shadow:none !important;
+    background: #e1e1e1;
     display: flex;
     outline: none;
     border: none;
