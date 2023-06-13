@@ -1,50 +1,53 @@
-<div class="row">
-  <div class="col-12 banner-show-blog" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(<%= @blog.photo_banner.attached? ? cl_image_path(@blog.photo_banner.key) : image_path("default-bg.jpg") %>)">
-    <h1 class="ms-5" style = "font-size: 58px; color: white;"><%= @blog.title %></h1>
-  </div>
-</div>
-<div class="ms-5">
+<div data-controller="scroll" data-action='scroll@window->scroll#scroll'>
   <div class="row">
-
-    <div class="col-8" style="font-family: sans-serif; font-size: 18px;" data-controller="theme-color">
-      <div class="dropdown position-absolute top-0 end-0 mt-4 me-4">
-        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Choose a color for titles
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-red" data-action="click->theme-color#switch_title_red" href="#">Red<div class="ms-3" style="height:20px; width:20px; background-color: #B70404;"></div></a></li>
-          <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-blue" data-action="click->theme-color#switch_title_blue" href="#">Blue<div class="ms-3" style="height:20px; width:20px; background-color: #0077b6;"></div></a></li>
-          <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-yellow" data-action="click->theme-color#switch_title_yellow" href="#">Yellow<div class="ms-3" style="height:20px; width:20px; background-color: #ffc300;"></div></a></li>
-        </ul>
-      </div>
-      <div class="post_detail">
-        <% if (@blog.end_date - @blog.start_date).to_i < 14 %>
-          <span class="duration-price">Budget €<%= (@blog.max_price + @blog.min_price) / 2 %> | <%= (@blog.end_date - @blog.start_date).to_i %> days <i class="fa-regular fa-calendar"></i></span>
-        <% elsif (@blog.end_date - @blog.start_date).to_i >= 14 && (@blog.end_date - @blog.start_date).to_i < 60 %>
-          <span class="duration-price">Budget €<%= ((@blog.max_price + @blog.min_price) / 2) * 4 %> | <%= ((@blog.end_date - @blog.start_date).to_i) / 7 %> weeks <i class="fa-regular fa-calendar"></i></span>
-        <% elsif (@blog.end_date - @blog.start_date).to_i >= 60 %>
-          <span class="duration-price">Budget €<%= (@blog.max_price + @blog.min_price) / 2 %> | <%= ((@blog.end_date - @blog.start_date).to_i) / 30 %> months <i class="fa-regular fa-calendar"></i></span>
-        <% end %>
-      </div>
-      <h3 class="mt-4" data-theme-color-target="title_intro">Introduction</h3>
-        <div class="my-3">
-          <% if  @blog.video.url%>
-            <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: false, class: "d-block w-50 m-auto my-3" %>
-          <% end %>
-          <div class="p-content">
-            <%= simple_format @blog.intro %>
+    <div class="col-12 banner-show-blog" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(<%= @blog.photo_banner.attached? ? cl_image_path(@blog.photo_banner.key) : image_path("default-bg.jpg") %>)">
+      <h1 class="ms-5" style = "font-size: 58px; color: white;"><%= @blog.title %></h1>
+    </div>
+  </div>
+  <div class="ms-5">
+    <div class="row">
+      <div class="col-8" style="font-family: sans-serif; font-size: 18px;" data-controller="theme-color">
+          <div>
+            <div data-scroll-target="bar" class="bg-primary bg-gradient fixed-top" style="height:8px; border-radius:'4px'; top:86px"></div>
           </div>
-        <% @steps.each do |step| %>
-          <div class="mb-3">
-            <h3 data-theme-color-target="title_step" class="<% if step.layout == 1 %>
-                                                                <%= "title-main" %>
-                                                            <% elsif step.layout == 2 %>
-                                                                <%= "title-secondary" %>
-                                                            <% elsif step.layout == 3 %>
-                                                                <%= "title-small d-none" %>
-                                                            <% else %>
-                                                                <%= "title-secondary" %>
-                                                            <% end %>">
+        <div class="dropdown position-absolute top-0 end-0 mt-4 me-4">
+          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Choose a color for titles
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-red" data-action="click->theme-color#switch_title_red" href="#">Red<div class="ms-3" style="height:20px; width:20px; background-color: #B70404;"></div></a></li>
+            <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-blue" data-action="click->theme-color#switch_title_blue" href="#">Blue<div class="ms-3" style="height:20px; width:20px; background-color: #0077b6;"></div></a></li>
+            <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-yellow" data-action="click->theme-color#switch_title_yellow" href="#">Yellow<div class="ms-3" style="height:20px; width:20px; background-color: #ffc300;"></div></a></li>
+          </ul>
+        </div>
+        <div class="post_detail">
+          <% if (@blog.end_date - @blog.start_date).to_i < 14 %>
+            <span class="duration-price">Budget €<%= (@blog.max_price + @blog.min_price) / 2 %> | <%= (@blog.end_date - @blog.start_date).to_i %> days <i class="fa-regular fa-calendar"></i></span>
+          <% elsif (@blog.end_date - @blog.start_date).to_i >= 14 && (@blog.end_date - @blog.start_date).to_i < 60 %>
+            <span class="duration-price">Budget €<%= ((@blog.max_price + @blog.min_price) / 2) * 4 %> | <%= ((@blog.end_date - @blog.start_date).to_i) / 7 %> weeks <i class="fa-regular fa-calendar"></i></span>
+          <% elsif (@blog.end_date - @blog.start_date).to_i >= 60 %>
+            <span class="duration-price">Budget €<%= (@blog.max_price + @blog.min_price) / 2 %> | <%= ((@blog.end_date - @blog.start_date).to_i) / 30 %> months <i class="fa-regular fa-calendar"></i></span>
+          <% end %>
+        </div>
+        <h3 class="mt-4" data-theme-color-target="title_intro">Introduction</h3>
+          <div class="my-3">
+            <% if  @blog.video.url%>
+              <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: false, class: "d-block w-50 m-auto my-3" %>
+            <% end %>
+            <div class="p-content">
+              <%= simple_format @blog.intro %>
+            </div>
+          <% @steps.each do |step| %>
+            <div class="mb-3">
+              <h3 data-theme-color-target="title_step" class="<% if step.layout == 1 %>
+                                                                  <%= "title-main" %>
+                                                              <% elsif step.layout == 2 %>
+                                                                  <%= "title-secondary" %>
+                                                              <% elsif step.layout == 3 %>
+                                                                  <%= "title-small d-none" %>
+                                                              <% else %>
+                                                                  <%= "title-secondary" %>
+                                                              <% end %>">
               <%= step.title %></h3>
               <% if step.photos.attached? %>
                 <div class="text-center position-relative">
@@ -84,15 +87,16 @@
               <% else %>
                 <p class="p-content"><%= simple_format step.content %></p>
               <% end %>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         </div>
-    </div>
-    <div class='col-4' data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-      <div style="width: 100%; height: 100vh; border-radius: 4px; position: sticky; top: 0;"
-      data-map-target="container">
+      </div>
+      <div class='col-4' data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        <div style="width: 100%; height: 100vh; border-radius: 4px; position: sticky; top: 0;"
+        data-map-target="container">
+        </div>
       </div>
     </div>
   </div>
