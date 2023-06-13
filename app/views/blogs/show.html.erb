@@ -26,7 +26,7 @@
         <% @steps.each do |step| %>
           <div class="mb-3">
             <h3><%= step.title %></h3>
-              <% if step.layout == 3 %>
+              <% if step.photos.attached? %>
                 <div>
                   <div>
                     <div id="stepCarousel-<%= step.id %>" class="carousel slide w-75" data-bs-ride="carousel" style="padding: 0px 30px; margin-bottom: 2rem;">
@@ -53,7 +53,7 @@
                     </div>
                   </div>
                 </div>
-              <% elsif step.layout == 2 %>
+              <% elsif step.photo_text.attached? %>
                 <div>
                   <div>
                     <div class="d-flex flex-column">
