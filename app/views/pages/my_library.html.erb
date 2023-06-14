@@ -1,33 +1,33 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1>My library</h1>
+      <h1 class="mb-3">My library</h1>
     </div>
+    <div class="row">
       <% current_user.blogs.each do |blog| %>
-        <div class="row">
-          <div class="col">
-            <div class="mb-3">
-              <div class="card-my-blog d-flex justify-content-between" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>);">
-                <h3 class="card-title"><%= blog.title %></h3>
-                <div class="card-my-blog_links-container">
-                  <%= link_to blog_path(blog), class:"btn btn-card" do %>
-                    <i class="fa-solid fa-eye"></i>
-                  <% end %>
-                  <%= link_to blog_steps_path(blog), class:"btn btn-card" do %>
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  <% end %>
-                  <%= link_to blog_steps_path(blog), class:"btn btn-card" do %>
-                    <i class="fa-solid fa-pen-ruler"></i>
-                  <% end %>
-                  <%= link_to blog_path(blog), class: "btn btn-card-danger", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-                    <i class="fa-solid fa-trash color-danger"></i>
-                  <% end %>
-                </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <div class="card-my-blog d-flex justify-content-between position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>);">
+              <h3 class="card-title"><%= blog.title %></h3>
+              <div class="card-my-blog_links-container">
+              <%= link_to edit_blog_path(blog), class:"position-absolute top-0 start-100 translate-middle" do %>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                <% end %>
+                <%= link_to blog_path(blog), class:"btn btn-card" do %>
+                  <i class="fa-solid fa-eye"></i>
+                <% end %>
+                <%= link_to blog_steps_path(blog), class:"btn btn-card" do %>
+                  <i class="fa-solid fa-pen-ruler"></i>
+                <% end %>
+                <%= link_to blog_path(blog), class: "btn btn-card-danger", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                  <i class="fa-solid fa-trash color-danger"></i>
+                <% end %>
               </div>
             </div>
           </div>
         </div>
       <% end %>
+    </div>
       <div class="row">
         <div class="col">
           <!-- Button trigger modal -->
