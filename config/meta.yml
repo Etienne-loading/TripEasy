@@ -1,0 +1,5 @@
+meta_product_name: "TripEasy"
+meta_title: "TripEasy - The ultimate travel blog for adventurers"
+meta_description: "TripEasy makes it easy to create captivating travel blogs. We give you the ability to design unique blogs, allowing you to share your stories, photos and tips. Discover inspiring travel content and plan your next adventures easily with TripEasy."
+meta_image: "banner4resize.jpeg" # should exist in `app/assets/images/`
+twitter_account: "@twitter"   # required for Twitter Cards

@@ -1,3 +1,9 @@
+<% content_for :meta_title, "#{@blog.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @blog.intro %>
+<% content_for :meta_image, cl_image_path(@blog.photo_banner.key) %>
+
+
+
 <div data-controller="scroll" data-action='scroll@window->scroll#scroll'>
 <div>
   <div class="banner-show-blog" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(<%= @blog.photo_banner.attached? ? cl_image_path(@blog.photo_banner.key) : image_path("default-bg.jpg") %>)">
