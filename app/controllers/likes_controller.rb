@@ -16,7 +16,7 @@ class LikesController < ApplicationController
       @like.blog = @blog
       @like.save
     end
-    redirect_to @blog
+    redirect_to blog_path(@blog)
   end
 
   def destroy
@@ -25,9 +25,9 @@ class LikesController < ApplicationController
       @like.destroy
       skip_authorization
     else
-      redirect_to @blog
+      redirect_to blog_path(params[:blog_id])
     end
-      redirect_to @blog
+    redirect_to blog_path(params[:blog_id])
   end
 
   private
@@ -43,7 +43,7 @@ class LikesController < ApplicationController
 
   def set_like
     if @blog.likes.present?
-    @like = @blog.likes.find(params[:id])
+      @like = @blog.likes.find(params[:id])
     else
       redirect_to blog_path
     end
