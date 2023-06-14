@@ -30,7 +30,7 @@
                         <% available_tags = step.tag_list - used_tags %>
                         <% selected_tags = available_tags.sample(3) %>
                         <% used_tags += selected_tags %>
-                        <% selected_tags.sample(3).each do |tag| %>
+                        <% selected_tags.sample(1).each do |tag| %>
                           <span class="tag mt-1">#<%= tag %></span> &nbsp;
                         <% end %>
                       <% end %>
@@ -91,7 +91,7 @@
                         <% available_tags = step.tag_list - used_tags %>
                         <% selected_tags = available_tags.sample(3) %>
                         <% used_tags += selected_tags %>
-                        <% selected_tags.sample(3).each do |tag| %>
+                        <% selected_tags.sample(1).each do |tag| %>
                           <span class="tag mt-1">#<%= tag %></span> &nbsp;
                         <% end %>
                       <% end %>
@@ -146,10 +146,18 @@
                         <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
                         <% end %>
                         <div class="mt-2">
-                          <span class="tag mt-1">#surfing </span>
-                          <span class="tag mt-1">#hiking </span>
-                          <span class="tag">#hunting </span>
-                        </div>
+                            <% used_tags = [] %>
+                      <% blog.steps.sample(3).each do |step| %>
+                        <% if step.tag_list.present? %>
+                        <% available_tags = step.tag_list - used_tags %>
+                        <% selected_tags = available_tags.sample(3) %>
+                        <% used_tags += selected_tags %>
+                        <% selected_tags.sample(1).each do |tag| %>
+                          <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                      </div>
                         <div style="display: flex; justify-content: space-between; margin-top: 25px;">
                           <div class="localisation">
                             <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;", class:"me-2" %>

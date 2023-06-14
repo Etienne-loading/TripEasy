@@ -50,7 +50,7 @@
                         <% available_tags = step.tag_list - used_tags %>
                         <% selected_tags = available_tags.sample(3) %>
                         <% used_tags += selected_tags %>
-                        <% selected_tags.sample(3).each do |tag| %>
+                        <% selected_tags.sample(1).each do |tag| %>
                           <span class="tag mt-1">#<%= tag %></span> &nbsp;
                         <% end %>
                       <% end %>
