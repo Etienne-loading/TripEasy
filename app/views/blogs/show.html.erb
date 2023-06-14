@@ -1,14 +1,20 @@
+<% content_for :meta_title, "#{@blog.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @blog.intro %>
+<% content_for :meta_image, cl_image_path(@blog.photo_banner.key) %>
+
+
+
 <div data-controller="scroll" data-action='scroll@window->scroll#scroll'>
 <div>
   <div class="banner-show-blog" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(<%= @blog.photo_banner.attached? ? cl_image_path(@blog.photo_banner.key) : image_path("default-bg.jpg") %>)">
     <h1 style = "font-size: 58px; color: white;"><%= @blog.title %></h1>
   </div>
 </div>
-<div class="ms-5">
-  <div class="row">
-    <div class="col-8" style="font-family: sans-serif; font-size: 18px;" data-controller="theme-color">
+<div class="">
+  <div class="d-flex">
+    <div class="" style="font-family: sans-serif; font-size: 18px; padding: 0 4rem;" data-controller="theme-color">
         <div>
-          <div data-scroll-target="bar" class="bg-primary bg-gradient fixed-top" style="height:8px; border-radius:'4px'; top:86px"></div>
+          <div data-scroll-target="bar" class="bg-primary bg-gradient fixed-top" style="height:4px; border-radius:'4px'; top:86px"></div>
         </div>
       <div class="dropdown position-absolute top-0 end-0 mt-4 me-4">
         <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -27,6 +33,16 @@
           <span class="duration-price">Budget €<%= ((@blog.max_price + @blog.min_price) / 2) * 4 %> | <%= ((@blog.end_date - @blog.start_date).to_i) / 7 %> weeks <i class="fa-regular fa-calendar"></i></span>
         <% elsif (@blog.end_date - @blog.start_date).to_i >= 60 %>
           <span class="duration-price">Budget €<%= (@blog.max_price + @blog.min_price) / 2 %> | <%= ((@blog.end_date - @blog.start_date).to_i) / 30 %> months <i class="fa-regular fa-calendar"></i></span>
+        <% end %>
+
+        <% if current_user.like_blog(@blog) %>
+          <%= link_to blog_like_path(@blog, current_user.like_blog(@blog)), data: { turbo_method: :delete } do %>
+            <i class="fa-solid fa-heart" style="color: #ff0000;"></i>
+          <% end %>
+        <% else %>
+          <%= link_to blog_likes_path(@blog), data: { turbo_method: :post }  do %>
+            <i class="fa-regular fa-heart" style="color: #ff0000;"></i>
+          <% end %>
         <% end %>
       </div>
       <h3 class="mt-4" data-theme-color-target="title_intro">Introduction</h3>
@@ -105,11 +121,11 @@
         <% end %>
       </div>
     </div>
-    <div class='col-4' data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-      <div style="width: 100%; height: 100vh; position: sticky; top: 0;"
-      data-map-target="container">
+    <div class="" style="flex: 0 0 33%;">
+      <div data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>" id="blog-map">
+        <div data-map-target="container"></div>
       </div>
     </div>
   </div>

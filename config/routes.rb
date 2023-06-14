@@ -2,28 +2,20 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :blogs do # index + show as traveler / new/create + edit/update + destroy as editor
-    resources :likes, only: [:create] # as traveler
-    #resources :steps, only: [:create] # as editor
-  end
-
-  # as traveler
-  resources :users, only: [:show]
-
-  # as editor
   resources :blogs do
+    resources :likes, only: [:new, :create, :destroy]
     resources :steps do
       resources :tips, only: [:create, :destroy]
       resources :tag_list
     end
   end
 
+  resources :users, only: [:show]
+
   resources :tags, only: [:update, :destroy]
 
   get '/my-library', to: 'pages#my_library'
 end
-
-
 # resources :blogs
 #   index + show as traveler
 #   new/create + edit/update + destroy as editor

@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :destroy, :update]
+  # before_action :set_like, only: [:show]
   def index
     @blogs = policy_scope(Blog)
     if params[:query].present?
@@ -8,6 +9,7 @@ class BlogsController < ApplicationController
   end
 
   def show
+    @blog = Blog.find(params[:id])
     authorize @blog
     @steps = @blog.steps
     @steps = @steps.order(:id)
@@ -62,6 +64,11 @@ class BlogsController < ApplicationController
   end
 
   def blog_params
-    params.require(:blog).permit(:title, :max_price, :min_price, :start_date, :end_date, :carbon_friendly, :photo_banner, :video, :intro)
+    params.require(:blog).permit(:title, :max_price, :min_price, :start_date, :end_date, :carbon_friendly, :photo_banner, :video, :intro, :like)
   end
+
+
+  # def set_like
+  #   @like = Like.find(params[:id])
+  # end
 end

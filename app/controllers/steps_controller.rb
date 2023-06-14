@@ -12,6 +12,7 @@ class StepsController < ApplicationController
   end
 
   def show
+    skip_authorization
     @step = Step.find(params[:id])
   end
 
