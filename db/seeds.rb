@@ -53,7 +53,7 @@ nationalities = ['French', 'German', 'Spanish', 'Italian']
   )
   user.save
   puts "Created #{user.pseudo}"
-end
+  end
 
 etienne = { first_name: "Etienne", last_name: "Pagenaud", pseudo: "Mister Worldwide", email: "mister.worldwide@gmail.com", password:"password", birthday:"10-10-1995", nationality:"french" }
 [etienne].each do |hash|
@@ -201,10 +201,6 @@ step4 = { title: "Discover the Grandeur of Mandalay: Former Royal Capital", addr
 
 step5 = { title: "Relax on the Beaches of Ngapali: A Tropical Paradise", address: "Ngapali", content: "Ngapali is an idyllic beach destination for relaxation and enjoying sandy beaches. Spend your days sunbathing, swimming in turquoise waters, and savoring fresh seafood. Treat yourself to relaxing massages and admire the breathtaking sunsets.", duration: 2, latitude: 18.4537, longitude: 94.3895, country: "Myanmar", blog: Blog.last, url: "https://images.unsplash.com/photo-1506399005762-2088660f5c38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80", layout: 4 }
 
-
-
-
-
 [step1, step2, step3, step4, step5].each do |hash|
   step = Step.create!(
     title: hash[:title],
@@ -221,6 +217,9 @@ step5 = { title: "Relax on the Beaches of Ngapali: A Tropical Paradise", address
   else
     image = URI.open(hash[:url])
     step.photo_text.attach(io: image, filename: step.title, content_type: 'png')
+  end
+  tag_list.sample(3).each do |tag|
+    step.tag_list.add tag
   end
   step.save
   puts "Created #{step.title}"
@@ -267,6 +266,9 @@ step4 = { title: "Immerse Yourself in Nature: Trakai and the Curonian Spit", add
   else
     image = URI.open(hash[:url])
     step.photo_text.attach(io: image, filename: step.title, content_type: 'png')
+  end
+  tag_list.sample(3).each do |tag|
+    step.tag_list.add tag
   end
   step.save
   puts "Created #{step.title}"
@@ -317,6 +319,9 @@ step7 = { title: "Tropical Paradise: Relaxation in Okinawa's Islands", address: 
   else
     image = URI.open(hash[:url])
     step.photo_text.attach(io: image, filename: step.title, content_type: 'png')
+  end
+  tag_list.sample(3).each do |tag|
+    step.tag_list.add tag
   end
   step.save
   puts "Created #{step.title}"
