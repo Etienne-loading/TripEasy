@@ -18,6 +18,7 @@
   background-size: cover;
   background-position: center;
   min-height: 125vh;
+  position: relative;
 }
 
 .banner h1 {
@@ -36,7 +37,14 @@
 }
 
 
-
+.arrow-container {
+  position: absolute;
+  top: 95vh;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
 // ARROW
 
 .arrow,
