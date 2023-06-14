@@ -7,7 +7,7 @@ class StepsController < ApplicationController
     @blog = Blog.find(params[:blog_id])
     @tips = Tip.all
     @tip = Tip.new
-    @steps = @blog.steps
+    @steps = @blog.steps.order(:id)
     @step = Step.new
   end
 
