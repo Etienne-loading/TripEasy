@@ -5,3 +5,13 @@
 .mapboxgl-popup-content {
   font-family: 'Rhodium Libre', serif;
 }
+
+#blog-map {
+  position: sticky !important;
+  top: 86px;
+}
+
+.mapboxgl-map {
+  width: 100%;
+  height: calc(100vh - 86px);
+}
