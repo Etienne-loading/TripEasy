@@ -64,15 +64,17 @@
                     <%=blog.steps.first.country%>
                     <% end %>
                   </div>
-                  <div class="heart"> 10 <%= image_tag "heart.svg",style:"max-height: 24px; max-width: 24px;", class:"ms-2" %></div>
+                  <div>
+                    <%= blog.likes.size %> <%= image_tag "heart.svg", style: "max-height: 24px; max-width: 24px;", class: "ms-2" %>
+                  </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
+    </div>
       </div>
       <% end %>
       <% end %>
-    </div>
+      </div>
   </div>
 </body>
