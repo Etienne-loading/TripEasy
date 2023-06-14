@@ -33,8 +33,8 @@
         <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-yellow" data-action="click->theme-color#switch_title_yellow" href="#">Yellow<div class="ms-3" style="height:20px; width:20px; background-color: #ffc300;"></div></a></li>
       </ul>
     </div>
-    <div class="col p-3">
-      <h2 data-theme-color-target="title_blog"><%= @blog.title %></h2>
+    <div class="col bg-light">
+      <h2 data-theme-color-target="title_blog" class="ms-4"><%= @blog.title %></h2>
       <div class="p-2" data-controller="edit-intro-blog">
         <div data-edit-intro-blog-target="content">
           <h5>Introduction content</h5>
@@ -56,9 +56,17 @@
       <% step_num = 0 %>
       <% @steps.each do |step| %>
         <% step_num += 1 %>
-        <div class="col-12 mb-3" data-controller="edit-step-blog">
-          <div data-edit-step-blog-target="content">
-            <h5 id="<%= step.id %>" data-theme-color-target="title_step" class="mb-2">Step : <%= step_num %> | <%= step.title %> | <%= step.duration %> days</h5>
+        <div class="col-12 mb-3 border-bottom position-relative" data-controller="edit-step-blog">
+          <div data-edit-step-blog-target="content" class="ps-4">
+            <h5 id="<%= step.id %>" data-theme-color-target="title_step" class="mb-2">Step : <%= step_num %> | <%= step.title %> | <%= step.duration %>
+              days
+              <div class="d-flex justify-content-end">
+                <div class="position-absolute top-0 end-0">
+                  <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
+                  <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+                </div>
+              </div>
+            </h5>
             <% if step.photo_text.attached? %>
               <div class="d-flex flex-column">
                 <p><%= simple_format step.content %></p>
@@ -79,7 +87,7 @@
           <div>
             <% if step.layout == 1 %>
               <%= simple_form_for [@blog, step],
-                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+                html: { class:"d-none m-4", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :duration, placeholder: "Duration" %>
@@ -87,7 +95,7 @@
               <% end %>
             <% elsif step.layout == 2 %>
               <%= simple_form_for [@blog, step],
-                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+                html: { class:"d-none m-4", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :duration, placeholder: "Duration" %>
@@ -103,7 +111,7 @@
               <% end %>
             <% elsif step.layout == 3 %>
               <%= simple_form_for [@blog, step],
-                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+                html: { class:"d-none m-4", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :duration, placeholder: "Duration" %>
@@ -118,7 +126,7 @@
               <% end %>
             <% else %>
               <%= simple_form_for [@blog, step],
-                html: { class:"d-none", data: { edit_step_blog_target:"form" }} do |f| %>
+                html: { class:"d-none m-4", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :content, input_html: { rows:"9" }, placeholder: "Content" %>
@@ -133,12 +141,7 @@
               <% end %>
             <% end %>
           </div>
-          <div class="d-flex justify-content-between">
-            <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
-            <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
-          </div>
         </div>
-        <hr>
       <% end %>
     </div>
     <div class="container">
