@@ -32,7 +32,5 @@ class TipsController < ApplicationController
     @tip = Tips.find(params[:id])
   end
 
-  def blog_params
-    params.require(:tip).permit(:title, :content, :link, :category)
-  end
+
 end
