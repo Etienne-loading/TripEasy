@@ -79,6 +79,10 @@
                 <p><%= simple_format step.content %></p>
                 <%= cl_image_tag(step.photo_text.key, width:250, height: 150, class:"mb-3") %>
               </div>
+              <% step.tips.each do |tip| %>
+                <%= tip.content %>
+                <%= link_to "delete tip", blog_step_tip_path(@blog, tip.step, tip), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+              <% end %>
             <% elsif step.photos.attached? %>
               <div class="d-flex align-items-center">
                 <% step.photos.each do |photo| %>
@@ -89,6 +93,9 @@
               </div>
             <% else %>
               <p><%= simple_format step.content %></p>
+              <% step.tips.each do |tip| %>
+                <%= tip.content %>
+              <% end %>
             <% end %>
           </div>
           <div class="pb-4">
@@ -121,6 +128,9 @@
                 <div class="position-absolute top-0 end-0 me-4">
                   <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
                   <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+                  <% if step.layout == 2 || step.layout == 4 %>
+                    <%= link_to "", "#", class: "fa-solid fa-lightbulb btn btn-outline-warning", data: {edit_step_blog_target:"tipbutton", action:"click->edit-step-blog#revealTipForm"} %>
+                  <% end %>
                 </div>
               </div>
             <% if step.tag_list.present? %>
@@ -163,6 +173,9 @@
                 <div class="position-absolute top-0 end-0 me-4">
                   <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
                   <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+                  <% if step.layout == 2 || step.layout == 4 %>
+                   <%= link_to "", "#", class: "fa-solid fa-lightbulb btn btn-outline-warning", data: {edit_step_blog_target:"tipbutton", action:"click->edit-step-blog#revealTipForm"} %>
+                  <% end %>
                 </div>
               </div>
               <% if step.tag_list.present? %>
@@ -172,6 +185,13 @@
               <% end %>
             <% end %>
           </div>
+          <% if step.layout == 2 || step.layout == 4%>
+            <%= simple_form_for [@blog, step, @tip],
+                  html: { class:"d-none", data: { edit_step_blog_target:"tipform" }} do |f| %>
+                  <%= f.input :content, input_html: { rows:"9" }, placeholder: "Content" %>
+                  <%= f.submit class: "btn btn-primary" %>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
     </div>

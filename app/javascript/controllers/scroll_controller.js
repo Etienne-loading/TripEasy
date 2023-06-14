@@ -18,8 +18,3 @@ export default class extends Controller {
     this.barTarget.style.width = `${width}%`
   }
 }
-
-
-// disconnect() {
-//   window.removeEventListener("scroll", this.scroll);
-// }

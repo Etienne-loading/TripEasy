@@ -97,11 +97,25 @@
                   <div class="d-flex flex-column">
                   <%= cl_image_tag(step.photo_text.key, height: "auto", class:"mb-3 w-100 m-auto mb-2") %>
                     <p class="p-content"><%= simple_format step.content %></p>
+                    <% step.tips.each do |tip| %>
+                      <div class="d-flex justify-content-end">
+                        <div class="p-2 text-primary">
+                          <i class="fa-solid fa-quote-left"></i> <I><%= tip.content %></I> <i class="fa-solid fa-quote-right"></i>
+                        </div>
+                      </div>
+                    <% end %>
                   </div>
                 </div>
               </div>
             <% else %>
               <p class="p-content"><%= simple_format step.content %></p>
+              <% step.tips.each do |tip| %>
+                <div class="d-flex justify-content-end">
+                  <div class="p-2 text-primary ">
+                    <i class="fa-solid fa-quote-left"></i> <I><%= tip.content %></I> <i class="fa-solid fa-quote-right"></i>
+                  </div>
+                </div>
+              <% end %>
             <% end %>
           </div>
         <% end %>

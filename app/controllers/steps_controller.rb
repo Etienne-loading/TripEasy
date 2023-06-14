@@ -5,6 +5,8 @@ class StepsController < ApplicationController
   def index
     skip_policy_scope
     @blog = Blog.find(params[:blog_id])
+    @tips = Tip.all
+    @tip = Tip.new
     @steps = @blog.steps
     @step = Step.new
   end

@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   resources :blogs do
     resources :likes, only: [:new, :create, :destroy]
     resources :steps do
-      resources :tips, only: [:create]
+      resources :tips, only: [:create, :destroy]
       resources :tag_list
     end
   end
 
   resources :users, only: [:show]
-  resources :tips, only: [:update, :destroy]
+
   resources :tags, only: [:update, :destroy]
 
   get '/my-library', to: 'pages#my_library'
