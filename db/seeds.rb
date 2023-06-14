@@ -112,11 +112,14 @@ step4 = { title: "Relax and Explore in Flores: Gateway to Yaxha Ruins", address:
     image = URI.open(hash[:url])
     step.photo_text.attach(io: image, filename: step.title, content_type: 'png')
   end
+  tag_list.sample(3).each do |tag|
+    step.tag_list.add("solo", "hunting", "surfing")
+  end
   step.save
   puts "Created #{step.title}"
 end
 
-spain = { title: "The Great Country of Rafael Nadal", min_price: 800, max_price: 1000, start_date: "2023-01-02", end_date: "2023-01-17", carbon_friendly:true, user:User.all.sample, intro:"Welcome to Spain, a country rich in history, culture and natural beauty. From bustling cities to heavenly beaches, this 20-day trip will allow you to discover all the diversity of Spain. Explore iconic sites such as the Sagrada Familia in Barcelona, wander the narrow streets of the Albaicín in Granada, sample the delights of Spanish cuisine in Madrid and relax on the sunny beaches of the Costa del Sol. Prepare to be charmed by passion, art and Spanish hospitality throughout your unforgettable trip to Spain." }
+spain = { title: "The Great Country of Rafael", min_price: 800, max_price: 1000, start_date: "2023-01-02", end_date: "2023-01-17", carbon_friendly:true, user:User.all.sample, intro:"Welcome to Spain, a country rich in history, culture and natural beauty. From bustling cities to heavenly beaches, this 20-day trip will allow you to discover all the diversity of Spain. Explore iconic sites such as the Sagrada Familia in Barcelona, wander the narrow streets of the Albaicín in Granada, sample the delights of Spanish cuisine in Madrid and relax on the sunny beaches of the Costa del Sol. Prepare to be charmed by passion, art and Spanish hospitality throughout your unforgettable trip to Spain." }
 [spain].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -133,6 +136,7 @@ spain = { title: "The Great Country of Rafael Nadal", min_price: 800, max_price:
   image = URI.open("https://images.unsplash.com/photo-1558642084-fd07fae5282e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1036&q=80")
   blog.photo_card.attach(io: image, filename: blog.title, content_type: 'png')
   puts "Created #{blog.title}"
+
   blog.save
 end
 
@@ -160,11 +164,14 @@ step6 = { title: "Cordoba, a journey through time: Between Andalusian history an
     image = URI.open(hash[:url])
     step.photo_text.attach(io: image, filename: step.title, content_type: 'png')
   end
+  tag_list.sample(3).each do |tag|
+    step.tag_list.add tag
+  end
   step.save
   puts "Created #{step.title}"
 end
 
-myanmar = { title: "Echanting exploration", min_price: 1500, max_price: 2000, start_date: "2023-03-02", end_date: "2023-03-13", carbon_friendly:false, user:User.all.sample, intro:"Welcome to Myanmar, a mysterious and enchanting country in Southeast Asia. Get ready to immerse yourself in a rich and unspoiled culture, discover majestic temples, breathtaking landscapes and warm hospitality. Explore the splendors of Yangon with the famous Shwedagon Pagoda, marvel at the temples of Bagan, embark on a cruise on the majestic Irrawaddy River and soak up the unique atmosphere of Inle Lake. Myanmar promises you an immersive adventure through its history, traditions and unspoiled nature. Prepare to be transported to a world of beauty and spirituality on this unforgettable trip to Myanmar."}
+myanmar = { title: "Enchanting exploration", min_price: 1500, max_price: 2000, start_date: "2023-03-02", end_date: "2023-03-13", carbon_friendly:false, user:User.all.sample, intro:"Welcome to Myanmar, a mysterious and enchanting country in Southeast Asia. Get ready to immerse yourself in a rich and unspoiled culture, discover majestic temples, breathtaking landscapes and warm hospitality. Explore the splendors of Yangon with the famous Shwedagon Pagoda, marvel at the temples of Bagan, embark on a cruise on the majestic Irrawaddy River and soak up the unique atmosphere of Inle Lake. Myanmar promises you an immersive adventure through its history, traditions and unspoiled nature. Prepare to be transported to a world of beauty and spirituality on this unforgettable trip to Myanmar."}
 [myanmar].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
