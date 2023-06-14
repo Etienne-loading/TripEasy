@@ -68,7 +68,6 @@ $card_color: #e1e1e1;
 
 .tag{
   cursor: pointer;
-  display: inline-block;
   font-size: 0.7rem;
   border-radius: 15px;
   padding: 0.1rem 0.5rem;
@@ -95,4 +94,10 @@ $card_color: #e1e1e1;
 .card-link{
   text-decoration: none;
   color:black;
+  &:hover {
+    color:black!important;
+    .card-blog {
+      background-color: #FCB84B;
+    }
+  }
 }

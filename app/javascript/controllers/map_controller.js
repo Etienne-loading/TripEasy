@@ -13,7 +13,7 @@ export default class extends Controller {
 
     this.map = new mapboxgl.Map({
       container: this.containerTarget,
-      style: "mapbox://styles/etienne26/cliizmii400dg01r07pxmegp3",
+      style: "mapbox://styles/etienne26/clivu424k003g01pb8174g4uj",
       center: [2.3522, 48.8566],
       minZoom: 2.5,
       maxZoom: 15,
@@ -66,9 +66,9 @@ export default class extends Controller {
             'line-cap': 'round',
           },
           paint: {
-            'line-color': '#FCB84B',
+            'line-color': '#FF9D00',
             'line-width': 5,
-            'line-opacity': 0.75,
+            'line-opacity': 0.85,
             'line-dasharray': [1, 2]
           }
         });
