@@ -11,13 +11,20 @@
     <div class="bg-dark col-3" style="min-height: 50vh">
       <div class="sticky-top">
         <div class="nav flex-column">
+          <div class="mb-4" style="background-color: #f7b633">
+            <h4 class="my-4 text-white text-center">Summary</h4>
+          </div>
           <% @steps.each do |step| %>
             <% step_num_sidebar += 1 %>
-            <%= link_to "#{step_num_sidebar}. #{step.title.truncate_words(4)}", "##{step.id}", class:"text-white p-3 text-decoration-none" %>
+            <%= link_to "##{step.id}", class:"text-white text-decoration-none" do %>
+              <h5 class="change-bg p-2 mb-3"><%= "#{step_num_sidebar}. #{step.title.truncate_words(4)}" %></h5>
+            <% end %>
           <% end %>
-          <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#modalForm">
+          <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-primary mx-3" id="create-btn" data-bs-toggle="modal" data-bs-target="#modalForm">
             Add section
           </button>
+          </div>
         </div>
       </div>
     </div>
@@ -34,39 +41,39 @@
       </ul>
     </div>
     <div class="col bg-light">
-      <h2 data-theme-color-target="title_blog" class="ms-4"><%= @blog.title %></h2>
-      <div class="p-2" data-controller="edit-intro-blog">
-        <div data-edit-intro-blog-target="content">
-          <h5>Introduction content</h5>
+      <div class="border-bottom position-relative pt-4" data-controller="edit-intro-blog">
+        <h3 class="ms-4">Introduction</h3>
+        <div data-edit-intro-blog-target="content" class="ms-4 mt-4">
           <% if  @blog.video.url%>
           <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: true, class: "d-block w-50 m-auto mb-3" %>
           <% end %>
           <%= simple_format @blog.intro %>
+          <div class="d-flex justify-content-end">
+            <div class="position-absolute top-0 end-0 me-4 mt-4">
+              <%= link_to "", edit_blog_path(@blog), data: {edit_intro_blog_target:"button", action:"click->edit-intro-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+            </div>
+          </div>
         </div>
-        <div>
-          <%= link_to "Edit my introduction", edit_blog_path(@blog), data: {edit_intro_blog_target:"button", action:"click->edit-intro-blog#revealEditForm"}%>
-        </div>
-        <%= simple_form_for @blog, html: { class:"d-none", data: { edit_intro_blog_target:"form" }} do |f| %>
+        <%= simple_form_for @blog, html: { class:"d-none m-4", data: { edit_intro_blog_target:"form" }} do |f| %>
             <%= f.input :title, placeholder: "Title" %>
             <%= f.input :video, as: :file, placeholder: "Video", input_html: { resource_type: :video } %>
             <%= f.input :intro, placeholder: "Introduction content" %>
             <%= f.submit class: "btn btn-primary" %>
             <% end %>
+            <div class="d-flex justify-content-end">
+            <div class="position-absolute top-0 end-0 me-4 mt-4">
+              <%= link_to "", edit_blog_path(@blog), data: {edit_intro_blog_target:"button", action:"click->edit-intro-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+            </div>
+          </div>
       </div>
       <% step_num = 0 %>
       <% @steps.each do |step| %>
         <% step_num += 1 %>
         <div class="col-12 mb-3 border-bottom position-relative" data-controller="edit-step-blog">
-          <div data-edit-step-blog-target="content" class="ps-4">
-            <h5 id="<%= step.id %>" data-theme-color-target="title_step" class="mb-2">Step : <%= step_num %> | <%= step.title %> | <%= step.duration %>
+          <div data-edit-step-blog-target="content" class="ps-4 mt-5">
+            <h3 id="<%= step.id %>" data-theme-color-target="title_step" class="mb-2">Step : <%= step_num %> | <%= step.title %> | <%= step.duration %>
               days
-              <div class="d-flex justify-content-end">
-                <div class="position-absolute top-0 end-0">
-                  <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
-                  <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
-                </div>
-              </div>
-            </h5>
+            </h3>
             <% if step.photo_text.attached? %>
               <div class="d-flex flex-column">
                 <p><%= simple_format step.content %></p>
@@ -84,15 +91,21 @@
               <p><%= simple_format step.content %></p>
             <% end %>
           </div>
-          <div>
+          <div class="pb-4">
             <% if step.layout == 1 %>
               <%= simple_form_for [@blog, step],
-                html: { class:"d-none m-4", data: { edit_step_blog_target:"form" }} do |f| %>
+                html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.submit class: "btn btn-primary" %>
               <% end %>
+              <div class="d-flex justify-content-end">
+                <div class="position-absolute top-0 end-0 me-4">
+                  <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
+                  <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+                </div>
+              </div>
             <% elsif step.layout == 2 %>
               <%= simple_form_for [@blog, step],
                 html: { class:"d-none m-4", data: { edit_step_blog_target:"form" }} do |f| %>
@@ -104,14 +117,20 @@
                 <%= f.input :tag_list, label: false, placeholder: "Tag" %>
                 <%= f.submit class: "btn btn-primary" %>
               <% end %>
+              <div class="d-flex justify-content-end">
+                <div class="position-absolute top-0 end-0 me-4">
+                  <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
+                  <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+                </div>
+              </div>
             <% if step.tag_list.present? %>
                 <% step.tags.each do |tag| %>
-                  <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                  <span class="tag ms-4">#<%= tag %></span> &nbsp;
                 <% end %>
               <% end %>
             <% elsif step.layout == 3 %>
               <%= simple_form_for [@blog, step],
-                html: { class:"d-none m-4", data: { edit_step_blog_target:"form" }} do |f| %>
+                html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :duration, placeholder: "Duration" %>
@@ -119,14 +138,20 @@
                 <%= f.input :tag_list, label: false, placeholder: "Tag" %>
                 <%= f.submit class: "btn btn-primary" %>
               <% end %>
+              <div class="d-flex justify-content-end">
+                <div class="position-absolute top-0 end-0 me-4">
+                  <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
+                  <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+                </div>
+              </div>
              <% if step.tag_list.present? %>
                 <% step.tags.each do |tag| %>
-                  <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                  <span class="tag ms-4">#<%= tag %></span> &nbsp;
                 <% end %>
               <% end %>
             <% else %>
               <%= simple_form_for [@blog, step],
-                html: { class:"d-none m-4", data: { edit_step_blog_target:"form" }} do |f| %>
+                html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
                 <%= f.input :address, placeholder: "Address" %>
                 <%= f.input :content, input_html: { rows:"9" }, placeholder: "Content" %>
@@ -134,9 +159,15 @@
                 <%= f.input :tag_list, label: false, placeholder: "Tag" %>
                 <%= f.submit class: "btn btn-primary" %>
               <% end %>
+              <div class="d-flex justify-content-end">
+                <div class="position-absolute top-0 end-0 me-4">
+                  <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
+                  <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+                </div>
+              </div>
               <% if step.tag_list.present? %>
                 <% step.tags.each do |tag| %>
-                  <span class="tag mt-1">#<%= tag %></span> &nbsp;
+                  <span class="tag ms-4">#<%= tag %></span> &nbsp;
                 <% end %>
               <% end %>
             <% end %>
@@ -146,7 +177,7 @@
     </div>
     <div class="container">
       <div class="row" data-controller="create-step-blog">
-        <div class="col text-center my-3">
+        <div class="col text-center mb-3 pb-4">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">
             Add section
           </button>

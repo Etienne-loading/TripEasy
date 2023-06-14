@@ -1,0 +1,11 @@
+.change-bg {
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+}
+
+.button-section {
+  padding: 8px 8px;
+  border-radius: 3px;
+}
