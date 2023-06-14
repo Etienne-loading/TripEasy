@@ -2,9 +2,33 @@ require 'faker'
 require "open-uri"
 require 'json'
 
+
 User.destroy_all
 Blog.destroy_all
 Step.destroy_all
+
+tag_list = [
+  "adventure",
+  "explore",
+  "culture",
+  "nature",
+  "cityscape",
+  "beach",
+  "mountains",
+  "foodie",
+  "road",
+  "historic",
+  "wildlife",
+  "sunset",
+  "local",
+  "backpack",
+  "luxury",
+  "photo",
+  "solo",
+  "family",
+  "hiking",
+  "surfing"
+]
 
 puts "Creating users ..."
 nationalities = ['French', 'German', 'Spanish', 'Italian']
@@ -46,7 +70,7 @@ user.save
 puts "Created #{user.pseudo}"
 end
 
-guatemala = { title: "Explorations au Guatemala", min_price: 1000, max_price: 1500, start_date: "2022-10-12", end_date: "2022-10-22", carbon_friendly:true, user:User.all.sample, intro:"Bienvenue au Guatemala, un joyau d'Amérique centrale qui allie nature spectaculaire et héritage culturel. Explorez les villes coloniales pittoresques, découvrez des sites archéologiques mayas fascinants, et émerveillez-vous devant des paysages de volcans majestueux et de lacs pittoresques. Imprégnez-vous de la richesse des traditions guatémaltèques, goûtez à une délicieuse cuisine locale et laissez-vous charmer par l'accueil chaleureux des habitants. Préparez-vous à vivre une expérience immersive et enrichissante au Guatemala, où l'aventure et la découverte vous attendent à chaque tournant."}
+guatemala = { title: "Exploration in Guatemala", min_price: 1000, max_price: 1500, start_date: "2022-10-12", end_date: "2022-10-22", carbon_friendly:true, user:User.all.sample, intro:"Welcome to Guatemala, a jewel of Central America that combines spectacular nature and cultural heritage. Explore quaint colonial towns, discover fascinating Mayan archaeological sites, and marvel at landscapes of majestic volcanoes and picturesque lakes. Immerse yourself in the richness of Guatemalan traditions, taste delicious local cuisine and let yourself be charmed by the warm welcome of the locals. Get ready for an immersive and enriching experience in Guatemala, where adventure and discovery await you at every turn."}
 [guatemala].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -66,10 +90,10 @@ guatemala = { title: "Explorations au Guatemala", min_price: 1000, max_price: 15
   puts "Created #{blog.title}"
 end
 
-step1 = { title: "Bienvenue dans la charmante Antigua : Une introduction au Guatemala", address: "Antigua", content: "Votre aventure commence dans la ville coloniale d'Antigua, avec ses rues pavées pittoresques et ses églises baroques. Dans cet article, découvrez les meilleurs sites à visiter, tels que la Plaza Mayor, la cathédrale et les ruines de l'église de La Merced. Imprégnez-vous de l'atmosphère historique de la ville, goûtez aux délicieux plats locaux et explorez les marchés animés.", duration: 1, latitude: 14.5586, longitude: -90.7295, country: "Guatemala", blog:Blog.last, url:"https://images.unsplash.com/photo-1563442744-3e17a3bf4932?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80", layout: 4 }
-step2 = { title: "Émerveillez-vous devant la beauté sereine du Lac Atitlán", address: "Lac Atitlán", content: "Le lac Atitlán est une merveille naturelle entourée de volcans et de villages indigènes. Dans cet article, découvrez les différentes communautés autour du lac, telles que Panajachel, San Marcos et Santiago Atitlán. Partez en bateau pour explorer les villages, admirez les tissages traditionnels des femmes mayas et profitez des vues à couper le souffle sur le lac et ses environs.", duration: 2, latitude: 14.6829, longitude: -91.2736, country: "Guatemala", blog:Blog.last, url:"https://images.unsplash.com/photo-1637181416128-7a32516e0ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2832&q=80", layout: 4 }
-step3 = { title: "Un voyage dans l'ancienne civilisation maya : Découvrez le parc national de Tikal", address: "Parc national de Tikal", content: "Plongez dans l'histoire fascinante des Mayas en visitant le parc national de Tikal. Dans cet article, explorez les majestueuses pyramides, les temples sacrés et la jungle dense de ce site archéologique emblématique. Partez à l'aube pour admirer le lever du soleil sur les ruines et écoutez les chants des singes hurleurs. Le parc national de Tikal est une expérience inoubliable pour les passionnés d'histoire et de nature.", duration: 2, latitude: 17.2220, longitude: -89.6237, country: "Guatemala", blog:Blog.last, url: "https://images.unsplash.com/photo-1508035460735-91088c495500?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" ,layout: 4}
-step4 = { title: "Détente et exploration à Flores : Porte d'entrée vers les ruines de Yaxha", address: "Flores", content: "Flores, une petite île pittoresque sur le lac Petén Itzá, est votre point de départ pour explorer les ruines de Yaxha. Dans cet article, découvrez la beauté tranquille de Flores avec ses maisons colorées et ses rues pavées. Ensuite, partez à la découverte des ruines de Yaxha, un site moins connu mais tout aussi impressionnant que Tikal. Grimpez au sommet des pyramides pour profiter de vues panoramiques sur la jungle environnante.", duration: 2, latitude: 16.9337, longitude: -89.8923, country: "Guatemala", blog:Blog.last, url:"https://images.unsplash.com/photo-1508035460735-91088c495500?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80", layout: 4 }
+step1 = { title: "Welcome to Charming Antigua: An Introduction to Guatemala", address: "Antigua", content: "Your adventure begins in the colonial city of Antigua, with its quaint cobblestone streets and baroque churches. In this article, discover the best sites to visit, such as the Plaza Mayor, the Cathedral and the ruins of the Church of La Merced. Soak up the city's historic atmosphere, sample delicious local dishes and explore bustling markets.", duration: 1, latitude: 14.5586, longitude: -90.7295, country: "Guatemala", blog:Blog.last, url:"https://images.unsplash.com/photo-1563442744-3e17a3bf4932?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80", layout: 4 }
+step2 = { title: "Marvel at the serene beauty of Lake Atitlán", address: "Lac Atitlán", content: "Lake Atitlán is a natural wonder surrounded by volcanoes and indigenous villages. In this article, learn about the different communities around the lake, such as Panajachel, San Marcos and Santiago Atitlán. Go by boat to explore the villages, admire the traditional weavings of Mayan women and enjoy the breathtaking views of the lake and its surroundings.", duration: 2, latitude: 14.6829, longitude: -91.2736, country: "Guatemala", blog:Blog.last, url:"https://images.unsplash.com/photo-1637181416128-7a32516e0ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2832&q=80", layout: 4 }
+step3 = { title: "A Journey to the Ancient Mayan Civilization: Discover Tikal National Park", address: "Parc national de Tikal", content: "Immerse yourself in the fascinating history of the Maya by visiting Tikal National Park. In this article, explore the majestic pyramids, sacred temples and dense jungle of this iconic archaeological site. Set off at dawn to admire the sunrise over the ruins and listen to the songs of the howler monkeys. Tikal National Park is an unforgettable experience for history and nature lovers.", duration: 2, latitude: 17.2220, longitude: -89.6237, country: "Guatemala", blog:Blog.last, url: "https://images.unsplash.com/photo-1508035460735-91088c495500?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" ,layout: 4}
+step4 = { title: "Relax and Explore in Flores: Gateway to Yaxha Ruins", address: "Flores", content: "Flores, a picturesque little island on Lake Petén Itzá, is your starting point for exploring the ruins of Yaxha. In this article, discover the tranquil beauty of Flores with its colorful houses and cobbled streets. Next, explore the ruins of Yaxha, a lesser-known but equally impressive site as Tikal. Climb to the top of the pyramids to enjoy panoramic views of the surrounding jungle.", duration: 2, latitude: 16.9337, longitude: -89.8923, country: "Guatemala", blog:Blog.last, url:"https://images.unsplash.com/photo-1508035460735-91088c495500?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80", layout: 4 }
 
 [step1, step2, step3, step4].each do |hash|
   step = Step.create!(
@@ -92,7 +116,7 @@ step4 = { title: "Détente et exploration à Flores : Porte d'entrée vers les r
   puts "Created #{step.title}"
 end
 
-spain = { title: "Le Grand Pays de Rafael", min_price: 800, max_price: 1000, start_date: "2023-01-02", end_date: "2023-01-17", carbon_friendly:true, user:User.all.sample, intro:"Bienvenue en Espagne, un pays riche en histoire, en culture et en beauté naturelle. De villes animées à des plages paradisiaques, ce voyage de 20 jours vous permettra de découvrir toute la diversité de l'Espagne. Explorez les sites emblématiques tels que la Sagrada Familia à Barcelone, promenez-vous dans les ruelles étroites de l'Albaicín à Grenade, goûtez aux délices de la cuisine espagnole à Madrid et détendez-vous sur les plages ensoleillées de la Costa del Sol. Préparez-vous à être charmé par la passion, l'art et l'hospitalité espagnole tout au long de votre voyage inoubliable en Espagne." }
+spain = { title: "The Great Country of Rafael Nadal", min_price: 800, max_price: 1000, start_date: "2023-01-02", end_date: "2023-01-17", carbon_friendly:true, user:User.all.sample, intro:"Welcome to Spain, a country rich in history, culture and natural beauty. From bustling cities to heavenly beaches, this 20-day trip will allow you to discover all the diversity of Spain. Explore iconic sites such as the Sagrada Familia in Barcelona, wander the narrow streets of the Albaicín in Granada, sample the delights of Spanish cuisine in Madrid and relax on the sunny beaches of the Costa del Sol. Prepare to be charmed by passion, art and Spanish hospitality throughout your unforgettable trip to Spain." }
 [spain].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -112,12 +136,12 @@ spain = { title: "Le Grand Pays de Rafael", min_price: 800, max_price: 1000, sta
   blog.save
 end
 
-step1 = { title: "Découvrez l'effervescence de Madrid : Capitale vibrante de l'Espagne", address: "Madrid", content: "Votre voyage débute dans la magnifique ville de Madrid, où l'histoire et la modernité se mêlent harmonieusement. Dans cet article, explorez les joyaux de Madrid, tels que le Palais Royal, la Plaza Mayor et le musée du Prado. Plongez dans la vie nocturne animée de la ville, dégustez des tapas délicieuses et profitez de l'atmosphère chaleureuse des rues madrilènes.", duration: 2, latitude: 40.4168, longitude: -3.7038, country: "Spain", blog:Blog.last, url:"https://images.unsplash.com/photo-1558370781-d6196949e317?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2358&q=80",layout: 4 }
-step2 = { title: "Laissez-vous charmer par Barcelone : Perle de la Méditerranée", address: "Barcelone", content: "Barcelone vous accueille avec son architecture emblématique, ses plages ensoleillées et sa riche culture catalane. Dans cet article, découvrez les merveilles de la ville, telles que la Sagrada Familia, le parc Güell et la promenade animée de Las Ramblas. Imprégnez-vous de l'atmosphère bohème du quartier gothique, goûtez à la délicieuse cuisine catalane et profitez des vues imprenables depuis le mont Tibidabo.", duration: 3, latitude: 41.3851, longitude: 2.1734, country: "Spain", blog:Blog.last ,layout: 4}
-step3 = { title: "Explorez la beauté mauresque de Grenade : Un trésor de l'Andalousie", address: "Grenade", content: "Grenade vous transporte dans l'époque mauresque avec son emblématique Alhambra et ses ruelles étroites remplies de charme. Dans cet article, découvrez l'Alhambra, un complexe palatial incroyablement détaillé, et promenez-vous dans les quartiers de l'Albaicín et du Sacromonte. Imprégnez-vous de l'ambiance andalouse, assistez à un spectacle de flamenco et dégustez des tapas authentiques accompagnées de vins locaux.", duration: 3, latitude: 37.1773, longitude: -3.5986, country: "Spain", blog:Blog.last, url:"https://images.unsplash.com/photo-1647797833375-63d6ecc36d62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2429&q=80",layout: 4}
-step4 = { title: "Vibrez au rythme de Séville : Capitale culturelle de l'Andalousie", address: "Séville", content: "Séville vous enchantera avec son architecture mauresque, ses jardins luxuriants et son ambiance festive. Dans cet article, découvrez la majestueuse cathédrale de Séville, l'imposante Plaza de España et le palais royal de l'Alcazar.", duration: 3, latitude: 7.3891, longitude: -5.9845, country:"Spain", blog:Blog.last, url: "https://images.unsplash.com/photo-1634893448760-0cb6e1af22f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80", layout: 4 }
-step5 = { title: "Détente et modernité à Valence : La ville des arts et des sciences", address: "Valence", content: "Valence offre un mélange unique de plages magnifiques, d'architecture moderne et d'une riche histoire. Dans cet article, découvrez la Cité des Arts et des Sciences, un complexe architectural futuriste, visitez la vieille ville avec sa cathédrale et dégustez la célèbre paella valencienne. Profitez également des plages de sable fin et explorez le charmant quartier de pêcheurs d'El Cabanyal", duration: 2, latitude: 39.46, longitude: -0.37 , country: "Spain", blog:Blog.last, layout: 4 }
-step6 = { title: "Cordoue, un voyage dans le temps : Entre histoire et culture andalouse", address: "Cordoue", content: "Cordoue vous transporte dans l'époque glorieuse du califat omeyyade avec sa célèbre mosquée-cathédrale, la Mezquita. Dans cet article, explorez les ruelles étroites de la Judería, le quartier juif, visitez l'Alcázar des rois chrétiens et promenez-vous dans les jardins de l'Alcázar de los Reyes Cristianos. Plongez dans l'atmosphère intemporelle de cette ville chargée d'histoire et d'influences culturelles", duration: 2, latitude: 37.88, longitude: -4.77, country: "Spain", blog:Blog.last, layout: 4}
+step1 = { title: "Discover the effervescence of Madrid: Vibrant capital of Spain", address: "Madrid", content: "Your journey begins in the beautiful city of Madrid, where history and modernity blend harmoniously. In this article, explore the jewels of Madrid, such as the Royal Palace, Plaza Mayor and the Prado Museum. Immerse yourself in the city's vibrant nightlife, taste delicious tapas and enjoy the cozy atmosphere of Madrid's streets.", duration: 2, latitude: 40.4168, longitude: -3.7038, country: "Spain", blog:Blog.last, url:"https://images.unsplash.com/photo-1558370781-d6196949e317?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2358&q=80",layout: 4 }
+step2 = { title: "Let yourself be charmed by Barcelona: Pearl of the Mediterranean", address: "Barcelone", content: "Barcelona welcomes you with its iconic architecture, sunny beaches and rich Catalan culture. In this article, discover the wonders of the city, such as the Sagrada Familia, Park Güell and the lively promenade of Las Ramblas. Soak up the bohemian atmosphere of the Gothic Quarter, sample delicious Catalan cuisine and take in the stunning views from Mount Tibidabo.", duration: 3, latitude: 41.3851, longitude: 2.1734, country: "Spain", blog:Blog.last ,layout: 4}
+step3 = { title: "Explore the Moorish Beauty of Granada: A Treasure of Andalusia", address: "Grenade", content: "Granada transports you back to Moorish times with its iconic Alhambra and narrow streets full of charm. In this article, learn about the Alhambra, an incredibly detailed palace complex, and stroll through the Albaicín and Sacromonte neighborhoods. Soak up the Andalusian atmosphere, watch a flamenco show and sample authentic tapas paired with local wines.", duration: 3, latitude: 37.1773, longitude: -3.5986, country: "Spain", blog:Blog.last, url:"https://images.unsplash.com/photo-1647797833375-63d6ecc36d62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2429&q=80",layout: 4}
+step4 = { title: "Vibrate to the rhythm of Seville: Cultural capital of Andalusia", address: "Séville", content: "Seville will enchant you with its Moorish architecture, lush gardens and festive atmosphere. In this article, discover the majestic Seville Cathedral, the imposing Plaza de España and the royal Alcazar Palace.", duration: 3, latitude: 7.3891, longitude: -5.9845, country:"Spain", blog:Blog.last, url: "https://images.unsplash.com/photo-1634893448760-0cb6e1af22f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80", layout: 4 }
+step5 = { title: "Relaxation and modernity in Valence: The city of arts and sciences", address: "Valence", content: "Valencia offers a unique blend of stunning beaches, modern architecture and rich history. In this article, discover the City of Arts and Sciences, a futuristic architectural complex, visit the old town with its cathedral and taste the famous Valencian paella. Also enjoy the sandy beaches and explore the charming fishing district of El Cabanyal", duration: 2, latitude: 39.46, longitude: -0.37 , country: "Spain", blog:Blog.last, layout: 4 }
+step6 = { title: "Cordoba, a journey through time: Between Andalusian history and culture", address: "Cordoue", content: "Cordoba transports you to the glorious era of the Umayyad Caliphate with its famous mosque-cathedral, the Mezquita. In this article, explore the narrow streets of Judería, the Jewish Quarter, visit the Alcázar of the Christian Kings, and stroll through the gardens of the Alcázar de los Reyes Cristianos. Immerse yourself in the timeless atmosphere of this city steeped in history and cultural influences", duration: 2, latitude: 37.88, longitude: -4.77, country: "Spain", blog:Blog.last, layout: 4}
 
 [step1, step2, step3, step4, step5, step6].each do |hash|
   step = Step.create!(
@@ -140,7 +164,7 @@ step6 = { title: "Cordoue, un voyage dans le temps : Entre histoire et culture a
   puts "Created #{step.title}"
 end
 
-myanmar = { title: "Exploration enchantée", min_price: 1500, max_price: 2000, start_date: "2023-03-02", end_date: "2023-03-13", carbon_friendly:false, user:User.all.sample, intro:"Bienvenue au Myanmar, un pays mystérieux et enchanteur d'Asie du Sud-Est. Préparez-vous à plonger dans une culture riche et préservée, à découvrir des temples majestueux, des paysages époustouflants et une hospitalité chaleureuse. Explorez les splendeurs de Yangon avec la célèbre pagode Shwedagon, laissez-vous émerveiller par les temples de Bagan, embarquez pour une croisière sur le majestueux fleuve Irrawaddy et imprégnez-vous de l'atmosphère unique du lac Inle. Le Myanmar vous promet une aventure immersive à travers son histoire, ses traditions et sa nature préservée. Préparez-vous à être transporté dans un monde de beauté et de spiritualité lors de ce voyage inoubliable au Myanmar." }
+myanmar = { title: "Echanting exploration", min_price: 1500, max_price: 2000, start_date: "2023-03-02", end_date: "2023-03-13", carbon_friendly:false, user:User.all.sample, intro:"Welcome to Myanmar, a mysterious and enchanting country in Southeast Asia. Get ready to immerse yourself in a rich and unspoiled culture, discover majestic temples, breathtaking landscapes and warm hospitality. Explore the splendors of Yangon with the famous Shwedagon Pagoda, marvel at the temples of Bagan, embark on a cruise on the majestic Irrawaddy River and soak up the unique atmosphere of Inle Lake. Myanmar promises you an immersive adventure through its history, traditions and unspoiled nature. Prepare to be transported to a world of beauty and spirituality on this unforgettable trip to Myanmar."}
 [myanmar].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -160,11 +184,19 @@ myanmar = { title: "Exploration enchantée", min_price: 1500, max_price: 2000, s
   blog.save
 end
 
-step1 = { title: "Découvrez la magie de Yangon : Porte d'entrée du Myanmar", address: "Yangon", content: "Votre voyage commence dans la fascinante ville de Yangon, où se mêlent tradition et modernité. Explorez les merveilles de Yangon, telles que la pagode Shwedagon, l'architecture coloniale britannique et les marchés animés. Imprégnez-vous de la spiritualité bouddhiste et goûtez aux délices culinaires locaux.", duration: 2, latitude: 16.8409, longitude: 96.1735, country: "Myanmar", blog:Blog.last, url:"https://images.unsplash.com/photo-1612257999781-1a997105f94b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2344&q=80", layout: 4 }
-step2 = { title: "Émerveillez-vous devant les temples de Bagan : Un trésor architectural", address: "Bagan", content: "Bagan vous transporte dans un paysage de temples et de pagodes majestueux. Explorez les temples millénaires, assistez à un lever de soleil magique depuis une montgolfière, et plongez-vous dans l'histoire et la spiritualité de ce lieu unique.", duration: 2, latitude: 21.1722, longitude: 94.8606, country: "Myanmar", blog:Blog.last, layout: 4 }
-step3 = { title: "Explorez la beauté sereine du lac Inle : Un paradis naturel", address: "Lac Inle", content: "Le lac Inle est un endroit enchanteur où vous découvrirez un mode de vie traditionnel unique. Partez en excursion en bateau pour explorer les villages flottants, admirez les pêcheurs avec leur technique de rame unique et découvrez l'artisanat local. Profitez également des magnifiques paysages et de la tranquillité du lac.", duration: 2, latitude: 20.5863, longitude: 96.9102, country: "Myanmar", blog:Blog.last, url:"https://images.unsplash.com/photo-1674468926641-11ad5a62eb9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2839&q=80", layout: 4 }
-step4 = { title: "Découvrez la grandeur de Mandalay : Ancienne capitale royale", address: "Mandalay", content: "Mandalay vous offre un voyage dans l'histoire royale du Myanmar. Visitez le palais royal, les temples sacrés et le célèbre pont U Bein. Explorez les collines environnantes pour admirer le coucher de soleil depuis le monastère de Mandalay et plongez-vous dans l'atmosphère animée des marchés locaux.", duration: 3, latitude: 21.9588, longitude: 96.0891, country: "Myanmar", blog:Blog.last, layout: 4 }
-step5 = { title: "Détente sur les plages de Ngapali : Un paradis tropical", address: "Ngapali", content: "Ngapali est une destination balnéaire idyllique pour se détendre et profiter des plages de sable fin. Passez vos journées à vous prélasser au soleil, à nager dans les eaux turquoise et à déguster des fruits de mer frais. Offrez-vous des massages relaxants et admirez les magnifiques couchers de soleil.", duration: 2, latitude: 18.4537, longitude: 94.3895, country: "Myanmar", blog:Blog.last, url:"https://images.unsplash.com/photo-1506399005762-2088660f5c38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" , layout: 4}
+step1 = { title: "Discover the Magic of Yangon: Gateway to Myanmar", address: "Yangon", content: "Your journey begins in the fascinating city of Yangon, where tradition and modernity blend. Explore the wonders of Yangon, such as the Shwedagon Pagoda, British colonial architecture, and vibrant markets. Immerse yourself in Buddhist spirituality and savor local culinary delights.", duration: 2, latitude: 16.8409, longitude: 96.1735, country: "Myanmar", blog: Blog.last, url: "https://images.unsplash.com/photo-1612257999781-1a997105f94b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2344&q=80", layout: 4 }
+
+step2 = { title: "Marvel at the Temples of Bagan: An Architectural Treasure", address: "Bagan", content: "Bagan transports you to a landscape of majestic temples and pagodas. Explore millennium-old temples, witness a magical sunrise from a hot air balloon, and immerse yourself in the history and spirituality of this unique place.", duration: 2, latitude: 21.1722, longitude: 94.8606, country: "Myanmar", blog: Blog.last, layout: 4 }
+
+step3 = { title: "Explore the Serene Beauty of Inle Lake: A Natural Paradise", address: "Inle Lake", content: "Inle Lake is an enchanting destination where you'll discover a unique traditional way of life. Take a boat excursion to explore floating villages, admire fishermen with their unique rowing technique, and discover local craftsmanship. Enjoy the stunning landscapes and tranquility of the lake.", duration: 2, latitude: 20.5863, longitude: 96.9102, country: "Myanmar", blog: Blog.last, url: "https://images.unsplash.com/photo-1674468926641-11ad5a62eb9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2839&q=80", layout: 4 }
+
+step4 = { title: "Discover the Grandeur of Mandalay: Former Royal Capital", address: "Mandalay", content: "Mandalay offers a journey into the royal history of Myanmar. Visit the royal palace, sacred temples, and the famous U Bein Bridge. Explore the surrounding hills to admire the sunset from Mandalay Monastery and immerse yourself in the vibrant atmosphere of local markets.", duration: 3, latitude: 21.9588, longitude: 96.0891, country: "Myanmar", blog: Blog.last, layout: 4 }
+
+step5 = { title: "Relax on the Beaches of Ngapali: A Tropical Paradise", address: "Ngapali", content: "Ngapali is an idyllic beach destination for relaxation and enjoying sandy beaches. Spend your days sunbathing, swimming in turquoise waters, and savoring fresh seafood. Treat yourself to relaxing massages and admire the breathtaking sunsets.", duration: 2, latitude: 18.4537, longitude: 94.3895, country: "Myanmar", blog: Blog.last, url: "https://images.unsplash.com/photo-1506399005762-2088660f5c38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80", layout: 4 }
+
+
+
+
 
 [step1, step2, step3, step4, step5].each do |hash|
   step = Step.create!(
@@ -233,7 +265,7 @@ step4 = { title: "Immerse Yourself in Nature: Trakai and the Curonian Spit", add
   puts "Created #{step.title}"
 end
 
-japan = { title: "Wanderlust Japan", min_price: 500, max_price: 1000, start_date: "2019-08-01", end_date: "2019-12-13", carbon_friendly:true, user:User.all.sample, intro:"Welcome to Japan, a land of captivating contrasts where ancient traditions blend seamlessly with modern innovation. Embark on a month-long adventure through this enchanting country and prepare to be captivated by its rich culture, stunning landscapes, and warm hospitality. Start your journey in Tokyo, a bustling metropolis where traditional temples stand side by side with towering skyscrapers. Immerse yourself in the vibrant street life of Shibuya and explore the serene gardens of the Imperial Palace. Head to Kyoto, a city of timeless beauty, where you can discover the iconic golden pavilion of Kinkaku-ji and wander through the enchanting Arashiyama Bamboo Grove. Experience a traditional tea ceremony and witness the grace and elegance of geisha performances." }
+japan = { title: "Wanderlust Japan", min_price: 5000, max_price: 8000, start_date: "2019-08-01", end_date: "2019-12-13", carbon_friendly:true, user:User.all.sample, intro:"Welcome to Japan, a land of captivating contrasts where ancient traditions blend seamlessly with modern innovation. Embark on a month-long adventure through this enchanting country and prepare to be captivated by its rich culture, stunning landscapes, and warm hospitality. Start your journey in Tokyo, a bustling metropolis where traditional temples stand side by side with towering skyscrapers. Immerse yourself in the vibrant street life of Shibuya and explore the serene gardens of the Imperial Palace. Head to Kyoto, a city of timeless beauty, where you can discover the iconic golden pavilion of Kinkaku-ji and wander through the enchanting Arashiyama Bamboo Grove. Experience a traditional tea ceremony and witness the grace and elegance of geisha performances." }
 [japan].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -282,12 +314,107 @@ step7 = { title: "Tropical Paradise: Relaxation in Okinawa's Islands", address: 
   step.save
   puts "Created #{step.title}"
 end
-  puts "DONNNNNNNNNNNNNNE"
-
 
 def generate_random_landscape_image_url
   Faker::LoremFlickr.image(size: "800x600", search_terms: ['landscape'])
 end
+
+japan1 = {
+  title: "Japan Journey Gems",
+  min_price: rand(1000..3000),
+  max_price: rand(3000..4000),
+  start_date: "2019-06-01",
+  end_date: "2019-07-01",
+  carbon_friendly: true,
+  user: User.all.sample,
+  intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  url: "https://images.unsplash.com/photo-1542640244-7e672d6cef4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+}
+
+japan2 = {
+  title: "Tokyo Tales and Beyond",
+  min_price: rand(500..800),
+  max_price: rand(800..1000),
+  start_date: "2020-03-01",
+  end_date: "2020-03-10",
+  carbon_friendly: true,
+  user: User.all.sample,
+  intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  url: "https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+}
+
+japan3 = {
+  title: "Zen Explorations in Japan",
+  min_price: rand(8000..10000),
+  max_price: rand(10000..12000),
+  start_date: "2017-06-01",
+  end_date: "2017-12-01",
+  carbon_friendly: true,
+  user: User.all.sample,
+  intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  url: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2388&q=80"
+}
+
+japan4 = {
+  title: "Adventures in Japan",
+  min_price: rand(800..1200),
+  max_price: rand(1200..2000),
+  start_date: "2022-08-01",
+  end_date: "2022-08-15",
+  carbon_friendly: true,
+  user: User.all.sample,
+  intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  url: "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2344&q=80"
+}
+
+japan5 = {
+  title: "Kyoto Chronicles in Japan",
+  min_price: rand(4000..6000),
+  max_price: rand(6000..7000),
+  start_date: "2023-01-01",
+  end_date: "2023-01-30",
+  carbon_friendly: true,
+  user: User.all.sample,
+  intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  url: "https://images.unsplash.com/photo-1578469645742-46cae010e5d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+}
+
+  [japan1, japan2, japan3, japan4, japan5].each do |hash|
+  blog = Blog.create!(
+    title: hash[:title],
+    min_price: hash[:min_price],
+    max_price: hash[:min_price],
+    start_date: hash[:start_date],
+    end_date: hash[:end_date],
+    carbon_friendly: hash[:carbon_friendly],
+    user: hash[:user],
+    intro: hash[:intro]
+  )
+  image = URI.open(hash[:url])
+  blog.photo_banner.attach(io: image, filename: blog.title, content_type: 'png')
+
+  step1 = { title: "Step 1", country: "Japan", blog: Blog.last }
+
+  [step1].each do |step_hash|
+    step = Step.create!(
+      title: step_hash[:title],
+      country: step_hash[:country],
+      blog: step_hash[:blog]
+    )
+    tag_list.sample(3).each do |tag|
+      step.tag_list.add tag
+    end
+    step.save
+  end
+end
+
+
+# like = {user: User.random blog: Blog.}
+# rand(40..200).times do
+# like = Like.create!(
+# user: User.random
+
+# end
 
 30.times do
   title = "#{Faker::Lorem.word.capitalize} #{Faker::Lorem.word.capitalize}"
@@ -320,6 +447,9 @@ end
     country: country,
     blog: blog
   )
+  tag_list.sample(3).each do |tag|
+    step.tag_list.add tag
+  end
   step.save
   puts "Created #{step.title}"
 end
