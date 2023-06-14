@@ -13,12 +13,11 @@ Rails.application.routes.draw do
   # as editor
   resources :blogs do
     resources :steps do
-      resources :tips, only: [:create]
+      resources :tips, only: [:create, :destroy]
       resources :tag_list
     end
   end
 
-  resources :tips, only: [:update, :destroy]
   resources :tags, only: [:update, :destroy]
 
   get '/my-library', to: 'pages#my_library'
