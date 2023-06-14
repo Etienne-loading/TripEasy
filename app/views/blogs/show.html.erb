@@ -1,6 +1,6 @@
 <% content_for :meta_title, "#{@blog.title} is on #{DEFAULT_META["meta_product_name"]}" %>
 <% content_for :meta_description, @blog.intro %>
-<% content_for :meta_image, cl_image_path(@blog.photo_banner.key) %>
+<% content_for :meta_image, cl_image_path(@blog.photo_banner.attached? ? cl_image_path(@blog.photo_banner.key) : image_path("default-bg.jpg")) %>
 
 
 
