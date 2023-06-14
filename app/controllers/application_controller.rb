@@ -32,4 +32,8 @@ class ApplicationController < ActionController::Base
   def set_user
     @user = current_user
   end
+
+  def default_url_options
+    { host: ENV["DOMAIN"] || "www.tripeasy.world" }
+  end
 end
