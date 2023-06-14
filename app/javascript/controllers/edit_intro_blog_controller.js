@@ -8,7 +8,7 @@ export default class extends Controller {
   revealEditForm(event) {
     event.preventDefault()
     this.formTarget.classList.toggle("d-none")
-    this.contentTarget.classList.add("d-none")
+    this.contentTarget.classList.toogle("d-none")
     this.buttonTarget.classList.add("d-none")
   }
 }
