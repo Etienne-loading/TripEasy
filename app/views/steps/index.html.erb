@@ -8,23 +8,23 @@
 <div class="d-flex">
   <% step_num_sidebar = 0 %>
   <% if @steps.present? %>
-    <div class="bg-dark col-3" style="min-height: 50vh">
-      <div class="sticky-top">
-        <div class="nav flex-column">
-          <div class="mb-4" style="background-color: #f7b633">
-            <h4 class="my-4 text-white text-center">Summary</h4>
-          </div>
+    <div class="bg-dark col-3">
+      <div class="sticky-top min-vh-100" style="top:86px;" id="sidebar-wrapper">
+        <div class="mb-4" style="background-color: #f7b633">
+          <h4 class="my-3 text-white text-center sidebar-heading">Summary</h4>
+        </div>
+        <div class="overflow-auto" style="height: 75vh">
           <% @steps.each do |step| %>
             <% step_num_sidebar += 1 %>
             <%= link_to "##{step.id}", class:"text-white text-decoration-none" do %>
               <h5 class="change-bg p-2 mb-3"><%= "#{step_num_sidebar}. #{step.title.truncate_words(4)}" %></h5>
             <% end %>
           <% end %>
-          <div class="d-flex justify-content-center">
+        </div>
+        <div class="d-flex justify-content-center pb-4">
           <button type="button" class="btn btn-primary mx-3" id="create-btn" data-bs-toggle="modal" data-bs-target="#modalForm">
             Add section
           </button>
-          </div>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
           <% if  @blog.video.url%>
           <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: true, class: "d-block w-50 m-auto mb-3" %>
           <% end %>
-          <%= simple_format @blog.intro %>
+          <p><%= simple_format @blog.intro %></p>
           <div class="d-flex justify-content-end">
             <div class="position-absolute top-0 end-0 me-4 mt-4">
               <%= link_to "", edit_blog_path(@blog), data: {edit_intro_blog_target:"button", action:"click->edit-intro-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
@@ -57,7 +57,7 @@
         <%= simple_form_for @blog, html: { class:"d-none m-4", data: { edit_intro_blog_target:"form" }} do |f| %>
             <%= f.input :title, placeholder: "Title" %>
             <%= f.input :video, as: :file, placeholder: "Video", input_html: { resource_type: :video } %>
-            <%= f.input :intro, placeholder: "Introduction content" %>
+            <%= f.input :intro, input_html: { rows:"9" }, placeholder: "Introduction content" %>
             <%= f.submit class: "btn btn-primary" %>
             <% end %>
             <div class="d-flex justify-content-end">
@@ -187,8 +187,8 @@
           </div>
           <% if step.layout == 2 || step.layout == 4%>
             <%= simple_form_for [@blog, step, @tip],
-                  html: { class:"d-none", data: { edit_step_blog_target:"tipform" }} do |f| %>
-                  <%= f.input :content, input_html: { rows:"9" }, placeholder: "Content" %>
+                  html: { class:"d-none m-4", data: { edit_step_blog_target:"tipform" }} do |f| %>
+                  <%= f.input :content, placeholder: "Content" %>
                   <%= f.submit class: "btn btn-primary" %>
             <% end %>
           <% end %>
