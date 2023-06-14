@@ -297,4 +297,8 @@ class User < ApplicationRecord
     "Zambian",
     "Zimbabwean"
   ]
+
+  def like_blog(blog)
+    Like.find_by(blog: blog, user: self)
+  end
 end
