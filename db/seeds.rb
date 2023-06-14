@@ -86,7 +86,7 @@ step4 = { title: "Détente et exploration à Flores : Porte d'entrée vers les r
     puts "NO PICTURE URL"
   else
     image = URI.open(hash[:url])
-    step.photo.attach(io: image, filename: step.title, content_type: 'png')
+    step.photo_text.attach(io: image, filename: step.title, content_type: 'png')
   end
   step.save
   puts "Created #{step.title}"
@@ -134,7 +134,7 @@ step6 = { title: "Cordoue, un voyage dans le temps : Entre histoire et culture a
     puts "NO PICTURE URL"
   else
     image = URI.open(hash[:url])
-    step.photo.attach(io: image, filename: step.title, content_type: 'png')
+    step.photo_text.attach(io: image, filename: step.title, content_type: 'png')
   end
   step.save
   puts "Created #{step.title}"
@@ -181,7 +181,7 @@ step5 = { title: "Détente sur les plages de Ngapali : Un paradis tropical", add
     puts "NO PICTURE URL"
   else
     image = URI.open(hash[:url])
-    step.photo.attach(io: image, filename: step.title, content_type: 'png')
+    step.photo_text.attach(io: image, filename: step.title, content_type: 'png')
   end
   step.save
   puts "Created #{step.title}"
@@ -227,7 +227,7 @@ step4 = { title: "Immerse Yourself in Nature: Trakai and the Curonian Spit", add
     puts "NO PICTURE URL"
   else
     image = URI.open(hash[:url])
-    step.photo.attach(io: image, filename: step.title, content_type: 'png')
+    step.photo_text.attach(io: image, filename: step.title, content_type: 'png')
   end
   step.save
   puts "Created #{step.title}"
@@ -277,7 +277,7 @@ step7 = { title: "Tropical Paradise: Relaxation in Okinawa's Islands", address: 
     puts "NO PICTURE URL"
   else
     image = URI.open(hash[:url])
-    step.photo.attach(io: image, filename: step.title, content_type: 'png')
+    step.photo_text.attach(io: image, filename: step.title, content_type: 'png')
   end
   step.save
   puts "Created #{step.title}"
