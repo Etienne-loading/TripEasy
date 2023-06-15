@@ -103,7 +103,11 @@
               <%= simple_form_for [@blog, step],
                 html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
-                <%= f.input :address, placeholder: "Address" %>
+                <%= f.input :address,
+                  placeholder: "Address",
+                  input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
+                  wrapper_html: {data: {controller: "address-autocomplete",
+                  address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.submit class: "btn btn-primary" %>
               <% end %>
@@ -117,7 +121,10 @@
               <%= simple_form_for [@blog, step],
                 html: { class:"d-none m-4", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
-                <%= f.input :address, placeholder: "Address" %>
+                <%= f.input :address,
+                  input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
+                  wrapper_html: {data: {controller: "address-autocomplete",
+                  address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.input :photo_text, as: :file %>
                 <%= f.input :content,  input_html: { rows:"9" }, placeholder: "Content" %>
@@ -142,7 +149,10 @@
               <%= simple_form_for [@blog, step],
                 html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
-                <%= f.input :address, placeholder: "Address" %>
+                <%= f.input :address,
+                  input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
+                  wrapper_html: {data: {controller: "address-autocomplete",
+                  address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.input :photos, label: false, as: :file, input_html: { multiple: true } %>
                 <%= f.input :tag_list, label: false, placeholder: "Tag" %>
@@ -163,7 +173,10 @@
               <%= simple_form_for [@blog, step],
                 html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form" }} do |f| %>
                 <%= f.input :title, placeholder: "Title" %>
-                <%= f.input :address, placeholder: "Address" %>
+                <%= f.input :address,
+                  input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
+                  wrapper_html: {data: {controller: "address-autocomplete",
+                  address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>
                 <%= f.input :content, input_html: { rows:"9" }, placeholder: "Content" %>
                 <%= f.input :duration, placeholder: "Duration" %>
                 <%= f.input :tag_list, label: false, placeholder: "Tag" %>

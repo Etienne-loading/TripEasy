@@ -1,0 +1,40 @@
+.mapboxgl-ctrl-geocoder--icon {
+  display: none;
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+  display: none;
+}
+
+.mapboxgl-ctrl-geocoder--button {
+  display: none;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  background-color: #F4F4F4;
+  border: 1px solid #ced4da;
+  border-radius: 2px
+}
+
+.suggestions {
+  list-style: none;
+  border: 1px solid #ced4da;
+  text-align: start;
+  padding: 0;
+  margin-top: 2px;
+}
+
+.suggestions li {
+  cursor: pointer;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ebedef;
+  padding: 0.7em;
+
+  &:hover {
+    background-color: #f0eeee;
+  }
+}

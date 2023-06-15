@@ -1,11 +1,14 @@
 <%= simple_form_for [@blog, @step], url: blog_steps_path(@blog),
   html: { class:"d-none", data: { layout_target:"form2" }} do |f| %>
-<%= f.input :title, label: false, placeholder: "Title" %>
-<%= f.input :address, label: false, placeholder: "Address" %>
-<%= f.input :duration, label: false, placeholder: "Duration" %>
-<%= f.input :photo_text, as: :file, label: false %>
-<%= f.input :content, label: false,  input_html: { rows:"9" }, placeholder: "Content" %>
-<%= f.input :tag_list, label: false, placeholder: "Tag" %>
-<%= f.hidden_field :layout, value: 2 %>
-<%= f.submit class: "btn btn-primary" %>
+  <%= f.input :title, label: false, placeholder: "Title" %>
+  <%= f.input :address,
+                  label: false,
+                  input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
+                  wrapper_html: {data: {controller: "address-autocomplete",
+                  address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %><%= f.input :duration, label: false, placeholder: "Duration" %>
+  <%= f.input :photo_text, as: :file, label: false %>
+  <%= f.input :content, label: false,  input_html: { rows:"9" }, placeholder: "Content" %>
+  <%= f.input :tag_list, label: false, placeholder: "Tag" %>
+  <%= f.hidden_field :layout, value: 2 %>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>
