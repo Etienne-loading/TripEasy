@@ -561,7 +561,7 @@ step7 = {
   end
 end
 
-myanmar = { title: "Enchanting exploration", min_price: 1500, max_price: 2000, start_date: "2023-03-02", end_date: "2023-03-13", carbon_friendly:false, user:User.all.sample, intro:"Welcome to Myanmar, a mysterious and enchanting country in Southeast Asia. Get ready to immerse yourself in a rich and unspoiled culture, discover majestic temples, breathtaking landscapes and warm hospitality. Explore the splendors of Yangon with the famous Shwedagon Pagoda, marvel at the temples of Bagan, embark on a cruise on the majestic Irrawaddy River and soak up the unique atmosphere of Inle Lake. Myanmar promises you an immersive adventure through its history, traditions and unspoiled nature. Prepare to be transported to a world of beauty and spirituality on this unforgettable trip to Myanmar."}
+myanmar = { title: "Enchanting exploration", min_price: 1500, max_price: 2000, start_date: "2023-03-02", end_date: "2023-03-13", carbon_friendly:false, user:User.last, intro:"Welcome to Myanmar, a mysterious and enchanting country in Southeast Asia. Get ready to immerse yourself in a rich and unspoiled culture, discover majestic temples, breathtaking landscapes and warm hospitality. Explore the splendors of Yangon with the famous Shwedagon Pagoda, marvel at the temples of Bagan, embark on a cruise on the majestic Irrawaddy River and soak up the unique atmosphere of Inle Lake. Myanmar promises you an immersive adventure through its history, traditions and unspoiled nature. Prepare to be transported to a world of beauty and spirituality on this unforgettable trip to Myanmar."}
 [myanmar].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -622,7 +622,7 @@ step5 = { title: "Relax on the Beaches of Ngapali: A Tropical Paradise", address
   puts "Created #{step.title}"
 end
 
-lithuania = { title: "Unveiling Lithuania", min_price: 500, max_price: 1000, start_date: "2019-08-13", end_date: "2019-08-20", carbon_friendly:true, user:User.all.sample, intro:"Welcome to Lithuania, a captivating Baltic gem that blends rich history with breathtaking natural beauty. Explore the charming streets of Vilnius, the capital city, and be mesmerized by its well-preserved medieval old town. Discover the medieval castles and picturesque landscapes of Trakai, immerse yourself in the unique culture of the Hill of Crosses, and unwind on the pristine shores of the Curonian Spit. Lithuania offers a perfect blend of history, art, and natural wonders. Get ready to be enchanted by its charming cities, lush forests, and warm hospitality. Embark on a remarkable journey through Lithuania and create memories that will last a lifetime.", layout: 4}
+lithuania = { title: "Unveiling Lithuania", min_price: 500, max_price: 1000, start_date: "2019-08-13", end_date: "2019-08-20", carbon_friendly:true, user:User.last, intro:"Welcome to Lithuania, a captivating Baltic gem that blends rich history with breathtaking natural beauty. Explore the charming streets of Vilnius, the capital city, and be mesmerized by its well-preserved medieval old town. Discover the medieval castles and picturesque landscapes of Trakai, immerse yourself in the unique culture of the Hill of Crosses, and unwind on the pristine shores of the Curonian Spit. Lithuania offers a perfect blend of history, art, and natural wonders. Get ready to be enchanted by its charming cities, lush forests, and warm hospitality. Embark on a remarkable journey through Lithuania and create memories that will last a lifetime.", layout: 4}
 [lithuania].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
@@ -678,7 +678,7 @@ step4 = { title: "Immerse Yourself in Nature: Trakai and the Curonian Spit", add
   puts "Created #{step.title}"
 end
 
-spain = { title: "The Great Country of Nadal", min_price: 800, max_price: 1000, start_date: "2023-01-02", end_date: "2023-01-17", carbon_friendly:true, user:User.all.sample, intro:"Welcome to Spain, a country rich in history, culture and natural beauty. From bustling cities to heavenly beaches, this 20-day trip will allow you to discover all the diversity of Spain. Explore iconic sites such as the Sagrada Familia in Barcelona, wander the narrow streets of the Albaicín in Granada, sample the delights of Spanish cuisine in Madrid and relax on the sunny beaches of the Costa del Sol. Prepare to be charmed by passion, art and Spanish hospitality throughout your unforgettable trip to Spain." }
+spain = { title: "The Great Country of Nadal", min_price: 800, max_price: 1000, start_date: "2023-01-02", end_date: "2023-01-17", carbon_friendly:true, user:User.last, intro:"Welcome to Spain, a country rich in history, culture and natural beauty. From bustling cities to heavenly beaches, this 20-day trip will allow you to discover all the diversity of Spain. Explore iconic sites such as the Sagrada Familia in Barcelona, wander the narrow streets of the Albaicín in Granada, sample the delights of Spanish cuisine in Madrid and relax on the sunny beaches of the Costa del Sol. Prepare to be charmed by passion, art and Spanish hospitality throughout your unforgettable trip to Spain." }
 [spain].each do |hash|
   blog = Blog.create!(
     title: hash[:title],
