@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="layout"
 export default class extends Controller {
 
-  static targets = ["layout1", "layout2", "layout3", "layout4", "form", "form2", "form3", "form4", "col", "col2", "col3", "col4"]
+  static targets = ["layout1", "layout2", "layout3", "layout4", "form", "form2", "form3", "form4", "col", "col2", "col3", "col4", "title"]
 
   connect() {
   }
@@ -19,6 +19,7 @@ export default class extends Controller {
     this.col2Target.remove()
     this.col3Target.remove()
     this.col4Target.remove()
+    this.titleTarget.innerHTML = "Add a title"
   }
 
   showForm2(event){
@@ -32,6 +33,7 @@ export default class extends Controller {
     this.colTarget.remove()
     this.col3Target.remove()
     this.col4Target.remove()
+    this.titleTarget.innerHTML = "Choose an image with a cool content"
   }
 
   showForm3(event){
@@ -45,6 +47,7 @@ export default class extends Controller {
     this.colTarget.remove()
     this.col2Target.remove()
     this.col4Target.remove()
+    this.titleTarget.innerHTML = "Add many photos"
   }
 
   showForm4(event){
@@ -58,5 +61,6 @@ export default class extends Controller {
     this.colTarget.remove()
     this.col2Target.remove()
     this.col3Target.remove()
+    this.titleTarget.innerHTML = "Add a cool content"
   }
 }

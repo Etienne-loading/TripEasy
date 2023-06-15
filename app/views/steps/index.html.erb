@@ -1,5 +1,8 @@
-<div class="banner-show-blog flex-column"
+<div class="banner-show-blog flex-column position-relative"
   style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(<%= @blog.photo_banner.attached? ? cl_image_path(@blog.photo_banner.key) : image_path("default-bg.jpg") %>); background-position:center; background-size:cover;">
+  <%= link_to blog_path(@blog), class:"btn btn-primary position-absolute top-0 end-0 m-4 px-3 py-3" do %>
+    <i class="fa-solid fa-eye"></i>
+  <% end %>
   <h1 style="font-size: 58px; color: white;">
     <%= @blog.title %>
   </h1>
@@ -10,40 +13,41 @@
   <% if @steps.present? %>
     <div class="bg-dark col-3">
       <div class="sticky-top" style="top:85px;" id="sidebar-wrapper">
-        <div class="mb-4" style="background-color: #f7b633">
-          <h4 class="py-3 text-white text-center sidebar-heading">Summary</h4>
-        </div>
-        <div class="overflow-auto" style="height: 70vh">
+        <%= link_to "", data: { bs_toggle:"modal", bs_target:"#modalForm" }, class:"text-decoration-none" do %>
+          <div class="mb-4 cta-step">
+            <h4 class="py-3 text-white text-center sidebar-heading">
+              Add step
+            </h4>
+          </div>
+        <% end %>
+        <div class="overflow-auto" style="height: 75vh">
           <% @steps.each do |step| %>
             <% step_num_sidebar += 1 %>
-            <%= link_to "##{step.id}", class:"text-white text-decoration-none" do %>
-              <h5 class="change-bg p-2 ps-4 mb-3" style="font-size: 1.2em;"><%= "#{step_num_sidebar}. #{step.title.truncate_words(4)}" %></h5>
+            <%= link_to "##{step.id}", class:"text-white text-decoration-none col" do %>
+              <h5 class="change-bg p-2 ps-3 mb-3" style="font-size: 1.1em;">
+                <div><%= "#{step_num_sidebar}. #{step.title.truncate_words(4)}" %></div>
+              </h5>
             <% end %>
           <% end %>
-        </div>
-        <div class="d-flex justify-content-center py-4">
-          <button type="button" class="btn btn-primary mx-3" id="create-btn" data-bs-toggle="modal" data-bs-target="#modalForm">
-            Add step
-          </button>
         </div>
       </div>
     </div>
   <% end %>
-  <div class="<%= @steps.present? ? "col-9" : "col" %>" data-controller="theme-color">
-    <div class="dropdown position-absolute top-0 end-0 mt-4 me-4">
-      <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Choose a color for titles
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-red" data-action="click->theme-color#switch_title_red" href="#">Red<div class="ms-3" style="height:20px; width:20px; background-color: #B70404;"></div></a></li>
-        <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-blue" data-action="click->theme-color#switch_title_blue" href="#">Blue<div class="ms-3" style="height:20px; width:20px; background-color: #0077b6;"></div></a></li>
-        <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-yellow" data-action="click->theme-color#switch_title_yellow" href="#">Yellow<div class="ms-3" style="height:20px; width:20px; background-color: #ffc300;"></div></a></li>
-      </ul>
-    </div>
-    <div class="col bg-light">
+  <div class="<%= @steps.present? ? "col-9" : "col" %>" data-controller="back-to-top" data-action="scroll@window->back-to-top#scroll">
+    <button
+        type="button"
+        class="btn btn-floating btn-lg d-none"
+        id="btn-back-to-top"
+        data-back-to-top-target="button"
+        data-action="click->back-to-top#backToTop"
+        >
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <div class="col bg-light ps-4">
+    <div>
       <div class="border-bottom position-relative pt-4" data-controller="edit-intro-blog">
-        <h3 class="ms-4">Introduction</h3>
-        <div data-edit-intro-blog-target="content" class="ms-4 mt-4">
+        <h3 style="font-size:1.5em;">Introduction</h3>
+        <div data-edit-intro-blog-target="content" class="mt-4">
           <% if  @blog.video.url%>
           <%= video_tag @blog.video.url, controls: true, mute: false, autoplay: true, class: "d-block w-50 m-auto mb-3" %>
           <% end %>
@@ -66,146 +70,159 @@
             </div>
           </div>
       </div>
+    </div>
       <% step_num = 0 %>
       <% @steps.each do |step| %>
-        <% step_num += 1 %>
-        <div class="col-12 mb-3 border-bottom position-relative" data-controller="edit-step-blog">
-          <div data-edit-step-blog-target="content" class="ps-4 mt-5">
-            <h3 id="<%= step.id %>" data-theme-color-target="title_step" class="mb-2">Step : <%= step_num %> | <%= step.title %> | <%= step.duration %>
-              days
-            </h3>
-            <% if step.photo_text.attached? %>
-              <div class="d-flex flex-column">
-                <p><%= simple_format step.content %></p>
-                <%= cl_image_tag(step.photo_text.key, width:250, height: 150, class:"mb-3") %>
-              </div>
-              <% step.tips.each do |tip| %>
-                <%= tip.content %>
-                <%= link_to "delete tip", blog_step_tip_path(@blog, tip.step, tip), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-              <% end %>
-            <% elsif step.photos.attached? %>
-              <div class="d-flex align-items-center">
-                <% step.photos.each do |photo| %>
-                  <div style="width:250px; height:150px" class="me-3 mb-3">
-                    <%= cl_image_tag(photo.key, width: "100%", height: "100%") %>
+        <%= content_tag :div, id: dom_id(step) do %>
+          <% step_num += 1 %>
+          <div>
+            <div class="col mb-3 border-bottom" data-controller="edit-step-blog" data-controller="update_step">
+              <div data-edit-step-blog-target="content", data-update-step-target="content" class="mt-5">
+                <h3 id="<%= step.id %>" class="mb-2 d-flex justify-content-between" style="font-size:1.5em;">Step : <%= step_num %> | <%= step.title %> | <%= step.duration %>
+                  days
+                  <div class="me-4">
+                    <% if step.layout == 2 || step.layout == 4 %>
+                      <%= link_to "", blog_step_path(step.blog, step), class: "fa-solid fa-lightbulb btn btn-outline-warning", data: {edit_step_blog_target:"tipbutton", action:"click->edit-step-blog#revealTipForm"} %>
+                    <% end %>
+                      <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+                      <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
                   </div>
-                <% end %>
-              </div>
-            <% else %>
-              <p><%= simple_format step.content %></p>
-              <% step.tips.each do |tip| %>
-                <%= tip.content %>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="pb-4">
-            <% if step.layout == 1 %>
-              <%= simple_form_for [@blog, step],
-                html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form" }} do |f| %>
-                <%= f.input :title, placeholder: "Title" %>
-                <%= f.input :address,
-                  placeholder: "Address",
-                  input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
-                  wrapper_html: {data: {controller: "address-autocomplete",
-                  address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>
-                <%= f.input :duration, placeholder: "Duration" %>
-                <%= f.submit class: "btn btn-primary" %>
-              <% end %>
-              <div class="d-flex justify-content-end">
-                <div class="position-absolute top-0 end-0 me-4">
-                  <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
-                  <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
-                </div>
-              </div>
-            <% elsif step.layout == 2 %>
-              <%= simple_form_for [@blog, step],
-                html: { class:"d-none m-4", data: { edit_step_blog_target:"form" }} do |f| %>
-                <%= f.input :title, placeholder: "Title" %>
-                <%= f.input :address,
-                  input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
-                  wrapper_html: {data: {controller: "address-autocomplete",
-                  address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>
-                <%= f.input :duration, placeholder: "Duration" %>
-                <%= f.input :photo_text, as: :file %>
-                <%= f.input :content,  input_html: { rows:"9" }, placeholder: "Content" %>
-                <%= f.input :tag_list, label: false, placeholder: "Tag" %>
-                <%= f.submit class: "btn btn-primary" %>
-              <% end %>
-              <div class="d-flex justify-content-end">
-                <div class="position-absolute top-0 end-0 me-4">
-                  <% if step.layout == 2 || step.layout == 4 %>
-                    <%= link_to "", "#", class: "fa-solid fa-lightbulb btn btn-outline-warning", data: {edit_step_blog_target:"tipbutton", action:"click->edit-step-blog#revealTipForm"} %>
+                </h3>
+                <% if step.photo_text.attached? %>
+                  <div class="d-flex flex-column">
+                    <p><%= simple_format step.content %></p>
+                    <%= cl_image_tag(step.photo_text.key, width:250, height: 150, class:"mb-3") %>
+                  </div>
+                  <% tip_count = 0 %>
+                  <% step.tips.each do |tip| %>
+                    <% tip_count += 1 %>
+                    <p class="d-flex flex-column">
+                      <strong>Tip <%= tip_count %>:</strong>
+                      <%= tip.content %>
+                      <%= link_to "delete tip", blog_step_tip_path(@blog, tip.step, tip), class:"text-decoration-none", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+                    </p>
                   <% end %>
-                  <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
-                  <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
-                </div>
-              </div>
-            <% if step.tag_list.present? %>
-                <% step.tags.each do |tag| %>
-                  <span class="tag ms-4">#<%= tag %></span> &nbsp;
-                <% end %>
-              <% end %>
-            <% elsif step.layout == 3 %>
-              <%= simple_form_for [@blog, step],
-                html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form" }} do |f| %>
-                <%= f.input :title, placeholder: "Title" %>
-                <%= f.input :address,
-                  input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
-                  wrapper_html: {data: {controller: "address-autocomplete",
-                  address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>
-                <%= f.input :duration, placeholder: "Duration" %>
-                <%= f.input :photos, label: false, as: :file, input_html: { multiple: true } %>
-                <%= f.input :tag_list, label: false, placeholder: "Tag" %>
-                <%= f.submit class: "btn btn-primary" %>
-              <% end %>
-              <div class="d-flex justify-content-end">
-                <div class="position-absolute top-0 end-0 me-4">
-                  <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
-                  <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
-                </div>
-              </div>
-              <% if step.tag_list.present? %>
-                <% step.tags.each do |tag| %>
-                  <span class="tag ms-4">#<%= tag %></span> &nbsp;
-                <% end %>
-              <% end %>
-            <% else %>
-              <%= simple_form_for [@blog, step],
-                html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form" }} do |f| %>
-                <%= f.input :title, placeholder: "Title" %>
-                <%= f.input :address,
-                  input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
-                  wrapper_html: {data: {controller: "address-autocomplete",
-                  address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>
-                <%= f.input :content, input_html: { rows:"9" }, placeholder: "Content" %>
-                <%= f.input :duration, placeholder: "Duration" %>
-                <%= f.input :tag_list, label: false, placeholder: "Tag" %>
-                <%= f.submit class: "btn btn-primary" %>
-              <% end %>
-              <div class="d-flex justify-content-end">
-                <div class="position-absolute top-0 end-0 me-4">
-                  <% if step.layout == 2 || step.layout == 4 %>
-                    <%= link_to "", "#", class: "fa-solid fa-lightbulb btn btn-outline-warning", data: {edit_step_blog_target:"tipbutton", action:"click->edit-step-blog#revealTipForm"} %>
+                <% elsif step.photos.attached? %>
+                  <div class="d-flex align-items-center">
+                    <% step.photos.each do |photo| %>
+                      <div style="width:250px; height:150px" class="me-3 mb-3">
+                        <%= cl_image_tag(photo.key, width: "100%", height: "100%") %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <p><%= simple_format step.content %></p>
+                  <% tip_count = 0 %>
+                  <% step.tips.each do |tip| %>
+                    <% tip_count += 1 %>
+                    <p class="d-flex flex-column">
+                      <strong>Tip <%= tip_count %>:</strong>
+                      <%= tip.content %>
+                      <%= link_to "delete tip", blog_step_tip_path(@blog, tip.step, tip), class:"text-decoration-none", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+                    </p>
                   <% end %>
-                  <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
-                  <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
-                </div>
+                <% end %>
               </div>
-              <% if step.tag_list.present? %>
-                <% step.tags.each do |tag| %>
-                  <span class="tag ms-4">#<%= tag %></span> &nbsp;
+              <div class="pb-4">
+                <h3>
+                  <div class="me-4 text-end d-none" data-edit-step-blog-target="buttons">
+                    <% if step.layout == 2 || step.layout == 4 %>
+                      <%= link_to "", blog_step_path(step.blog, step), class: "fa-solid fa-lightbulb btn btn-outline-warning", data: {edit_step_blog_target:"tipbutton", action:"click->edit-step-blog#revealTipForm"} %>
+                    <% end %>
+                      <%= link_to "", blog_step_path(step.blog, step), data: {edit_step_blog_target:"button", action:"click->edit-step-blog#revealEditForm"}, class: "fa-solid fa-pen btn btn-outline-primary" %>
+                      <%= link_to "", blog_step_path(step.blog, step), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "fa-solid fa-trash btn btn-outline-danger" %>
+                  </div>
+                </h3>
+                <% if step.layout == 1 %>
+                  <%= simple_form_for [@blog, step],
+                    html: { class:"d-none m-4", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update" }} do |f| %>
+                    <%= f.input :title, placeholder: "Title" %>
+                    <%= f.input :address,
+                      input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
+                      wrapper_html: {data: {controller: "address-autocomplete",
+                      address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>                    
+                    <%= f.input :duration, placeholder: "Duration" %>
+                    <%= f.submit class: "btn btn-primary" %>
+                  <% end %>
+                <% elsif step.layout == 2 %>
+                  <%= simple_form_for [@blog, step],
+                    html: { class:"d-none m-4", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update" }} do |f| %>
+                    <%= f.input :title, placeholder: "Title" %>
+                    <%= f.input :address,
+                      input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
+                      wrapper_html: {data: {controller: "address-autocomplete",
+                      address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>                        
+                    <%= f.input :duration, placeholder: "Duration" %>
+                    <%= f.input :photo_text, as: :file %>
+                    <%= f.input :content,  input_html: { rows:"9" }, placeholder: "Content" %>
+                    <%= f.input :tag_list, label: false, placeholder: "Tag" %>
+                    <%= f.submit class: "btn btn-primary" %>
+                  <% end %>
+                  <div class="d-flex justify-content-end">
+                    <div class="position-absolute top-0 end-0 me-4">
+                    </div>
+                  </div>
+                <% if step.tag_list.present? %>
+                    <% step.tags.each do |tag| %>
+                      <span class="tag ms-4">#<%= tag %></span> &nbsp;
+                    <% end %>
+                  <% end %>
+                <% elsif step.layout == 3 %>
+                  <%= simple_form_for [@blog, step],
+                    html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update" }} do |f| %>
+                    <%= f.input :title, placeholder: "Title" %>
+                    <%= f.input :address,
+                      input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
+                      wrapper_html: {data: {controller: "address-autocomplete",
+                      address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>    
+                    <%= f.input :duration, placeholder: "Duration" %>
+                    <%= f.input :photos, label: false, as: :file, input_html: { multiple: true } %>
+                    <%= f.input :tag_list, label: false, placeholder: "Tag" %>
+                    <%= f.submit class: "btn btn-primary" %>
+                  <% end %>
+                  <div class="d-flex justify-content-end">
+                    <div class="position-absolute top-0 end-0 me-4">
+                    </div>
+                  </div>
+                  <% if step.tag_list.present? %>
+                    <% step.tags.each do |tag| %>
+                      <span class="tag ms-4">#<%= tag %></span> &nbsp;
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <%= simple_form_for [@blog, step],
+                    html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update" }} do |f| %>
+                    <%= f.input :title, placeholder: "Title" %>
+                    <%= f.input :address,
+                      input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
+                      wrapper_html: {data: {controller: "address-autocomplete",
+                      address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>    
+                    <%= f.input :content, input_html: { rows:"9" }, placeholder: "Content" %>
+                    <%= f.input :duration, placeholder: "Duration" %>
+                    <%= f.input :tag_list, label: false, placeholder: "Tag" %>
+                    <%= f.submit class: "btn btn-primary" %>
+                  <% end %>
+                  <div class="d-flex justify-content-end">
+                    <div class="position-absolute top-0 end-0 me-4">
+                    </div>
+                  </div>
+                  <% if step.tag_list.present? %>
+                    <% step.tags.each do |tag| %>
+                      <span class="tag ms-4">#<%= tag %></span> &nbsp;
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+              <% if step.layout == 2 || step.layout == 4%>
+                <%= simple_form_for [@blog, step, @tip],
+                      html: { class:"d-none m-4", data: { edit_step_blog_target:"tipform" }} do |f| %>
+                      <%= f.input :content, placeholder: "Content" %>
+                      <%= f.submit class: "btn btn-primary" %>
                 <% end %>
               <% end %>
-            <% end %>
+            </div>
           </div>
-          <% if step.layout == 2 || step.layout == 4%>
-            <%= simple_form_for [@blog, step, @tip],
-                  html: { class:"d-none m-4", data: { edit_step_blog_target:"tipform" }} do |f| %>
-                  <%= f.input :content, placeholder: "Content" %>
-                  <%= f.submit class: "btn btn-primary" %>
-            <% end %>
-          <% end %>
-        </div>
+        <% end %>
       <% end %>
     </div>
     <div class="container">
@@ -222,7 +239,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalFormLabel">Choose a layout</h1>
+            <h1 class="modal-title fs-5" id="modalFormLabel" data-layout-target="title">Choose a layout</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

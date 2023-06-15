@@ -1,16 +1,31 @@
 .post_detail {
-  margin: 20px 0px;
+  margin: 0px 0px 20px 0px;
   padding: 20px 0px;
   border-bottom: 1px solid #c0c0c0;
-  letter-spacing: 3px;
+  letter-spacing: 1.5px;
   font-size: 16px;
   opacity: 0.8;
-  display: inline-block;
+  justify-content: space-between;
   width: auto;
   float: none;
+  a {
+    text-decoration: none!important;
+  }
 }
 
 .p-content {
   padding: 0px 30px;
   margin-bottom: 2rem;
+}
+
+.like-button {
+  background-color: transparent;
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
 }
