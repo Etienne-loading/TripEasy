@@ -30,7 +30,7 @@
     </div>
   <% end %>
   <div class="<%= @steps.present? ? "col-9" : "col" %>" data-controller="theme-color">
-    <div class="dropdown position-absolute top-0 end-0 mt-4 me-4">
+    <%# <div class="dropdown position-absolute top-0 end-0 mt-4 me-4">
       <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Choose a color for titles
       </button>
@@ -39,7 +39,7 @@
         <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-blue" data-action="click->theme-color#switch_title_blue" href="#">Blue<div class="ms-3" style="height:20px; width:20px; background-color: #0077b6;"></div></a></li>
         <li><a class="dropdown-item d-flex align-items-center justify-content-between" data-theme-color-target="button-yellow" data-action="click->theme-color#switch_title_yellow" href="#">Yellow<div class="ms-3" style="height:20px; width:20px; background-color: #ffc300;"></div></a></li>
       </ul>
-    </div>
+    </div> %>
     <div class="col bg-light">
       <div class="border-bottom position-relative pt-4" data-controller="edit-intro-blog">
         <h3 class="ms-4">Introduction</h3>
