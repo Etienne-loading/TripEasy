@@ -1,9 +1,11 @@
 .mapboxgl-popup {
-  max-width: 200px;
+  width: 200px;
 }
 
 .mapboxgl-popup-content {
   font-family: 'Rhodium Libre', serif;
+  border-radius: 6px !important;
+  padding: 0 !important;
 }
 
 #blog-map {

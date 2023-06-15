@@ -34,14 +34,10 @@ export default class extends Controller {
     stepCoordinates = stepCoordinates.join(";")
 
     const directionUrl = `https://api.mapbox.com/directions/v5/mapbox/driving/${stepCoordinates}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
-    console.log(directionUrl);
-
     fetch(directionUrl, { method: 'GET' })
       .then(response => response.json())
       .then((json) => {
-        // do something with the json
-        console.log(json.routes);
-        if (!json.routes) return;
+        // do something with the json        if (!json.routes) return;
 
         const data = json.routes[0];
         const route = data.geometry.coordinates;
@@ -76,7 +72,6 @@ export default class extends Controller {
   }
 
   fitMapToMarkers() {
-    console.log(this.markersValue)
     const bounds = new mapboxgl.LngLatBounds();
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
@@ -85,11 +80,16 @@ export default class extends Controller {
   addMarkersToMap() {
     this.markersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
-      new mapboxgl.Marker({ color: '#4A6947' }) // Remplacez 'red' par la couleur souhaitée
+      this.marker = new mapboxgl.Marker({ color: '#4A6947' }) // Remplacez 'red' par la couleur souhaitée
         .setLngLat([marker.lng, marker.lat])
         .setPopup(popup)
         .addTo(this.map)
-    });
-  }
 
+      const markerElement = this.marker._element;
+      markerElement.id = marker.id;
+      markerElement.dataset.action = "click->marker#scrollToStep";
+      return this.marker
+    });
+
+  }
 }
