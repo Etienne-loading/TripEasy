@@ -7,12 +7,12 @@
       <% current_user.blogs.each do |blog| %>
         <div class="col-6">
           <div class="mb-3">
-            <div class="card-my-blog d-flex justify-content-between position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>);">
-              <h3 class="card-title"><%= blog.title %></h3>
+            <div class="card-my-blog d-flex justify-content-between position-relative mb-4" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>);">
+              <div>
+                <h3 class="card-title mb-2"><%= blog.title %></h3>
+                <p><%= blog.min_price %>-<%= blog.max_price %>€ | <%= (blog.end_date - blog.start_date).to_i %> days | <%= blog.likes.size %> <i class="fa-solid fa-heart"></i></p>
+              </div>
               <div class="card-my-blog_links-container">
-              <%= link_to edit_blog_path(blog), class:"position-absolute top-0 start-100 translate-middle" do %>
-                  <i class="fa-solid fa-pen-to-square"></i>
-                <% end %>
                 <%= link_to blog_path(blog), class:"btn btn-card" do %>
                   <i class="fa-solid fa-eye"></i>
                 <% end %>
