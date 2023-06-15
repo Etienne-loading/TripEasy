@@ -9,3 +9,45 @@
   padding: 8px 8px;
   border-radius: 3px;
 }
+
+.cta-step {
+  background-color: #f7b633;
+  &:hover {
+    background-color: #4A6947;
+    color: black;
+  }
+}
+
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  border-radius: 50%;
+  background-color: #f7b633;
+  &:hover {
+    background-color: #4A6947;
+  }
+}
+
+//* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  // * {
+  //   scrollbar-width: auto;
+  //   scrollbar-color: #f7b633 #ffffff;
+  // }
+
+  // /* Chrome, Edge, and Safari */
+  // *::-webkit-scrollbar {
+  //   width: 10px;
+  // }
+
+  // *::-webkit-scrollbar-track {
+  //   background: #ffffff;
+  // }
+
+  // *::-webkit-scrollbar-thumb {
+  //   background-color: #f7b633;
+  //   border-radius: 4px;
+  //   border: 0px none #704848;
+  // }
