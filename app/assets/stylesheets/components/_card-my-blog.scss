@@ -10,6 +10,9 @@
   h3 {
     font-size: 30px;
     color: #FCFAEE;
+    .fa-pen {
+      font-size: 15px;
+    }
   }
   &_links-container {
     display: flex;
@@ -24,6 +27,9 @@
       aspect-ratio: 1 /1;
       background-color: #FCFAEE;
     }
+    .btn-card:hover {
+      background-color: rgb(186, 186, 186);
+    }
     .btn-card-danger {
       margin: 0.25rem 0;
       display: flex;
@@ -32,6 +38,5 @@
       aspect-ratio: 1 /1;
       background-color: #ac300d;
     }
-    
   }
 }
