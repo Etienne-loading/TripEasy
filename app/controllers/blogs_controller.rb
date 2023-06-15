@@ -18,7 +18,8 @@ class BlogsController < ApplicationController
       {
         lat: step.latitude,
         lng: step.longitude,
-        info_window_html: render_to_string(partial: "steps/info_window", locals: {step: step})
+        info_window_html: render_to_string(partial: "steps/info_window", locals: {step: step}),
+        id: step.id
       }
     end
   end

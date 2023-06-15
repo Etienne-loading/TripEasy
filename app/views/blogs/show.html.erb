@@ -10,7 +10,7 @@
     <h1 style = "font-size: 58px; color: white;"><%= @blog.title %></h1>
   </div>
 </div>
-<div class="">
+<div class="" data-controller="marker">
   <div class="d-flex">
     <div class="" style="font-family: sans-serif; font-size: 18px; padding: 0 4rem;" data-controller="theme-color">
         <div>
@@ -54,7 +54,7 @@
             <%= simple_format @blog.intro %>
           </div>
         <% @steps.each do |step| %>
-          <div class="mb-3">
+          <div class="mb-3" id="<%= step.id %>">
             <h3 data-theme-color-target="title_step" class="<% if step.layout == 1 %>
                                                                 <%= "title-main" %>
                                                             <% elsif step.layout == 2 %>
