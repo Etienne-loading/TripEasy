@@ -26,7 +26,6 @@ export default class extends Controller {
     placeholders.forEach((placeholder) => {
       placeholder.placeholder = "Address"
     })
-
   }
 
   #killMinus() {
