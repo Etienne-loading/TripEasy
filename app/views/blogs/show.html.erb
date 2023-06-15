@@ -41,15 +41,14 @@
 
         <% if current_user.like_blog(@blog) %>
           <%= link_to blog_like_path(@blog, current_user.like_blog(@blog)), data: { turbo_method: :delete } do %>
-            <button type="button" class="btn btn-light" style="--bs-btn-bg: #e1e1e1;">
-              <i class="fa-solid fa-heart" style="color: #ff0000;"></i>
+            <button type="button" class="like-button">
+              <i class="fa-solid fa-heart" style="color: #ff0000; font-size: 25px;"></i>
             </button>
           <% end %>
         <% else %>
           <%= link_to blog_likes_path(@blog), data: { turbo_method: :post } do %>
-            <button type="button" class="btn btn-light" style="--bs-btn-bg: #e1e1e1;">
-              <i class="fa-regular fa-heart" style="color: #ff0000;"></i>
-              Like the blog
+            <button type="button" class="like-button">
+              <i class="fa-regular fa-heart" style="color: #ff0000; font-size: 25px;"></i>
             </button>
           <% end %>
         <% end %>
