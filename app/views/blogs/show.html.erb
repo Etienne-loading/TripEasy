@@ -37,7 +37,12 @@
 
         <% total_word_count = @steps.sum { |step| step.content.to_s.split.size } %>
         <% minutes = (total_word_count / 200.0).ceil %>
-        <span class="duration-price">Reading time : <%= minutes %> minute<%= 's' if minutes > 1 %></span>
+
+        <% if minutes < 1 %>
+          <span class="duration-price">Reading time 1 minute</span>
+        <% else %>
+          <span class="duration-price">Reading time : <%= minutes %> minute<%= 's' if minutes > 1 %></span>
+        <% end %>
 
         <% if current_user.like_blog(@blog) %>
           <%= link_to blog_like_path(@blog, current_user.like_blog(@blog)), data: { turbo_method: :delete } do %>
