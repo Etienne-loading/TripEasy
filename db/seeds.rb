@@ -12,10 +12,10 @@ tag_list = [
   "explore",
   "culture",
   "nature",
-  "cityscape",
+  "city",
   "beach",
-  "mountains",
-  "foodie",
+  "mountain",
+  "food",
   "road",
   "historic",
   "wildlife",
@@ -27,7 +27,9 @@ tag_list = [
   "solo",
   "family",
   "hiking",
-  "surfing"
+  "surfing",
+  "fishing",
+  "camping"
 ]
 
 puts "Creating users ..."
@@ -72,8 +74,6 @@ guatemala = { title: "Exploration in Guatemala", min_price: 1000, max_price: 150
   blog.photo_banner.attach(io: image, filename: blog.title, content_type: 'png')
   image = URI.open("https://images.unsplash.com/photo-1528543010705-e7e75169b717?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80")
   blog.photo_card.attach(io: image, filename: blog.title, content_type: 'png')
-
-
   blog.save
   puts "Created #{blog.title}"
 end
@@ -85,10 +85,10 @@ like1 = { user: User.all.sample, blog: Blog.last }
   )
   end
 
-step1 = { title: "Welcome to Charming Antigua: An Introduction to Guatemala", address: "Antigua", content: "Your adventure begins in the colonial city of Antigua, with its quaint cobblestone streets and baroque churches. In this article, discover the best sites to visit, such as the Plaza Mayor, the Cathedral and the ruins of the Church of La Merced. Soak up the city's historic atmosphere, sample delicious local dishes and explore bustling markets.", duration: 1, latitude: 14.5586, longitude: -90.7295, country: "Guatemala", blog:Blog.last, url:"https://images.unsplash.com/photo-1563442744-3e17a3bf4932?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80", layout: 4 }
+step1 = { title: "Welcome to Charming Antigua: An Introduction to Guatemala", address: "Antigua", content: "Your adventure begins in the colonial city of Antigua, with its quaint cobblestone streets and baroque churches. In this article, discover the best sites to visit, such as the Plaza Mayor, the Cathedral and the ruins of the Church of La Merced. Soak up the city's historic atmosphere, sample delicious local dishes and explore bustling markets.", duration: 1, latitude: 14.5586, longitude: 90.7295, country: "Guatemala", blog:Blog.last, url:"https://images.unsplash.com/photo-1563442744-3e17a3bf4932?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80", layout: 4 }
 step2 = { title: "Marvel at the serene beauty of Lake Atitlán", address: "Lac Atitlán", content: "Lake Atitlán is a natural wonder surrounded by volcanoes and indigenous villages. In this article, learn about the different communities around the lake, such as Panajachel, San Marcos and Santiago Atitlán. Go by boat to explore the villages, admire the traditional weavings of Mayan women and enjoy the breathtaking views of the lake and its surroundings.", duration: 2, latitude: 14.6829, longitude: -91.2736, country: "Guatemala", blog:Blog.last, url:"https://images.unsplash.com/photo-1637181416128-7a32516e0ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2832&q=80", layout: 4 }
 step3 = { title: "A Journey to the Ancient Mayan Civilization: Discover Tikal National Park", address: "Parc national de Tikal", content: "Immerse yourself in the fascinating history of the Maya by visiting Tikal National Park. In this article, explore the majestic pyramids, sacred temples and dense jungle of this iconic archaeological site. Set off at dawn to admire the sunrise over the ruins and listen to the songs of the howler monkeys. Tikal National Park is an unforgettable experience for history and nature lovers.", duration: 2, latitude: 17.2220, longitude: -89.6237, country: "Guatemala", blog:Blog.last, url: "https://images.unsplash.com/photo-1508035460735-91088c495500?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" ,layout: 4}
-step4 = { title: "Relax and Explore in Flores: Gateway to Yaxha Ruins", address: "Flores", content: "Flores, a picturesque little island on Lake Petén Itzá, is your starting point for exploring the ruins of Yaxha. In this article, discover the tranquil beauty of Flores with its colorful houses and cobbled streets. Next, explore the ruins of Yaxha, a lesser-known but equally impressive site as Tikal. Climb to the top of the pyramids to enjoy panoramic views of the surrounding jungle.", duration: 2, latitude: 16.9337, longitude: -89.8923, country: "Guatemala", blog:Blog.last, url:"https://images.unsplash.com/photo-1508035460735-91088c495500?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80", layout: 4 }
+step4 = { title: "Relax and Explore in Flores: Gateway to Yaxha Ruins", address: "Flores", content: "Flores, a picturesque little island on Lake Petén Itzá, is your starting point for exploring the ruins of Yaxha. In this article, discover the tranquil beauty of Flores with its colorful houses and cobbled streets. Next, explore the ruins of Yaxha, a lesser-known but equally impressive site as Tikal. Climb to the top of the pyramids to enjoy panoramic views of the surrounding jungle.", duration: 2, latitude: 16.9337, longitude: -89.8923, country: "Guatemala", blog:Blog.last, url: "https://images.unsplash.com/photo-1544527232-c8738c8cb2cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2832&q=80", layout: 4 }
 
 [step1, step2, step3, step4].each do |hash|
   step = Step.create!(
