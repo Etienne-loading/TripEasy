@@ -29,7 +29,7 @@
       <div class="card-blog p-3">
         <div class="d-flex flex-column">
           <div>
-            <div class="mt-2"><span class="card-title"><%= blog.title %></span></div>
+            <div class="mt-2"><span class="card-title"><%= truncate(blog.title, length: 28) %></span></div>
             <div>
               <% if (blog.end_date - blog.start_date).to_i < 14 %>
               <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> |
@@ -60,7 +60,7 @@
                 <div style="display: flex; justify-content: space-between; margin-top: 25px;">
                   <div class="localisation">
                     <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;", class:"me-2" %>
-                    <% if blog.steps.first %>
+                    <% if blog.steps.first.country.present? %>
                     <%=blog.steps.first.country.truncate_words(2)%>
                     <% end %>
                   </div>
