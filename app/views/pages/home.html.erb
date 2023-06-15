@@ -10,7 +10,7 @@
             <% counter = 0 %>
               <% @blogs.sort_by { |blog| -blog.likes.size }.each do |blog| %>
             <% if counter < 4 %>
-            <%= link_to blog_path(blog), class: "card-link" do %>
+            <%= link_to blog_path(blog), class: "card-link", data:{aos:"fade-up", aos_easing:"linear", aos_duration:"1000"} do %>
             <div class="card-img" style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)"></div>
               <div class="card-blog p-3">
                 <div class="d-flex flex-column">
@@ -71,7 +71,7 @@
             <% counter = 0 %>
             <% @blogs.each do |blog| %>
             <% if counter < 4 %>
-            <%= link_to blog_path(blog), class: "card-link" do %>
+            <%= link_to blog_path(blog), class: "card-link", data:{aos:"fade-up", aos_easing:"linear", aos_duration:"1000"} do %>
             <div class="card-img" style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)"></div>
               <div class="card-blog p-3">
                 <div class="d-flex flex-column">
@@ -132,7 +132,7 @@
             <% counter = 0 %>
             <% @blogs.each do |blog| %>
             <% if counter < 4 %>
-            <%= link_to blog_path(blog), class: "card-link" do %>
+            <%= link_to blog_path(blog), class: "card-link", data:{aos:"fade-up", aos_easing:"linear", aos_duration:"1000"} do %>
             <div class="card-img" style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)"></div>
               <div class="card-blog p-3">
                 <div class="d-flex flex-column">
