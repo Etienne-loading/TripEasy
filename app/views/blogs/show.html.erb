@@ -34,6 +34,7 @@
         <% elsif (@blog.end_date - @blog.start_date).to_i >= 60 %>
           <span class="duration-price">Budget €<%= ((@blog.max_price + @blog.min_price) / 2 %> - <%= ((@blog.end_date - @blog.start_date).to_i) / 30 %> months <i class="fa-regular fa-calendar"></i></span>
         <% end %>
+        
 
         <% total_word_count = @steps.sum { |step| step.content.to_s.split.size } %>
         <% minutes = (total_word_count / 200.0).ceil %>
