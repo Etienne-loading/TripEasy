@@ -19,7 +19,7 @@
                         <% if (blog.end_date - blog.start_date).to_i < 14 %>
                         <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
-                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
+                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
                         <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
                         <% end %>
@@ -82,7 +82,7 @@
                         <% if (blog.end_date - blog.start_date).to_i < 14 %>
                         <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
-                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
+                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
                         <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
                         <% end %>
@@ -145,7 +145,7 @@
                         <% if (blog.end_date - blog.start_date).to_i < 14 %>
                         <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
-                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
+                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
                         <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
                         <% end %>
