@@ -17,11 +17,11 @@
                     <div class="mt-2"><span class="card-title"><%= truncate(blog.title, length: 28) %></span></div>
                       <div>
                         <% if (blog.end_date - blog.start_date).to_i < 14 %>
-                        <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
+                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
                         <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
-                        <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
+                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
                         <% end %>
                         <div class="mt-2">
                           <% used_tags = [] %>
@@ -65,7 +65,7 @@
 <div class="py-5 bg-white">
   <div class="container">
     <div class="row">
-        <h2>Find popular countries</h2>
+        <h2>Find popular destinations</h2>
       </div>
       <div class="row">
         <div class="col">
@@ -80,11 +80,11 @@
                     <div class="mt-2"><span class="card-title"><%= truncate(blog.title, length: 28) %></span></div>
                       <div>
                         <% if (blog.end_date - blog.start_date).to_i < 14 %>
-                        <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
+                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
                         <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
-                        <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
+                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
                         <% end %>
                         <div class="mt-2">
                           <% used_tags = [] %>
@@ -128,7 +128,7 @@
 <div class="py-5 bg-white">
   <div class="container">
     <div class="row">
-        <h2>Find popular tags</h2>
+        <h2>Find last published blogs</h2>
       </div>
       <div class="row">
         <div class="col">
@@ -143,11 +143,11 @@
                     <div class="mt-2"><span class="card-title"><%= truncate(blog.title, length: 28) %></span></div>
                       <div>
                         <% if (blog.end_date - blog.start_date).to_i < 14 %>
-                        <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
+                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= (blog.end_date - blog.start_date).to_i %> days </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 14 && (blog.end_date - blog.start_date).to_i < 60 %>
                         <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) * 4 %> | <%= ((blog.end_date - blog.start_date).to_i) / 7 %> weeks </span>
                         <% elsif (blog.end_date - blog.start_date).to_i >= 60 %>
-                        <span class="duration-price">€<%= (blog.max_price + blog.min_price) / 2 %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
+                        <span class="duration-price">€<%= ((blog.max_price + blog.min_price) / 2) %> | <%= ((blog.end_date - blog.start_date).to_i) / 30 %> months </span>
                         <% end %>
                         <div class="mt-2">
                             <% used_tags = [] %>
