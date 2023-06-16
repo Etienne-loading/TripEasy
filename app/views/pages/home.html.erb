@@ -69,7 +69,7 @@
         <div class="col">
           <div class="card-container">
             <% counter = 0 %>
-            <% @blogs.each do |blog| %>
+            <% @blogs.sort_by { |blog| -blog.id }.each do |blog| %>
             <% if counter < 4 %>
             <%= link_to blog_path(blog), class: "card-link", data:{aos:"fade-up", aos_easing:"linear", aos_duration:"1000"} do %>
             <div class="card-img" style="background-image: url(<%= blog.photo_banner.attached? ? cl_image_path(blog.photo_banner.key) : image_path("default-bg.jpg") %>)"></div>

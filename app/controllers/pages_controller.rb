@@ -4,6 +4,7 @@ class PagesController < ApplicationController
 
   def home
   @blogs = Blog.all
+  @blogs = @blogs.order(:id)
   end
 
   def my_library
