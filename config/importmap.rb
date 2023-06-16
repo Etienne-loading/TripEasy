@@ -12,7 +12,6 @@ pin "process", to: "https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/pro
 pin "stimulus-scroll-progress", to: "https://ga.jspm.io/npm:stimulus-scroll-progress@4.1.0/dist/stimulus-scroll-progress.mjs"
 pin "lodash", to: "https://ga.jspm.io/npm:lodash@4.17.21/lodash.js"
 pin "typed.js", to: "https://ga.jspm.io/npm:typed.js@2.0.16/dist/typed.module.js"
-
 pin "@mapbox/mapbox-gl-geocoder", to: "https://ga.jspm.io/npm:@mapbox/mapbox-gl-geocoder@5.0.1/lib/index.js"
 pin "#lib/client.js", to: "https://ga.jspm.io/npm:@mapbox/mapbox-sdk@0.13.7/lib/browser/browser-client.js"
 pin "@mapbox/fusspot", to: "https://ga.jspm.io/npm:@mapbox/fusspot@0.4.0/lib/index.js"
