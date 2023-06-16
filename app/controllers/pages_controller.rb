@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :destroy, :update]
 
   def home
-  @blogs = Blog.all
+    @blogs = Blog.all.order(:id)
   end
 
   def my_library
