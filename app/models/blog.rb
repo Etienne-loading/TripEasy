@@ -27,4 +27,9 @@ class Blog < ApplicationRecord
   validates :max_price, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
+
+
+  def previous_step(step)
+    self.steps.order(:id).select{|steppy| steppy.id < step.id}.last
+  end
 end
