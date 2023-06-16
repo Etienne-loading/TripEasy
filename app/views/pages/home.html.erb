@@ -39,8 +39,10 @@
                         <div style="display: flex; justify-content: space-between; margin-top: 25px;">
                           <div class="localisation">
                             <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;", class:"me-2" %>
-                            <% if blog.steps.first.country.present? %>
-                              <%=blog.steps.first.country.truncate_words(2)%>
+                            <% if blog.steps.present? %>
+                              <% if blog.steps.first.country.present? %>
+                                <%=blog.steps.first.country.truncate_words(2)%>
+                              <% end %>
                             <% end %>
                           </div>
                           <div class="heart"> <%= blog.likes.size %> <%= image_tag "heart.svg", style:"max-height: 24px; max-width: 24px;", class:"ms-2" %></div>
@@ -100,8 +102,10 @@
                         <div style="display: flex; justify-content: space-between; margin-top: 25px;">
                           <div class="localisation">
                             <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;", class:"me-2" %>
-                            <% if blog.steps.first.country.present? %>
-                              <%=blog.steps.first.country.truncate_words(2)%>
+                            <% if blog.steps.present? %>
+                              <% if blog.steps.first.country.present? %>
+                                <%=blog.steps.first.country.truncate_words(2)%>
+                              <% end %>
                             <% end %>
                           </div>
                           <%= blog.likes.size %> <%= image_tag "heart.svg", style: "max-height: 24px; max-width: 24px;", class: "ms-2" %>
@@ -161,8 +165,10 @@
                         <div style="display: flex; justify-content: space-between; margin-top: 25px;">
                           <div class="localisation">
                             <%= image_tag "localisation.svg",style:"max-height: 24px; max-width: 24px;", class:"me-2" %>
-                            <% if blog.steps.first.country.present? %>
-                              <%=blog.steps.first.country.truncate_words(2)%>
+                            <% if blog.steps.present? %>
+                              <% if blog.steps.first.country.present? %>
+                                <%=blog.steps.first.country.truncate_words(2)%>
+                              <% end %>
                             <% end %>
                           </div>
                           <%= blog.likes.size %> <%= image_tag "heart.svg", style: "max-height: 24px; max-width: 24px;", class: "ms-2" %>
