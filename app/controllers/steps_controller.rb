@@ -1,7 +1,7 @@
 class StepsController < ApplicationController
   include ActionView::RecordIdentifier
 
-  before_action :set_blog, only: [:create, :index, :new]
+  before_action :set_blog, only: [:create, :index, :new, :update]
 
 
   def index
@@ -29,7 +29,7 @@ class StepsController < ApplicationController
     tags = params[:step][:tag_list].split(',') if tags
     @step.tag_list.add(tags)
     if @step.save
-      redirect_to blog_steps_path
+      redirect_to blog_steps_path(@blog, anchor: @step.id)
     else
       @steps = @blog.steps.order(:id)
       render :index, status: :unprocessable_entity
@@ -54,7 +54,7 @@ class StepsController < ApplicationController
 
     if @step.update(step_params)
       @step.tag_list.remove(params[:step][:tag_list])
-      redirect_to blog_steps_path(anchor: dom_id(@step))
+      redirect_to blog_steps_path(@blog, anchor: @blog.previous_step(@step).id)
     else
       render :edit, status: :unprocessable_entity
     end

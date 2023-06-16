@@ -135,7 +135,7 @@
                 </h3>
                 <% if step.layout == 1 %>
                   <%= simple_form_for [@blog, step],
-                    html: { class:"d-none m-4", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update" }} do |f| %>
+                    html: { class:"d-none m-4", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update", turbo: false }} do |f| %>
                     <%= f.input :title, placeholder: "Title" %>
                     <%= f.input :address,
                       input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
@@ -146,7 +146,7 @@
                   <% end %>
                 <% elsif step.layout == 2 %>
                   <%= simple_form_for [@blog, step],
-                    html: { class:"d-none m-4", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update" }} do |f| %>
+                    html: { class:"d-none m-4", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update", turbo: false }} do |f| %>
                     <%= f.input :title, placeholder: "Title" %>
                     <%= f.input :address,
                       input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
@@ -169,7 +169,7 @@
                   <% end %>
                 <% elsif step.layout == 3 %>
                   <%= simple_form_for [@blog, step],
-                    html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update" }} do |f| %>
+                    html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update", turbo: false }} do |f| %>
                     <%= f.input :title, placeholder: "Title" %>
                     <%= f.input :address,
                       input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},
@@ -191,7 +191,7 @@
                   <% end %>
                 <% else %>
                   <%= simple_form_for [@blog, step],
-                    html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update" }} do |f| %>
+                    html: { class:"d-none m-4 position-relative", data: { edit_step_blog_target:"form", update_step_target:"form", action: "submit->update_step#update", turbo: false }} do |f| %>
                     <%= f.input :title, placeholder: "Title" %>
                     <%= f.input :address,
                       input_html: {data: {address_autocomplete_target: "address"}, class:"d-none"},

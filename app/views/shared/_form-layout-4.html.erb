@@ -1,5 +1,5 @@
 <%= simple_form_for [@blog, @step], url: blog_steps_path(@blog),
-  html: { class:"d-none", data: { layout_target:"form4" }} do |f| %>
+  html: { class:"d-none", data: { layout_target:"form4", turbo: false }} do |f| %>
   <%= f.input :title, label: false, placeholder: "Title" %>
   <%= f.input :address,
                 label: false,
