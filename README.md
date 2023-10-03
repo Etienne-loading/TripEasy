@@ -1,43 +1,40 @@
-<h1>Project</h1>
+##### Prerequisites
 
-<a href=https://www.tripeasy.world> TripEasy </a>
+The setups steps expect following tools installed on the system.
 
-<h1>Install</h1>
+- Github
+- Ruby [2.4.0](https://github.com/organization/project-name/blob/master/.ruby-version#L1)
+- Rails [5.0.2](https://github.com/organization/project-name/blob/master/Gemfile#L12)
 
-<p>Clone the repository</p>
+##### 1. Check out the repository
 
-git clone git@github.com:juliendargelos/project.git
-cd project
-Check your Ruby version
+```bash
+git clone git@github.com:organization/project-name.git
+```
 
-ruby -v
-The ouput should start with something like ruby 2.5.1
+##### 2. Create database.yml file
 
-<p>If not, install the right ruby version using rbenv (it could take a while):</p>
+Copy the sample database.yml file and edit the database configuration as required.
 
-rbenv install 2.5.1
-Install dependencies
+```bash
+cp config/database.yml.sample config/database.yml
+```
 
-<p>Using Bundler and Yarn:</p>
+##### 3. Create and setup the database
 
-bundle && yarn
-Set environment variables
+Run the following commands to create and setup the database.
 
-<p>Initialize the database</p>
+```ruby
+bundle exec rake db:create
+bundle exec rake db:setup
+```
 
-rails db:create db:migrate db:seed
-Add heroku remotes
+##### 4. Start the Rails server
 
-<p>Using Heroku CLI:</p>
+You can start the rails server using the command given below.
 
-heroku git:remote -a project
-heroku git:remote --remote heroku-staging -a project-staging
+```ruby
+bundle exec rails s
+```
 
-<h3>Serve</h3
-
-rails s
-
-<p>You can now access to your localhost : <a href=localhost:3000> localhost:3000 </a></p>
-
-
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+And now you can visit the site with the URL http://localhost:3000
